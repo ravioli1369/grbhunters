@@ -938,3 +938,4 @@ def automaticgui():
     input_frame.pack(side=LEFT)
     
     auto_win.mainloop()
+automaticgui()
