@@ -3,6 +3,57 @@ import subprocess as sp
 from tkinter import *
 from tkinter import filedialog 
 import os
+from astropy.io import fits
+import matplotlib.pyplot as plt
+
+
+
+
+'''----function for choosing the modueles---------------------------------------------------------------------------'''
+
+
+def homegui():
+    home_win = Tk()
+    home_win.title('CZTI Pipeline')
+    home_win.geometry("1280x720")
+    home_win.configure(bg='#282a36')
+    home_label = Label(home_win, text="Welcome to CZTI Pipeline", font='Courier 36 bold', bg='#282a36', fg='#f8f8f2')
+    home_label.pack(pady=20)
+    czti_pipeline_frame = Frame(home_win, bg='#282a36')
+    czti_labels_frame = Frame(home_win, bg='#282a36')
+    czti_pipeline_button = Button(czti_pipeline_frame, text='cztpipeline', font='Courier 20 bold', command=automaticgui, bg='#6272a4', fg='#f8f8f2', width=15)
+   
+    czti_modules_frame = Frame(home_win, bg='#282a36')
+    
+    cztgtigen_button = Button(czti_modules_frame, text="cztgtigen", font='Courier 20 bold', command=gtigui, bg='#6272a4', fg='#f8f8f2', width=15)
+    cztgaas_button = Button(czti_modules_frame, text="cztgaas", font='Courier 20 bold', command=gaasgui, bg='#6272a4', fg='#f8f8f2', width=15)
+    cztdatasel_button = Button(czti_modules_frame, text="cztdatasel", font='Courier 20 bold', command=dataselgui, bg='#6272a4', fg='#f8f8f2', width=15)
+    cztpixclean_button = Button(czti_modules_frame, text="cztpixclean", font='Courier 20 bold', command=pixcleangui, bg='#6272a4', fg='#f8f8f2', width=15)
+    cztevtclean_button = Button(czti_modules_frame, text="cztevtclean", font='Courier 20 bold', command=evtcleangui, bg='#6272a4', fg='#f8f8f2', width=15)
+    cztflagbadpix_button = Button(czti_modules_frame, text="cztflagbadpix", font='Courier 20 bold', command=flagbadpixgui, bg='#6272a4', fg='#f8f8f2', width=15)
+    cztbindata_button = Button(czti_modules_frame, text="cztbindata", font='Courier 20 bold', command=bindatagui, bg='#6272a4', fg='#f8f8f2', width=15)
+    cztdpigen_button = Button(czti_modules_frame, text="cztdpigen", font='Courier 20 bold', command=dpigengui, bg='#6272a4', fg='#f8f8f2', width=15)
+    cztimage_button = Button(czti_modules_frame, text="cztimage", font='Courier 20 bold', command=imagegui, bg='#6272a4', fg='#f8f8f2', width=15)
+    cztrspgen_button = Button(czti_modules_frame, text="cztrspgen", font='Courier 20 bold', command=rspgen, bg='#6272a4', fg='#f8f8f2', width=15)
+
+    cztgtigen_button.grid(row=1, column=0, padx=20, pady=20)
+    cztgaas_button.grid(row=2, column=0,padx=20, pady=20)
+    cztdatasel_button.grid(row=3, column=0,padx=20, pady=20)
+    cztpixclean_button.grid(row=4, column=0,padx=20, pady=20)
+    cztevtclean_button.grid(row=5, column=0,padx=20, pady=20)
+
+    cztflagbadpix_button.grid(row=1, column=1,padx=0, pady=20)
+    cztdpigen_button.grid(row=2, column=1,padx=0, pady=20)
+    cztbindata_button.grid(row=3, column=1,padx=0, pady=20)
+    cztimage_button.grid(row=4, column=1,padx=0, pady=20)
+    cztrspgen_button.grid(row=5, column=1,padx=0, pady=20)
+
+    czti_labels_frame.pack(side=TOP, padx=200)
+    czti_pipeline_button.pack(side=TOP, padx=100, pady=250)
+    czti_pipeline_frame.pack(side=LEFT, padx=30)
+
+    czti_modules_frame.pack(side=RIGHT, padx=100, pady=75)
+    home_win.mainloop()
 
 
 
@@ -11,6 +62,7 @@ import os
 
 
 '''-------------variable creation-----------------------------------------------------------------------------------'''
+
 evt_label = ''
 mkf_label = ''
 mkf_thres_label = ''
@@ -21,8 +73,10 @@ gti = ''
 out = ''
 livetime = ''
 badpix = ''
+dpiordph = ''
+imginp = ''
 
-
+directory_label = ''
 gtitype_label = ''
 gtitype = 'QUAD'
 
@@ -32,7 +86,9 @@ gtitype = 'QUAD'
 '''----function definition for manual pipeline----------------------------------------------------------------------------------------------'''
 
 
+
 '''--------------cztgtigen------------------------------------------------------------------------------------------'''
+
 def man_gtigen(gti_bcevt, gti_mkf, gti_mkf_threshold, gti_usrgti='-'):
     sp.call(['cztgtigen', 
              'usergtifile='+gti_usrgti,
@@ -43,7 +99,10 @@ def man_gtigen(gti_bcevt, gti_mkf, gti_mkf_threshold, gti_usrgti='-'):
              'clobber=YES', 
              'history=YES'])
 
+
+
 '''--------------cztgaas--------------------------------------------------------------------------------------------'''
+
 def man_gaas(gaas_bcevt, gaas_mkf):
     sp.call(['cztgaas', 
              'par_evtfile='+gaas_bcevt, 
@@ -52,7 +111,10 @@ def man_gaas(gaas_bcevt, gaas_mkf):
              'par_clobber=YES', 
              'par_history=YES'])
 
+
+
 '''--------------cztdatasel-----------------------------------------------------------------------------------------'''
+
 def man_datasel(datasel_bcevt, datasel_bcgti):
     sp.call(['cztdatasel', 
              'gtitype='+gtitype,
@@ -62,7 +124,10 @@ def man_datasel(datasel_bcevt, datasel_bcgti):
              'clobber=YES',
              'history=YES'])
 
+
+
 '''--------------cztpixclean---------------------------------------------------------------------------------------'''
+
 def man_pixclean(pixclean_bc_dsevt, pixclean_bc_livetimefits):
     sp.call(['cztpixclean', 
              'par_infile='+pixclean_bc_dsevt, 
@@ -75,15 +140,23 @@ def man_pixclean(pixclean_bc_dsevt, pixclean_bc_livetimefits):
              'par_det_count_thresh=100', 
              'par_pix_count_thresh=1000'])
 
+
+
 '''--------------cztevtclean---------------------------------------------------------------------------------------'''
+
 def man_evtclean(evtclean_quad_pcevt):
     sp.call(['cztevtclean', 
              'infile='+evtclean_quad_pcevt, 
              'outfile='+out+'evtclean_out.evt', 
              'alphaval=0', 
-             'vetorange=0-0'])
-    
+             'vetorange=0-0',
+             'clobber=YES',
+             'history=YES'])
+
+
+
 '''--------------cztflagbadpix-------------------------------------------------------------------------------------'''
+
 def man_flagbadpix(flagbadpix_quad_badpixfits):
     sp.call(['cztflagbadpix', 
              'nbadpixFiles=1', 
@@ -92,7 +165,10 @@ def man_flagbadpix(flagbadpix_quad_badpixfits):
              'clobber=YES', 
              'history=YES'])
 
+
+
 '''--------------cztbindata----------------------------------------------------------------------------------------'''
+
 def man_bindata(bindata_quad_cleanevt, bindata_mkf, bindata_quad_badpix_outfits, bindata_quad_livetimefits):
     sp.call(['cztbindata', 
              'inevtfile='+bindata_quad_cleanevt, 
@@ -111,7 +187,10 @@ def man_bindata(bindata_quad_cleanevt, bindata_mkf, bindata_quad_badpix_outfits,
              'clobber=YES',
              'history=YES'])
 
+
+
 '''--------------cztdpigen-----------------------------------------------------------------------------------------'''
+
 def man_dpigen(dpigen_quad_cleanevt, dpigen_quad_badpix_outfits):
     sp.call(['cztdpigen',
              'par_infile='+dpigen_quad_cleanevt,
@@ -125,11 +204,15 @@ def man_dpigen(dpigen_quad_cleanevt, dpigen_quad_badpix_outfits):
              'par_clobber=YES',
              'par_history=YES'])
 
+
+
 '''--------------cztimage------------------------------------------------------------------------------------------'''
-def man_image(image_dpiordph, image_imginp, image_aspectQ0, image_aspectQ1, image_aspectQ2, image_aspectQ3): #imginp=quad_clean+dpiordph  take dpiordph from user
+
+def man_image(image_dpiordph, image_imginp, image_aspectQ0, image_aspectQ1, image_aspectQ2, image_aspectQ3):
     sp.call(['cztimage', 
              'par_intype='+image_dpiordph,
              'par_infile='+image_imginp, 
+             'par_outImgFile='+out+'image_out.img',
              'par_aspectfileQ0='+image_aspectQ0,
              'par_aspectfileQ1='+image_aspectQ1,
              'par_aspectfileQ2='+image_aspectQ2,
@@ -138,7 +221,10 @@ def man_image(image_dpiordph, image_imginp, image_aspectQ0, image_aspectQ1, imag
              'par_clobber=YES', 
              'par_history=YES'])
 
+
+
 '''--------------cztrspgen-----------------------------------------------------------------------------------------'''
+
 def man_rspgen():
     sp.call(['cztrspgen', 
              'phafile='+directory+Q0pha,
@@ -176,502 +262,591 @@ def man_rspgen():
 
 
 '''--------------gtigen--------------------------------------------------------------------------------------------'''
+
 def gtigui():
     global evt_label
     global gtigen_win
     global mkf_label
     global mkf_thres_label
-    global evt
-    global mkf
-    global mkf_threshold
-    global dir
+    global directory_label
     gtigen_win = Tk() #creating the window
     gtigen_win.title('cztgtigen')
-    gtigen_win.geometry("1200x400")
-    input_frame = Frame(gtigen_win) #creating the frame
-    ilabel = Label(input_frame, text="Choose the required input files", font='Arial 16 bold')
-    ilabel.pack(side=TOP)
-    b1 = Button(input_frame, text='Browse event file', command=open_evt_file)
-    b2 = Button(input_frame, text='Browse mkf file', command=open_mkf_file)
-    b3 = Button(input_frame, text='Browse mkf threshold file', command=open_mkf_thres_file)
-    dir = StringVar()
-    evt_label = Label(input_frame, text="Event file: "+evt)
-    mkf_label = Label(input_frame, text="Mkf file: "+mkf)
-    mkf_thres_label = Label(input_frame, text="Mkf Threshold file: "+mkf_threshold)
+    gtigen_win.geometry("1280x720")
+    gtigen_win.configure(bg='#282a36')
+    input_frame = Frame(gtigen_win,bg='#282a36') #creating the frame
+    ilabel = Label(input_frame, text="Choose the required input files", font='Courier 23 bold', bg='#282a36', fg='#f8f8f2')
+    ilabel.pack(side=TOP, pady=20)
+    b1 = Button(input_frame, text='Browse event file', command=open_evt_file, bg='#6272a4', fg='#f8f8f2',font='Courier 12 bold')
+    b2 = Button(input_frame, text='Browse mkf file', command=open_mkf_file, bg='#6272a4', fg='#f8f8f2',font='Courier 12 bold')
+    b3 = Button(input_frame, text='Browse mkf threshold file', command=open_mkf_thres_file, bg='#6272a4', fg='#f8f8f2',font='Courier 12 bold')
+    evt_label = Label(input_frame, text="Event file: ", bg='#282a36', fg='#f8f8f2',font='Courier 14 bold')
+    mkf_label = Label(input_frame, text="Mkf file: ", bg='#282a36',fg='#f8f8f2',font='Courier 14 bold')
+    mkf_thres_label = Label(input_frame, text="Mkf Threshold file: ", bg='#282a36', fg='#f8f8f2',font='Courier 14')
     evt_label.pack(pady=10)
     mkf_label.pack(pady=10)
     mkf_thres_label.pack(pady=10)
 
-    confirm_button = Button(gtigen_win, text='Confirm', command=confirm_gtigen)
+    confirm_button = Button(gtigen_win, text='Confirm', command=confirm_gtigen, bg='#6272a4', fg='#f8f8f2',font='Courier 20 bold')
     button_frame = Frame(gtigen_win)
-    directory_button = Button(button_frame, text="Open", command=output)
-    directory_label = Label(gtigen_win,  width=200, bg='white', fg='black', textvariable=dir)
-
-    directory_label.pack(side=TOP, padx=10, pady=20)
-    directory_button.pack(side=TOP)
+    
+    b1.pack(side=LEFT, padx=10, pady=20)
+    b2.pack(side=LEFT, padx=10, pady=20)
+    b3.pack(side=LEFT, padx=10, pady=20)
     button_frame.pack(side=BOTTOM)
 
-    output_frame = Frame(gtigen_win)
-    olabel = Label(output_frame, text="Choose the required output directory", font='Arial 16 bold')
+    output_frame = Frame(gtigen_win, bg='#282a36')
+    olabel = Label(output_frame, text="Choose the required output directory", font='Courier 23 bold', bg='#282a36', fg='#f8f8f2')
+    directory_label = Label(output_frame,  width=100, text="Output Directory: ", font='Courier 14', bg='#282a36', fg='#f8f8f2')
+    directory_button = Button(output_frame, text="Open", command=output, bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
+    directory_button.pack(side=BOTTOM, pady=10)
+    directory_label.pack(side=BOTTOM, padx=100, pady=45)
     olabel.pack(side=TOP, pady=10)
 
-    b1.pack(side=LEFT)
-    b2.pack(side=LEFT)
-    b3.pack(side=LEFT)
-    confirm_button.pack(side=BOTTOM)
-    input_frame.pack(side=LEFT)
-    output_frame.pack(side=RIGHT, padx=40)
+    confirm_button.pack(side=BOTTOM, pady=60)
+    input_frame.pack(side=LEFT, padx=40)
+    output_frame.pack(side=RIGHT, padx=0)
 
     gtigen_win.mainloop()
 
+
+
 '''--------------gaas--------------------------------------------------------------------------------------------'''
+
 def gaasgui():
-    global gaas_win
     global evt_label
+    global gaas_win
     global mkf_label
-    global evt
-    global mkf
-    global dir
+    global directory_label
     gaas_win = Tk() #creating the window
     gaas_win.title('cztgaas')
-    gaas_win.geometry("1200x400")
-    input_frame = Frame(gaas_win) #creating the frame
-    ilabel = Label(input_frame, text="Choose the required input files", font='Arial 16 bold')
-    ilabel.pack(side=TOP)
-    b1 = Button(input_frame, text='Browse event file', command=open_evt_file) #browse button for event file
-    b2 = Button(input_frame, text='Browse mkf file', command=open_mkf_file) #browse button for mkf file
-    dir = StringVar()
-    evt_label = Label(input_frame, text="Event file: "+evt)
-    mkf_label = Label(input_frame, text="Mkf file: "+mkf)
+    gaas_win.geometry("1280x720")
+    gaas_win.configure(bg='#282a36')
+    input_frame = Frame(gaas_win,bg='#282a36') #creating the frame
+    ilabel = Label(input_frame, text="Choose the required input files", font='Courier 23 bold', bg='#282a36', fg='#f8f8f2')
+    ilabel.pack(side=TOP, pady=20)
+    b1 = Button(input_frame, text='Browse event file', command=open_evt_file, bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
+    b2 = Button(input_frame, text='Browse mkf file', command=open_mkf_file, bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
+    evt_label = Label(input_frame, text="Event file: ", bg='#282a36', fg='#f8f8f2', font='Courier 14')
+    mkf_label = Label(input_frame, text="Mkf file: ", bg='#282a36',fg='#f8f8f2', font='Courier 14')
     evt_label.pack(pady=10)
     mkf_label.pack(pady=10)
 
-    confirm_button = Button(gaas_win, text='Confirm', command=confirm_gaas)
+    confirm_button = Button(gaas_win, text='Confirm', command=confirm_gaas, bg='#6272a4', fg='#f8f8f2', font='Courier 20 bold')
     button_frame = Frame(gaas_win)
-    directory_button = Button(button_frame, text="Open", command=output)
-    directory_label = Label(gaas_win,  width=200, bg='white', fg='black', textvariable=dir)
-
-    directory_label.pack(side=TOP, padx=10, pady=20)
-    directory_button.pack(side=TOP)
     button_frame.pack(side=BOTTOM)
 
-    output_frame = Frame(gaas_win)
-    olabel = Label(output_frame, text="Choose the required output directory", font='Arial 16 bold')
+    output_frame = Frame(gaas_win, bg='#282a36')
+    olabel = Label(output_frame, text="Choose the required output directory", font='Courier 23 bold', bg='#282a36', fg='#f8f8f2')
+    directory_label = Label(output_frame,  width=100, text="Output Directory: ", font='Courier 14', bg='#282a36', fg='#f8f8f2')
+    directory_button = Button(output_frame, text="Open", command=output, bg='#6272a4', fg='#f8f8f2')
+    directory_button.pack(side=BOTTOM, pady=10)
+    directory_label.pack(side=BOTTOM, padx=100, pady=45)
     olabel.pack(side=TOP, pady=10)
 
-    b1.pack(side=LEFT)
-    b2.pack(side=LEFT)
-    confirm_button.pack(side=BOTTOM)
-    input_frame.pack(side=LEFT)
-    output_frame.pack(side=RIGHT, padx=40)
-
+    b1.pack(side=LEFT, padx=40, pady=20)
+    b2.pack(side=LEFT, padx=40, pady=20)
+    confirm_button.pack(side=BOTTOM, pady=60)
+    input_frame.pack(side=LEFT, padx=80)
+    output_frame.pack(side=RIGHT, padx=0)
+    
     gaas_win.mainloop()
 
+
+
 '''--------------datasel------------------------------------------------------------------------------------------'''
+
 def dataselgui():
-    global datasel_win
     global evt_label
+    global datasel_win
     global gti_label
-    global evt
-    global gti
-    global dir
+    global directory_label
     datasel_win = Tk() #creating the window
     datasel_win.title('cztdatasel')
-    datasel_win.geometry("1200x400")
-    input_frame = Frame(datasel_win) #creating the frame
-    ilabel = Label(input_frame, text="Choose the required input files", font='Arial 16 bold')
-    ilabel.pack(side=TOP)
-    b1 = Button(input_frame, text='Browse event file', command=open_evt_file)
-    b2 = Button(input_frame, text='Browse GTI file', command=open_gti_file)
-    dir = StringVar()
-    evt_label = Label(input_frame, text="Event file: "+evt)
-    gti_label = Label(input_frame, text="GTI file: "+gti)
+    datasel_win.geometry("1280x720")
+    datasel_win.configure(bg='#282a36')
+    input_frame = Frame(datasel_win,bg='#282a36') #creating the frame
+    ilabel = Label(input_frame, text="Choose the required input files", font='Courier 23 bold', bg='#282a36', fg='#f8f8f2')
+    ilabel.pack(side=TOP, pady=20)
+    b1 = Button(input_frame, text='Browse event file', command=open_evt_file, bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
+    b2 = Button(input_frame, text='Browse gti file', command=open_gti_file, bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
+    evt_label = Label(input_frame, text="Event file: ", bg='#282a36', fg='#f8f8f2',font='Courier 14')
+    gti_label = Label(input_frame, text="GTI file: ", bg='#282a36',fg='#f8f8f2',font='Courier 14')
     evt_label.pack(pady=10)
     gti_label.pack(pady=10)
 
-    confirm_button = Button(datasel_win, text='Confirm', command=confirm_datasel)
+    confirm_button = Button(datasel_win, text='Confirm', command=confirm_datasel, bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
     button_frame = Frame(datasel_win)
-    directory_button = Button(button_frame, text="Open", command=output)
-    directory_label = Label(datasel_win,  width=200, bg='white', fg='black', textvariable=dir)
-
-    directory_label.pack(side=TOP, padx=10, pady=20)
-    directory_button.pack(side=TOP)
     button_frame.pack(side=BOTTOM)
 
-    output_frame = Frame(datasel_win)
-    olabel = Label(output_frame, text="Choose the required output directory", font='Arial 16 bold')
+    output_frame = Frame(datasel_win, bg='#282a36')
+    olabel = Label(output_frame, text="Choose the required output directory", font='Courier 23 bold', bg='#282a36', fg='#f8f8f2')
+    directory_label = Label(output_frame,  width=100, text="Output Directory: ",font='Courier 14', bg='#282a36', fg='#f8f8f2')
+    directory_button = Button(output_frame, text="Open", command=output, bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
+    directory_button.pack(side=BOTTOM, pady=10)
+    directory_label.pack(side=BOTTOM, padx=100, pady=45)
     olabel.pack(side=TOP, pady=10)
 
-    b1.pack(side=LEFT)
-    b2.pack(side=LEFT)
-    confirm_button.pack(side=BOTTOM)
-    input_frame.pack(side=LEFT)
-    output_frame.pack(side=RIGHT, padx=40)
+    b1.pack(side=LEFT, padx=40, pady=20)
+    b2.pack(side=LEFT, padx=40, pady=20)
+    confirm_button.pack(side=BOTTOM, pady=40)
+    input_frame.pack(side=LEFT, padx=80)
+    output_frame.pack(side=RIGHT, padx=0)
 
     datasel_win.mainloop()
 
+
+
 '''--------------pixclean-----------------------------------------------------------------------------------------'''
+
 def pixcleangui():
-    global pixclean_win
     global evt_label
-    global fits_label
-    global evt
-    global fits
-    global dir
+    global pixclean_win
+    global livetime_label
+    global directory_label
     pixclean_win = Tk() #creating the window
     pixclean_win.title('cztpixclean')
-    pixclean_win.geometry("1200x400")
-    input_frame = Frame(pixclean_win) #creating the frame
-    ilabel = Label(input_frame, text="Choose the required input files", font='Arial 16 bold')
-    ilabel.pack(side=TOP)
-    b1 = Button(input_frame, text='Browse event file', command=open_evt_file)
-    b2 = Button(input_frame, text='Browse livetime file', command=open_livetime_file)
-    dir = StringVar()
-    evt_label = Label(input_frame, text="Event file: "+evt)
-    fits_label = Label(input_frame, text="Livetime file: "+fits)
+    pixclean_win.geometry("1280x720")
+    pixclean_win.configure(bg='#282a36')
+    input_frame = Frame(pixclean_win,bg='#282a36') #creating the frame
+    ilabel = Label(input_frame, text="Choose the required input files", font='Courier 23 bold', bg='#282a36', fg='#f8f8f2')
+    ilabel.pack(side=TOP, pady=20)
+    b1 = Button(input_frame, text='Browse event file', command=open_evt_file, bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
+    b2 = Button(input_frame, text='Browse livetime file', command=open_livetime_file, bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
+    evt_label = Label(input_frame, text="Event file: ", bg='#282a36', fg='#f8f8f2',font='Courier 14')
+    livetime_label = Label(input_frame, text="Livetime file: ", bg='#282a36',fg='#f8f8f2',font='Courier 14')
     evt_label.pack(pady=10)
-    fits_label.pack(pady=10)
+    livetime_label.pack(pady=10)
 
-    confirm_button = Button(pixclean_win, text='Confirm', command=confirm_pixclean)
+    confirm_button = Button(pixclean_win, text='Confirm', command=confirm_pixclean, bg='#6272a4', fg='#f8f8f2', font='Courier 20 bold')
     button_frame = Frame(pixclean_win)
-    directory_button = Button(button_frame, text="Open", command=output)
-    directory_label = Label(pixclean_win,  width=200, bg='white', fg='black', textvariable=dir)
-
-    directory_label.pack(side=TOP, padx=10, pady=20)
-    directory_button.pack(side=TOP)
     button_frame.pack(side=BOTTOM)
 
-    output_frame = Frame(pixclean_win)
-    olabel = Label(output_frame, text="Choose the required output directory", font='Arial 16 bold')
+    output_frame = Frame(pixclean_win, bg='#282a36')
+    olabel = Label(output_frame, text="Choose the required output directory", font='Courier 23 bold', bg='#282a36', fg='#f8f8f2')
+    directory_label = Label(output_frame,  width=100, text="Output Directory: ",font='Courier 14', bg='#282a36', fg='#f8f8f2')
+    directory_button = Button(output_frame, text="Open", command=output, bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
+    directory_button.pack(side=BOTTOM, pady=10)
+    directory_label.pack(side=BOTTOM, padx=100, pady=45)
     olabel.pack(side=TOP, pady=10)
-
-    b1.pack(side=LEFT)
-    b2.pack(side=LEFT)
-    confirm_button.pack(side=BOTTOM)
-    input_frame.pack(side=LEFT)
-    output_frame.pack(side=RIGHT, padx=40)
+    
+    b1.pack(side=LEFT, padx=40, pady=20)
+    b2.pack(side=LEFT, padx=40, pady=20)
+    confirm_button.pack(side=BOTTOM, pady=20)
+    input_frame.pack(side=LEFT, padx=80)
+    output_frame.pack(side=RIGHT, padx=0)
 
     pixclean_win.mainloop()
 
+
+
 '''--------------evtclean-----------------------------------------------------------------------------------------'''
+
 def evtcleangui():
-    global evtclean_win
     global evt_label
-    global evt
-    global dir
+    global evtclean_win
+    global directory_label
     evtclean_win = Tk() #creating the window
     evtclean_win.title('cztevtclean')
-    evtclean_win.geometry("1200x400")
-    input_frame = Frame(evtclean_win) #creating the frame
-    ilabel = Label(input_frame, text="Choose the required input files", font='Arial 16 bold')
-    ilabel.pack(side=TOP)
-    b1 = Button(input_frame, text='Browse event file', command=open_evt_file)
-    dir = StringVar()
-    evt_label = Label(input_frame, text="Event file: "+evt)
+    evtclean_win.geometry("1280x720")
+    evtclean_win.configure(bg='#282a36')
+    input_frame = Frame(evtclean_win,bg='#282a36') #creating the frame
+    ilabel = Label(input_frame, text="Choose the required input files", font='Courier 23 bold', bg='#282a36', fg='#f8f8f2')
+    ilabel.pack(side=TOP, pady=20)
+    b1 = Button(input_frame, text='Browse event file', command=open_evt_file, bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
+    evt_label = Label(input_frame, text="Event file: ", bg='#282a36', fg='#f8f8f2',font='Courier 14')
     evt_label.pack(pady=10)
 
-    confirm_button = Button(evtclean_win, text='Confirm', command=confirm_evtclean)
+    confirm_button = Button(evtclean_win, text='Confirm', command=confirm_evtclean, bg='#6272a4', fg='#f8f8f2', font='Courier 20 bold')
     button_frame = Frame(evtclean_win)
-    directory_button = Button(button_frame, text="Open", command=output)
-    directory_label = Label(evtclean_win,  width=200, bg='white', fg='black', textvariable=dir)
-
-    directory_label.pack(side=TOP, padx=10, pady=20)
-    directory_button.pack(side=TOP)
     button_frame.pack(side=BOTTOM)
 
-    output_frame = Frame(evtclean_win)
-    olabel = Label(output_frame, text="Choose the required output directory", font='Arial 16 bold')
+    output_frame = Frame(evtclean_win, bg='#282a36')
+    olabel = Label(output_frame, text="Choose the required output directory", font='Courier 23 bold', bg='#282a36', fg='#f8f8f2')
+    directory_label = Label(output_frame,  width=100, text="Output Directory: ",font='Courier 14', bg='#282a36', fg='#f8f8f2')
+    directory_button = Button(output_frame, text="Open", command=output, bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
+    directory_button.pack(side=BOTTOM, pady=10)
+    directory_label.pack(side=BOTTOM, padx=100, pady=30)
     olabel.pack(side=TOP, pady=10)
 
-    b1.pack(side=LEFT)
-    confirm_button.pack(side=BOTTOM)
-    input_frame.pack(side=LEFT)
-    output_frame.pack(side=RIGHT, padx=40)
+    b1.pack(side=LEFT, padx=140, pady=20)
+    confirm_button.pack(side=BOTTOM, pady=60)
+    input_frame.pack(side=LEFT, padx=80)
+    output_frame.pack(side=RIGHT, padx=0)
 
     evtclean_win.mainloop()
 
+
+
 '''--------------flagbadpix---------------------------------------------------------------------------------------'''
+
 def flagbadpixgui():
+    global evt_label
     global flagbadpix_win
-    global fits_label
-    global fits
-    global dir
+    global badpix_label
+    global directory_label
     flagbadpix_win = Tk() #creating the window
     flagbadpix_win.title('cztflagbadpix')
-    flagbadpix_win.geometry("1200x400")
-    input_frame = Frame(flagbadpix_win) #creating the frame
-    ilabel = Label(input_frame, text="Choose the required input files", font='Arial 16 bold')
-    ilabel.pack(side=TOP)
-    b1 = Button(input_frame, text='Browse badpix file', command=open_badpix_file)
-    dir = StringVar()
-    fits_label = Label(input_frame, text="Badpix file: "+fits)
-    fits_label.pack(pady=10)
+    flagbadpix_win.geometry("1280x720")
+    flagbadpix_win.configure(bg='#282a36')
+    input_frame = Frame(flagbadpix_win,bg='#282a36') #creating the frame
+    ilabel = Label(input_frame, text="Choose the required input files", font='Courier 23 bold', bg='#282a36', fg='#f8f8f2')
+    ilabel.pack(side=TOP, pady=20)
+    b1 = Button(input_frame, text='Browse event file', command=open_evt_file, bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
+    b2 = Button(input_frame, text='Browse badpix file', command=open_badpix_file, bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
+    evt_label = Label(input_frame, text="Event file: ", bg='#282a36', fg='#f8f8f2',font='Courier 14')
+    badpix_label = Label(input_frame, text="Badpix file: ", bg='#282a36',fg='#f8f8f2',font='Courier 14')
+    evt_label.pack(pady=10)
+    badpix_label.pack(pady=10)
 
-    confirm_button = Button(flagbadpix_win, text='Confirm', command=confirm_flagbadpix)
+    confirm_button = Button(flagbadpix_win, text='Confirm', command=confirm_flagbadpix, bg='#6272a4', fg='#f8f8f2', font='Courier 20 bold')
     button_frame = Frame(flagbadpix_win)
-    directory_button = Button(button_frame, text="Open", command=output)
-    directory_label = Label(flagbadpix_win,  width=200, bg='white', fg='black', textvariable=dir)
-
-    directory_label.pack(side=TOP, padx=10, pady=20)
-    directory_button.pack(side=TOP)
     button_frame.pack(side=BOTTOM)
-
-    output_frame = Frame(flagbadpix_win)
-    olabel = Label(output_frame, text="Choose the required output directory", font='Arial 16 bold')
+    
+    output_frame = Frame(flagbadpix_win, bg='#282a36')
+    olabel = Label(output_frame, text="Choose the required output directory", font='Courier 23 bold', bg='#282a36', fg='#f8f8f2')
+    directory_label = Label(output_frame,  width=100, text="Output Directory: ", font='Courier 14', bg='#282a36', fg='#f8f8f2')
+    directory_button = Button(output_frame, text="Open", command=output, bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
+    directory_button.pack(side=BOTTOM, pady=10)
+    directory_label.pack(side=BOTTOM, padx=100, pady=45)
     olabel.pack(side=TOP, pady=10)
 
-    b1.pack(side=LEFT)
-    confirm_button.pack(side=BOTTOM)
-    input_frame.pack(side=LEFT)
-    output_frame.pack(side=RIGHT, padx=40)
-
+    b1.pack(side=LEFT, padx=40, pady=20)
+    b2.pack(side=LEFT, padx=40, pady=20)
+    confirm_button.pack(side=BOTTOM, pady=60)
+    input_frame.pack(side=LEFT, padx=80)
+    output_frame.pack(side=RIGHT, padx=0)
+    
     flagbadpix_win.mainloop()
 
-'''--------------bindata------------------------------------------------------------------------------------------'''
+
+
+'''--------------bindata-------------------------------------------------------------------------------------------'''
+
 def bindatagui():
-    global bindata_win
     global evt_label
-    global fits_label
-    global evt
-    global livetime
-    global badpix
-    global dir
+    global bindata_win
+    global mkf_label
+    global badpix_label
+    global livetime_label
+    global directory_label
     bindata_win = Tk() #creating the window
     bindata_win.title('cztbindata')
-    bindata_win.geometry("1200x400")
-    input_frame = Frame(bindata_win) #creating the frame
-    ilabel = Label(input_frame, text="Choose the required input files", font='Arial 16 bold')
-    ilabel.pack(side=TOP)
-    b1 = Button(input_frame, text='Browse event file', command=open_evt_file)
-    b2 = Button(input_frame, text='Browse livetime file', command=open_livetime_file)
-    b3 = Button(input_frame, text='Browse badpix file', command=open_badpix_file)
-    dir = StringVar()
-    evt_label = Label(input_frame, text="Event file: "+evt)
-    fits_label = Label(input_frame, text="Livetime file: "+fits)
+    bindata_win.geometry("1400x720")
+    bindata_win.configure(bg='#282a36')
+    input_frame = Frame(bindata_win,bg='#282a36') #creating the frame
+    ilabel = Label(input_frame, text="Choose the required input files", font='Courier 23 bold', bg='#282a36', fg='#f8f8f2')
+    ilabel.pack(side=TOP, pady=20)
+    b1 = Button(input_frame, text='Browse event file', command=open_evt_file, bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
+    b2 = Button(input_frame, text='Browse mkf file', command=open_mkf_file, bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
+    b3 = Button(input_frame, text='Browse badpix file', command=open_badpix_file, bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
+    b4 = Button(input_frame, text='Browse livetime file', command=open_livetime_file, bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
+    evt_label = Label(input_frame, text="Event file: ", bg='#282a36', fg='#f8f8f2',font='Courier 14')
+    mkf_label = Label(input_frame, text="Mkf file: ", bg='#282a36',fg='#f8f8f2',font='Courier 14')
+    badpix_label = Label(input_frame, text="Badpix file: ", bg='#282a36',fg='#f8f8f2',font='Courier 14')
+    
+    livetime_label = Label(input_frame, text="Livetime file: ", bg='#282a36',fg='#f8f8f2', font='Courier 14')
     evt_label.pack(pady=10)
-    fits_label.pack(pady=10)
+    mkf_label.pack(pady=10)
+    badpix_label.pack(pady=10)
+    livetime_label.pack(pady=10)
 
-    confirm_button = Button(bindata_win, text='Confirm', command=confirm_bindata)
+    confirm_button = Button(bindata_win, text='Confirm', command=confirm_bindata, bg='#6272a4', fg='#f8f8f2', font='Courier 20 bold')
     button_frame = Frame(bindata_win)
-    directory_button = Button(button_frame, text="Open", command=output)
-    directory_label = Label(bindata_win,  width=200, bg='white', fg='black', textvariable=dir)
-
-    directory_label.pack(side=TOP, padx=10, pady=20)
-    directory_button.pack(side=TOP)
     button_frame.pack(side=BOTTOM)
-
-    output_frame = Frame(bindata_win)
-    olabel = Label(output_frame, text="Choose the required output directory", font='Arial 16 bold')
+    
+    output_frame = Frame(bindata_win, bg='#282a36')
+    olabel = Label(output_frame, text="Choose the required output directory", font='Courier 23 bold', bg='#282a36', fg='#f8f8f2')
+    directory_label = Label(output_frame,  width=100, text="Output Directory: ",font='Courier 14', bg='#282a36', fg='#f8f8f2')
+    directory_button = Button(output_frame, text="Open", command=output, bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
+    directory_button.pack(side=BOTTOM, pady=10)
+    directory_label.pack(side=BOTTOM, padx=100, pady=45)
     olabel.pack(side=TOP, pady=10)
-
-    b1.pack(side=LEFT)
-    b2.pack(side=LEFT)
-    b3.pack(side=LEFT)
-    confirm_button.pack(side=BOTTOM)
-    input_frame.pack(side=LEFT)
-    output_frame.pack(side=RIGHT, padx=40)
+    
+    b1.pack(side=LEFT, padx=10, pady=20)
+    b2.pack(side=LEFT, padx=10, pady=20)
+    b3.pack(side=LEFT, padx=10, pady=20)
+    b4.pack(side=LEFT, padx=10, pady=20)
+    confirm_button.pack(side=BOTTOM, pady=60)
+    input_frame.pack(side=LEFT, padx=20)
+    output_frame.pack(side=RIGHT, padx=0)
 
     bindata_win.mainloop()
 
+
+
 '''--------------dpigen-------------------------------------------------------------------------------------------'''
+
 def dpigengui():
-    global dpigen_win
     global evt_label
-    global fits_label
-    global evt
-    global badpix
-    global dir
+    global dpigen_win
+    global badpix_label
+    global directory_label
     dpigen_win = Tk() #creating the window
     dpigen_win.title('cztdpigen')
-    dpigen_win.geometry("1200x400")
-    input_frame = Frame(dpigen_win) #creating the frame
-    ilabel = Label(input_frame, text="Choose the required input files", font='Arial 16 bold')
-    ilabel.pack(side=TOP)
-    b1 = Button(input_frame, text='Browse event file', command=open_evt_file)
-    b2 = Button(input_frame, text='Browse badpix file', command=open_badpix_file)
-    dir = StringVar()
-    evt_label = Label(input_frame, text="Event file: "+evt)
-    fits_label = Label(input_frame, text="Badpix file: "+fits)
+    dpigen_win.geometry("1280x720")
+    dpigen_win.configure(bg='#282a36')
+    input_frame = Frame(dpigen_win,bg='#282a36') #creating the frame
+    ilabel = Label(input_frame, text="Choose the required input files", font='Courier 23 bold', bg='#282a36', fg='#f8f8f2')
+    ilabel.pack(side=TOP, pady=20)
+    b1 = Button(input_frame, text='Browse event file', command=open_evt_file, bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
+    b2 = Button(input_frame, text='Browse badpix file', command=open_badpix_file, bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
+    evt_label = Label(input_frame, text="Event file: ", bg='#282a36', fg='#f8f8f2',font='Courier 14')
+    badpix_label = Label(input_frame, text="Badpix file: ", bg='#282a36',fg='#f8f8f2',font='Courier 14')
     evt_label.pack(pady=10)
-    fits_label.pack(pady=10)
+    badpix_label.pack(pady=10)
 
-    confirm_button = Button(dpigen_win, text='Confirm', command=confirm_dpigen)
+    confirm_button = Button(dpigen_win, text='Confirm', command=confirm_dpigen, bg='#6272a4', fg='#f8f8f2', font='Courier 20 bold')
     button_frame = Frame(dpigen_win)
-    directory_button = Button(button_frame, text="Open", command=output)
-    directory_label = Label(dpigen_win,  width=200, bg='white', fg='black', textvariable=dir)
-
-    directory_label.pack(side=TOP, padx=10, pady=20)
-    directory_button.pack(side=TOP)
     button_frame.pack(side=BOTTOM)
 
-    output_frame = Frame(dpigen_win)
-    olabel = Label(output_frame, text="Choose the required output directory", font='Arial 16 bold')
+    output_frame = Frame(dpigen_win, bg='#282a36')
+    olabel = Label(output_frame, text="Choose the required output directory", font='Courier 23 bold', bg='#282a36', fg='#f8f8f2')
+    directory_label = Label(output_frame,  width=100, text="Output Directory: ",font='Courier 14', bg='#282a36', fg='#f8f8f2')
+    directory_button = Button(output_frame, text="Open", command=output, bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
+    directory_button.pack(side=BOTTOM, pady=10)
+    directory_label.pack(side=BOTTOM, padx=100, pady=45)
     olabel.pack(side=TOP, pady=10)
 
-    b1.pack(side=LEFT)
-    b2.pack(side=LEFT)
-    confirm_button.pack(side=BOTTOM)
-    input_frame.pack(side=LEFT)
-    output_frame.pack(side=RIGHT, padx=40)
+    b1.pack(side=LEFT, padx=40, pady=20)
+    b2.pack(side=LEFT, padx=10, pady=20)
+    confirm_button.pack(side=BOTTOM, pady=40)
+    input_frame.pack(side=LEFT, padx=80)
+    output_frame.pack(side=RIGHT, padx=0)
 
     dpigen_win.mainloop()
 
+
+
+'''--------------image--------------------------------------------------------------------------------------------'''
+
 def imagegui():
+    global dpiordph_label
     global image_win
-    global evt_label
-    global fits_label
-    global evt
-    global badpix
-    global dir
+    global imginp_label
+    global aspect_label
+    global dpiordph
+    global imginp
+    global aspectQ0
+    global aspectQ1
+    global aspectQ2
+    global aspectQ3
+    global directory_label
+    global out
     image_win = Tk() #creating the window
     image_win.title('cztimage')
-    image_win.geometry("1200x400")
-    input_frame = Frame(image_win) #creating the frame
-    ilabel = Label(input_frame, text="Choose the required input files", font='Arial 16 bold')
-    ilabel.pack(side=TOP)
-    b1 = Button(input_frame, text='DPI/DPH', command=choose_dpiordph)
-    b2 = Button(input_frame, text='Browse event file', command=open_evt_file)
-    b3 = Button(input_frame, text='Browse aspect file for Q0', command=open_aspectQ0_file)
-    b4 = Button(input_frame, text='Browse aspect file for Q1', command=open_aspectQ1_file)
-    b5 = Button(input_frame, text='Browse aspect file for Q2', command=open_aspectQ2_file)
-    b6 = Button(input_frame, text='Browse aspect file for Q3', command=open_aspectQ3_file)
-    dir = StringVar()
-    evt_label = Label(input_frame, text="Event file: "+evt)
-    fits_label = Label(input_frame, text="Badpix file: "+fits)
-    evt_label.pack(pady=10)
-    fits_label.pack(pady=10)
-
-    confirm_button = Button(image_win, text='Confirm', command=confirm_image)
+    image_win.geometry("1280x720")
+    image_win.configure(bg='#282a36')
+    input_frame = Frame(image_win,bg='#282a36') #creating the frame
+    ilabel = Label(input_frame, text="Choose the required input files", font='Courier 23 bold', bg='#282a36', fg='#f8f8f2')
+    ilabel.pack(side=TOP, pady=20)
+    b1 = Button(input_frame, text='Browse DPI/DPH file', command=open_dpi_or_dph_file, bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
+    dpiordph_label = Label(input_frame, text="DPI/DPH file: ", bg='#282a36', fg='#f8f8f2',font='Courier 14')
+    dpiordph_label.pack(pady=10)
+    b2 = Button(input_frame, text="Choose aspect files directory", command=aspect_dir, bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
+    aspect_label = Label(input_frame, text='Aspect file directory: ', bg='#282a36', fg='#f8f8f2',font='Courier 14')
+    aspectQ0 = out+evt.replace('_bc.evt','_aspect')+'_Q0'
+    aspectQ1 = out+evt.replace('_bc.evt','_aspect')+'_Q1'
+    aspectQ2 = out+evt.replace('_bc.evt','_aspect')+'_Q2'
+    aspectQ3 = out+evt.replace('_bc.evt','_aspect')+'_Q3'
+    confirm_button = Button(image_win, text='Confirm', command=confirm_image, bg='#6272a4', fg='#f8f8f2', font='Courier 20 bold')
     button_frame = Frame(image_win)
-    directory_button = Button(button_frame, text="Open", command=output)
-    directory_label = Label(image_win,  width=200, bg='white', fg='black', textvariable=dir)
-
-    directory_label.pack(side=TOP, padx=10, pady=20)
-    directory_button.pack(side=TOP)
     button_frame.pack(side=BOTTOM)
-
-    output_frame = Frame(image_win)
-    olabel = Label(output_frame, text="Choose the required output directory", font='Arial 16 bold')
+        
+    output_frame = Frame(image_win, bg='#282a36')
+    olabel = Label(output_frame, text="Choose the required output directory", font='Courier 23 bold', bg='#282a36', fg='#f8f8f2')
+    directory_label = Label(output_frame,  width=100, text="Output Directory: ",font='Courier 14', bg='#282a36', fg='#f8f8f2')
+    directory_button = Button(output_frame, text="Open", command=output, bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
+    directory_button.pack(side=BOTTOM, pady=10)
+    directory_label.pack(side=BOTTOM, padx=100, pady=45)
     olabel.pack(side=TOP, pady=10)
 
-    b1.pack(side=LEFT)
-    b2.pack(side=LEFT)
-    b3.pack(side=LEFT)
-    b4.pack(side=LEFT)
-    b5.pack(side=LEFT)
-    b6.pack(side=LEFT)
-    confirm_button.pack(side=BOTTOM)
-    input_frame
+    b1.pack(side=LEFT, padx=120, pady=20)
+    b2.pack(side=LEFT, padx=40, pady=20)
+    aspect_label.pack(side=BOTTOM)
+    confirm_button.pack(side=BOTTOM, pady=60)
+    input_frame.pack(side=LEFT, padx=20)
+    output_frame.pack(side=RIGHT, padx=0)
+
+    image_win.mainloop()
+
+
+
+'''--------------rspgen-------------------------------------------------------------------------------------------'''
 
 def rspgengui():
     global rspgen_win
     global evt_label
-    global fits_label
-    global evt
-    global badpix
-    global dir
+    global mkf_label
+    global mkf_thres_label
+    global gti_label
+    global livetime_label
+    global badpix_label
+    global directory_label
     rspgen_win = Tk() #creating the window
     rspgen_win.title('cztrspgen')
-    rspgen_win.geometry("1200x400")
-    input_frame = Frame(rspgen_win) #creating the frame
-    ilabel = Label(input_frame, text="Choose the required input files", font='Arial 16 bold')
-    ilabel.pack(side=TOP)
+    rspgen_win.geometry("1280x720")
+    rspgen_win.configure(bg='#282a36')
+    input_frame = Frame(rspgen_win,bg='#282a36') #creating the frame
+    ilabel = Label(input_frame, text="Choose the required input files", font='Courier 23 bold', bg='#282a36', fg='#f8f8f2')
+    ilabel.pack(side=TOP, pady=20)
+    
+    b1 = Button(input_frame, text='Browse event file', command=open_evt_file, bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
+    b2 = Button(input_frame, text='Browse mkf file', command=open_mkf_file, bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
+    b3 = Button(input_frame, text='Browse mkf threshold file', command=open_mkf_thres_file, bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
+    b4 = Button(input_frame, text='Browse gti file', command=open_gti_file, bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
+    b5 = Button(input_frame, text='Browse livetime file', command=open_livetime_file, bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
+    b6 = Button(input_frame, text='Browse badpix file', command=open_badpix_file, bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
 
-    confirm_button = Button(rspgen_win, text='Confirm', command=confirm_rspgen)
+    evt_label = Label(input_frame, text="Event file: ", bg='#282a36', fg='#f8f8f2',font='Courier 14')
+    mkf_label = Label(input_frame, text="Mkf file: ", bg='#282a36',fg='#f8f8f2',font='Courier 14')
+    mkf_thres_label = Label(input_frame, text="Mkf Threshold file: ", bg='#282a36',fg='#f8f8f2',font='Courier 14')
+    gti_label = Label(input_frame, text="GTI file: ", bg='#282a36',fg='#f8f8f2',font='Courier 14')
+    livetime_label = Label(input_frame, text="Livetime file: ", bg='#282a36',fg='#f8f8f2',font='Courier 14')
+    badpix_label = Label(input_frame, text="Badpix file: ", bg='#282a36',fg='#f8f8f2',font='Courier 14')
+
+    evt_label.pack(pady=10)
+    mkf_label.pack(pady=10)
+    mkf_thres_label.pack(pady=10)
+    gti_label.pack(pady=10)
+    livetime_label.pack(pady=10)
+    badpix_label.pack(pady=10)
+    
+    confirm_button = Button(rspgen_win, text='Confirm', command=confirm_rspgen, bg='#6272a4', fg='#f8f8f2', font='Courier 20 bold')
     button_frame = Frame(rspgen_win)
-    directory_button = Button(button_frame, text="Open", command=output)
-    directory_label = Label(rspgen_win,  width=200, bg='white', fg='black', textvariable=dir)
-
-    directory_label.pack(side=TOP, padx=10, pady=20)
-    directory_button.pack(side=TOP)
     button_frame.pack(side=BOTTOM)
 
-    output_frame = Frame(rspgen_win)
-    olabel = Label(output_frame, text="Choose the required output directory", font='Arial 16 bold')
+    output_frame = Frame(rspgen_win, bg='#282a36')
+    olabel = Label(output_frame, text="Choose the required output directory", font='Courier 23 bold', bg='#282a36', fg='#f8f8f2')
+    directory_label = Label(output_frame,  width=100, text="Output Directory: ",font='Courier 14', bg='#282a36', fg='#f8f8f2')
+    directory_button = Button(output_frame, text="Open", command=output, bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
+    directory_button.pack(side=BOTTOM, pady=10)
+    directory_label.pack(side=BOTTOM, padx=100, pady=45)
     olabel.pack(side=TOP, pady=10)
 
-
-    confirm_button.pack(side=BOTTOM)
-    input_frame.pack(side=LEFT)
-    output_frame.pack(side=RIGHT, padx=40)
+    b1.pack(side=LEFT, padx=10, pady=20)
+    b2.pack(side=LEFT, padx=10, pady=20)
+    b3.pack(side=LEFT, padx=10, pady=20)
+    b4.pack(side=LEFT, padx=10, pady=20)
+    b5.pack(side=LEFT, padx=10, pady=20)
+    b6.pack(side=LEFT, padx=10, pady=20)
+    confirm_button.pack(side=BOTTOM, pady=60)
+    input_frame.pack(side=LEFT, padx=20)
+    output_frame.pack(side=RIGHT, padx=0)
 
     rspgen_win.mainloop()
 
 
-'''------functions for gui-----------------------------------------------------------------------------------------'''
+
+
+
+
+'''------functions used by gui-----------------------------------------------------------------------------------------'''
+
 
 '''--------------opening and storing location of evt files----------------------------------------------------------------------------------------'''''
+
 def open_evt_file():
     file = filedialog.askopenfile(mode='r', title="Open File")
     global evt
-    evt = os.path.abspath(file.name)
-    evt_label.config(text="Event file: "+ evt)
+    evt =  (os.path.abspath(file.name))
+    evt_label.config(text="Event file: "+ os.path.basename(evt), font='Courier 12 bold')
+
+
 
 '''--------------opening and storing location of mkf files----------------------------------------------------------------------------------------'''
+
 def open_mkf_file():
     file = filedialog.askopenfile(mode='r', title="Open File")
     global mkf
-    mkf = os.path.abspath(file.name)
-    mkf_label.config(text='Mkf file: '+mkf)
+    mkf =  (os.path.abspath(file.name))
+    mkf_label.config(text='Mkf file: '+ os.path.basename(mkf), font='Courier 12 bold')
+
+
 
 '''--------------opening and storing location of mkf threshold files----------------------------------------------------------------------------------------'''
+
 def open_mkf_thres_file():
     file = filedialog.askopenfile(mode='r', title="Open File")
     global mkf_threshold
-    mkf_threshold = os.path.abspath(file.name)
-    mkf_thres_label.config(text='Mkf Threshold file: '+mkf_threshold)
+    mkf_threshold =  (os.path.abspath(file.name))
+    mkf_thres_label.config(text='Mkf Threshold file: '+ os.path.basename(mkf_threshold), font='Courier 12 bold')
+
+
 
 '''--------------opening and storing location of gti files----------------------------------------------------------------------------------------'''
+
 def open_gti_file():
     file = filedialog.askopenfile(mode='r', title="Open File")
     global gti
-    gti = os.path.abspath(file.name)
-    gti_label.config(text='GTI file: '+gti)
+    gti =  (os.path.abspath(file.name))
+    gti_label.config(text='GTI file: '+ os.path.basename(gti), font='Courier 12 bold')
+
+
 
 '''--------------asking for the gtitype------------------------------------------------------------------------------------------------------------'''
+
 def gti_type_common():
     global gtitype
     global gtitype_label
     gtitype = 'COMMON'
-    gtitype_label.config(text='GTI Type: '+gtitype)
+    gtitype_label.config(text='GTI Type: '+gtitype, font='Courier 12 bold')
+
+
 
 '''--------------opening and storing location of livetime files----------------------------------------------------------------------------------------'''
+
 def open_livetime_file():
     file = filedialog.askopenfile(mode='r', title="Open File")
     global livetime
-    livetime = os.path.abspath(file.name)
-    livetime_label.config(text='Livetime file: '+livetime)
+    livetime =  (os.path.abspath(file.name))
+    livetime_label.config(text='Livetime file: '+ os.path.basename(livetime), font='Courier 12 bold')
+
+
 
 '''--------------opening and storing location of badpix files----------------------------------------------------------------------------------------'''
+
 def open_badpix_file():
     file = filedialog.askopenfile(mode='r', title="Open File")
     global badpix
-    badpix = os.path.abspath(file.name)
-    badpix_label.config(text='Badpix file: '+badpix)
+    badpix =  (os.path.abspath(file.name))
+    badpix_label.config(text='Badpix file: '+ os.path.basename(badpix), font='Courier 12 bold')
 
-'''--------------opening and storing location of dpi files----------------------------------------------------------------------------------------'''
-def open_dpi_file():
-    file = filedialog.askopenfile(mode='r', title="Open File")
-    global dpi
-    dpi = os.path.abspath(file.name)
-    dpi_label.config(text='DPI file: '+dpi)
 
-'''--------------opening and storing location of dph files----------------------------------------------------------------------------------------'''
-def open_dph_file():
+
+'''--------------opening and storing location of dpi or dph files----------------------------------------------------------------------------------------'''
+
+def open_dpi_or_dph_file():
     file = filedialog.askopenfile(mode='r', title="Open File")
-    global dph
-    dph = os.path.abspath(file.name)
-    dph_label.config(text='DPH file: '+dph)
+    global imginp
+    global dpiordph
+    imginp =  (os.path.abspath(file.name))
+    dpiordph_label.config(text='DPI/DPH file: '+ os.path.basename(imginp), font='Courier 12 bold')
+    dpiordph = imginp.split('/')[-1].split('.')[-1]
+
+
+
+'''--------------opening and storing location of aspect files----------------------------------------------------------------------------------------'''
+
+def aspect_dir():
+    global out
+    global aspect_label
+    out = filedialog.askdirectory() +'/'
+    aspect_label.config(text="Aspect Files Directory: "+out, font='Courier 12 bold')
 
 
 
 '''--------------opening and storing location of output files----------------------------------------------------------------------------------------'''
+
 def output():
     global out
     global dir
     out = filedialog.askdirectory() +'/'
-    dir.set(out)
-    
+    directory_label.config(text="Output Directory: "+out, font='Courier 12 bold')
+
+
+
+'''--------------functions for starting the modules---------------------------------------------------------------------------------------'''
+
 def confirm_gtigen():
     global gtigen_win
     gtigen_win.destroy()
@@ -710,7 +885,7 @@ def confirm_bindata():
 def confirm_dpigen():
     global dpigen_win
     dpigen_win.destroy()
-    man_dpigen(dph, badpix)
+    man_dpigen(evt, badpix)
 
 def confirm_image():
     global image_win
@@ -721,6 +896,8 @@ def confirm_rspgen():
     global rspgen_win
     rspgen_win.destroy()
     man_rspgen()
+
+
 
 
 
@@ -881,6 +1058,83 @@ def rspgen():
              'clobber=YES',
              'history=YES'])
 
+
+
+'''-----Functions to generate lightcurve, spectral plots and images--------------------------------------------------------------'''
+
+def lightcurves():
+    global evt
+    lc1 = fits.open(evt.replace('bc.evt','quad_clean_Q0.lc'))
+    lc2 = fits.open(evt.replace('bc.evt','quad_clean_Q1.lc'))
+    lc3 = fits.open(evt.replace('bc.evt','quad_clean_Q2.lc'))
+    lc4 = fits.open(evt.replace('bc.evt','quad_clean_Q3.lc'))
+    lc1_data = lc1[1].data
+    lc2_data = lc2[1].data
+    lc3_data = lc3[1].data
+    lc4_data = lc4[1].data
+    clean_lc = [lc1_data, lc2_data, lc3_data, lc4_data]
+    for i in range (0,4):
+        plt.figure(dpi=250, figsize=(15,5))
+        plt.title('Q'+str(i)+ ' lightcurve')
+        plt.xlabel('Time (sec)')
+        plt.ylabel('Counts/s')
+        plt.plot(clean_lc[i].field('TIME'), clean_lc[i].field('RATE'), color='mediumslateblue')
+        plt.savefig(evt.replace("bc.evt", "quad_clean_")+'Q'+str(i)+'_lightcurve.png')
+        plt.close()
+
+
+
+
+'''-----GUI for automatic pipeline-----------------------------------------------------------------------------------------'''
+
+
+def automaticgui():
+    global auto_win
+    global evt_label
+    global mkf_label
+    global mkf_thres_label
+    global livetime_label
+    global evt
+    global mkf
+    global mkf_threshold
+    global livetime
+    auto_win = Tk() #creating the window
+    auto_win.title('Automatic Pipeline')
+    auto_win.configure(bg='#282a36')
+    auto_win.geometry("1280x720")
+    input_frame = Frame(auto_win,bg='#282a36') #creating the frame
+    ilabel = Label(input_frame, text="Choose the required input files", font='Courier 25 bold', bg='#282a36', fg='#f8f8f2')
+    ilabel.pack(side=TOP, pady=20)
+    b1 = Button(input_frame, text='Browse event file', command=open_evt_file,bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
+    b2 = Button(input_frame, text='Browse mkf file', command=open_mkf_file,bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
+    b3 = Button(input_frame, text='Browse mkf threshold file', command=open_mkf_thres_file,bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
+    b4 = Button(input_frame, text='Browse livetime file', command=open_livetime_file,bg='#6272a4', fg='#f8f8f2', font='Courier 12 bold')
+    evt_label = Label(input_frame, text="Event file: "+evt, bg='#282a36',fg='#f8f8f2',font='Courier 14')
+    mkf_label = Label(input_frame, text="Mkf file: "+mkf, bg='#282a36',fg='#f8f8f2',font='Courier 14')
+    mkf_thres_label = Label(input_frame, text="Mkf Threshold file: "+mkf_threshold, bg='#282a36',fg='#f8f8f2',font='Courier 14')
+    livetime_label = Label(input_frame, text="Livetime file: "+livetime, bg='#282a36',fg='#f8f8f2',font='Courier 14')
+    evt_label.pack(pady=10)
+    mkf_label.pack(pady=10)
+    mkf_thres_label.pack(pady=10)
+    livetime_label.pack(pady=10)
+
+    confirm_button = Button(auto_win, text='Confirm', command=confirm_auto, bg='#6272a4', fg='#f8f8f2', font='Courier 20 bold')
+    button_frame = Frame(auto_win)
+
+    b1.pack(side=LEFT, padx=20, pady=10)
+    b2.pack(side=LEFT, padx=20, pady=10)
+    b3.pack(side=LEFT, padx=20, pady=10)
+    b4.pack(side=LEFT, padx=20, pady=10)
+    button_frame.pack(side=BOTTOM)
+    confirm_button.pack(side=BOTTOM, pady=40)
+    input_frame.pack(side=TOP, pady=120)
+    
+    auto_win.mainloop()
+
+
+
+'''-----function to run the automatic pipeline-----------------------------------------------------------------------------------------'''
+
 def confirm_auto():
     global auto_win
     auto_win.destroy()
@@ -894,48 +1148,9 @@ def confirm_auto():
     dpigen()
     image()
     rspgen()
+    lightcurves()
 
-def automaticgui():
-    global auto_win
-    global evt_label
-    global mkf_label
-    global mkf_thres_label
-    global livetime_label
-    global evt
-    global mkf
-    global mkf_threshold
-    global livetime
-    global dir
-    auto_win = Tk() #creating the window
-    auto_win.title('Automatic Pipeline')
-    auto_win.geometry("1200x600")
-    input_frame = Frame(auto_win) #creating the frame
-    ilabel = Label(input_frame, text="Choose the required input files", font='Arial 16 bold')
-    ilabel.pack(side=TOP)
-    b1 = Button(input_frame, text='Browse event file', command=open_evt_file)
-    b2 = Button(input_frame, text='Browse mkf file', command=open_mkf_file)
-    b3 = Button(input_frame, text='Browse mkf threshold file', command=open_mkf_thres_file)
-    b4 = Button(input_frame, text='Browse livetime file', command=open_livetime_file)
-    dir = StringVar()
-    evt_label = Label(input_frame, text="Event file: "+evt)
-    mkf_label = Label(input_frame, text="Mkf file: "+mkf)
-    mkf_thres_label = Label(input_frame, text="Mkf Threshold file: "+mkf_threshold)
-    livetime_label = Label(input_frame, text="Livetime file: "+livetime)
-    evt_label.pack(pady=10)
-    mkf_label.pack(pady=10)
-    mkf_thres_label.pack(pady=10)
-    livetime_label.pack(pady=10)
 
-    confirm_button = Button(auto_win, text='Confirm', command=confirm_auto)
-    button_frame = Frame(auto_win)
+'''-----calling the home gui-----------------------------------------------------------------------------------------'''
 
-    b1.pack(side=LEFT)
-    b2.pack(side=LEFT)
-    b3.pack(side=LEFT)
-    b4.pack(side=LEFT)
-    button_frame.pack(side=BOTTOM)
-    confirm_button.pack(side=BOTTOM)
-    input_frame.pack(side=LEFT)
-    
-    auto_win.mainloop()
-automaticgui()
+homegui()
