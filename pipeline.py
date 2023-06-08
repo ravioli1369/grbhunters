@@ -1,3 +1,4 @@
+#!/home/ravioli/miniconda3/bin/python
 '''----------------------------------------------------------------------------------------------------------------'''
 import subprocess as sp
 from tkinter import *
