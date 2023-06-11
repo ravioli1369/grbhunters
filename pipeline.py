@@ -1,4 +1,9 @@
 #!/home/ravioli/miniconda3/bin/python
+
+
+'''Written by ravioli1369@gmail.com and shreyasbharadwaj04@gmail.com'''
+
+
 '''----------------------------------------------------------------------------------------------------------------'''
 import subprocess as sp
 from tkinter import *
@@ -6,7 +11,15 @@ from tkinter import filedialog
 import os
 from astropy.io import fits
 import matplotlib.pyplot as plt
+import argparse
 
+'''----passing arguments----------------------------------------------------------------------------------------------'''
+parser = argparse.ArgumentParser(description='CZTI Pipeline', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser.add_argument('--type', help='Run GUI or command line', type=str, default='gui')
+parser.add_argument('--e', '--evt', help='Input event file', type=str, default='')
+parser.add_argument('--m', '--mkf', help='Input mkf file', type=str, default='')
+parser.add_argument('--t', '--threshold', help='Input mkf threshold', type=str, default='')
+parser.add_argument('--l', '--livetime', help='Input livetime file', type=str, default='')
 
 
 
@@ -63,16 +76,22 @@ def homegui():
 
 
 '''-------------variable creation-----------------------------------------------------------------------------------'''
+args = parser.parse_args()
+evt = args.e
+mkf = args.m
+mkf_threshold = args.t
+livetime = args.l
+type = args.type
 
 evt_label = ''
 mkf_label = ''
 mkf_thres_label = ''
-evt = ''
-mkf = ''
-mkf_threshold = ''
+#evt = ''
+#mkf = ''
+#mkf_threshold = ''
 gti = ''
 out = ''
-livetime = ''
+#livetime = ''
 badpix = ''
 dpiordph = ''
 imginp = ''
@@ -1152,6 +1171,18 @@ def confirm_auto():
     lightcurves()
 
 
-'''-----calling the home gui-----------------------------------------------------------------------------------------'''
-
-homegui()
+'''-----calling-----------------------------------------------------------------------------------------'''
+if type == 'gui':
+    homegui()
+elif type == 'cmd':
+    gtigen()
+    gaas()
+    datasel()
+    pixclean()
+    evtclean()
+    flagbadpix()
+    bindata()
+    dpigen()
+    image()
+    rspgen()
+    lightcurves()
