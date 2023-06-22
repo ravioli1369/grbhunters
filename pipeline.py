@@ -1159,16 +1159,16 @@ def confirm_auto():
     global auto_win
     auto_win.destroy()
     gtigen()
-    gaas()
+    #gaas()
     datasel()
     pixclean()
     evtclean()
     flagbadpix()
     bindata()
-    dpigen()
-    image()
-    rspgen()
-    lightcurves()
+    #dpigen()
+    #image()
+    #rspgen()
+    #lightcurves()
 
 
 '''-----calling-----------------------------------------------------------------------------------------'''
