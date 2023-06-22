@@ -1,0 +1,599 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This report has been adapted from the following template:
+% The Legrand Orange Book
+% LaTeX Template
+% Version 2.4 (26/09/2018)
+%
+% This template was downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Mathias Legrand (legrand.mathias@gmail.com) with modifications by:
+% Vel (vel@latextemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+% Some changes made to the template:
+% We use natbib for citations, and this significantly changes the Bibliography page
+% We also change the colors and images used in the chapter headers and so on.
+%
+%
+% This template also uses a number of packages which may need to be
+% updated to the newest versions for the template to compile. It is strongly
+% recommended you update your LaTeX distribution if you have any
+% compilation errors.
+%
+% Important note:
+% Chapter heading images should have a 2:1 width:height ratio,
+% e.g. 920px width and 460px height.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[11pt]{book} % Default font size
+\usepackage{blindtext}
+\usepackage{lipsum}
+\usepackage{textcomp}
+\usepackage{gensymb}
+\usepackage{mathtools}
+% \usepackage{subfigure}
+\usepackage{titling}
+\usepackage{authblk}
+\usepackage{eso-pic}
+\usepackage[nottoc]{tocbibind}
+\usepackage{natbib}
+\usepackage{aas_macros}
+\usepackage[outputdir=cache]{minted}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{graphics}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{units}
+\usepackage[utf8]{inputenc}
+\usepackage{subcaption}
+\usepackage[export]{adjustbox}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{xcolor}
+% \usepackage{wasysym}
+% \usepackage{marvosym}
+% \usepackage{gensymb}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+%% THEME
+\input{structure.tex} % Insert the commands.tex file which contains the majority of the structure behind the template
+
+\definecolor{theme}{RGB}{76,139,245} % Redefine the color used for highlighting throughout the book. 
+
+\renewcommand{\familydefault}{\sfdefault}
+
+%\hypersetup{pdftitle={Title},pdfauthor={Author}} % Uncomment and fill out to include PDF metadata for the author and title of the book
+
+%----------------------------------------------------------------------------------------
+
+%% TITLE 
+\title{\color{white}
+	{\LARGE\sffamily\textsc{\color{black}Krittika Summer Projects 2023}}\\
+	\normalfont\fontsize{35}{35}\selectfont
+	\textbf{\color{black} Faintest of the Brightest}}
+
+%% AUTHORS and AFFILIATIONS
+\author[1,2]{\color{black}Ravi Kumar}
+
+
+\setlength{\affilsep}{3em}
+% Check your affiliations
+\affil[1]{\protect\raggedright\normalfont\fontsize{10}{0}\selectfont Krittika - The Astronomy Club of IIT Bombay, Powai, Mumbai - 400076, India}
+\affil[2]{Indian Institute of Technology Bombay, Mumbai - 400076, India}
+
+
+
+\date{}
+
+
+\begin{document}
+\makeatletter
+\newcommand{\printauthorlist}{
+    \begin{center}
+		\expandafter\let\csname textsuperscript \endcsname\@gobble % Remove \textsuperscript 
+		\AB@authlist% Print list
+	\end{center}
+}
+\makeatother
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\begin{titlepage}
+	\begingroup
+	\thispagestyle{empty}
+        \begin{center}
+	\AddToShipoutPicture*{\includegraphics[height=\paperheight, width=\paperwidth]{Pictures/cover.png}}
+        \end{center}
+	\vspace*{25em}
+	{\centering
+	\makeatletter
+		\@title\\[0.5em]
+		{\normalfont\LARGE\printauthorlist}
+	\makeatother
+	}
+	\endgroup
+
+\end{titlepage}
+
+%----------------------------------------------------------------------------------------
+%	COPYRIGHT/ALT TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\begin{titlepage}
+	\thispagestyle{empty}
+	\date{\protect\raggedright
+		\vfill
+		\noindent Copyright \copyright\ 2023 Krittika IITB\\ %Copyright notice
+		\noindent \textsc{Published by Krittika: The Astronomy Club of IIT Bombay}\\ % Publisher	
+		\noindent \href{https://github.com/krittikaiitb}{\textsc{github.com/krittikaiitb}} \\ % URL
+	First Release, July 2023 % Printing/edition date
+}
+	\maketitle
+\end{titlepage}
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT
+%----------------------------------------------------------------------------------------
+
+\newpage
+\pagestyle{empty}
+\begin{center}
+{\huge \textmd{Abstract}}\\
+\end{center}
+\vspace{5em}
+
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+% \usechapterimagefalse % If you don't want to include a chapter image, use this to toggle images off - it can be enabled later with \usechapterimagetrue
+
+\chapterimage{index} % Table of contents heading image
+
+\pagestyle{empty} % Disable headers and footers for the following pages
+%\setcounter{tocdepth}{0}
+\tableofcontents % Print the table of contents itself
+
+\pagestyle{fancy} % Enable headers and footers again
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER 1
+%----------------------------------------------------------------------------------------
+
+\chapterimage{astrosat} % Chapter heading image
+
+\chapter{Introduction}
+\section{Gamma Ray Bursts}
+\subsection{What are Gamma Ray Bursts?}
+Gamma-ray bursts (GRBs) are massively large explosions caused when a star dies resulting in a supernova, when two \href{https://en.wikipedia.org/wiki/Neutron_star}{neutron stars} collide, or when a neutron star collides with a \href{https://en.wikipedia.org/wiki/Black_hole}{black hole}, releasing a large amount of energy.  
+
+\begin{figure}[H]
+\centering
+    \includegraphics[scale=0.43]{Pictures/grb_shell_final_0.jpg}
+    \caption{Emissions of a GRB (Source: \href{https://www.nasa.gov/feature/goddard/2023/nasa-missions-study-what-may-be-a-1-in-10000-year-gamma-ray-burst}{NASA's Goddard Space Flight Center})}
+\end{figure}
+
+This illustration shows the ingredients of a long gamma-ray burst, the most common type. The core of a massive star (left) has collapsed, forming a black hole that sends a jet of particles moving through the collapsing star and out into space at nearly the speed of light. Radiation across the spectrum arises from hot ionized gas (plasma) in the vicinity of the newborn black hole, collisions among shells of fast-moving gas within the jet (internal shock waves), and from the leading edge of the jet as it sweeps up and interacts with its surroundings (external shock). The presence of a prompt emission and a much longer afterglow (in multiple wavelengths) is a common feature of GRBs.
+
+\subsection{Classification of GRBs}
+GRBs are classified into 3 main classes, short, long and ultra-long, according to the duration for which they are detected.
+
+\textbf{Short GRBs} are events with a duration of less than 2 seconds, and the gamma rays from short bursts lean toward the high-energy end of the spectrum, while long GRBs emit lower-energy gamma rays. They are thought to be caused by the merger of two neutron stars or a neutron star and a black hole and account for about 30\% of detected GRBs.
+
+\textbf{Long GRBs} are events with a duration of more than 2 seconds. Although the gamma rays emitted are of lower energy than short GRBs, the total energy output of long GRBs is generally higher owing to their longer duration. They are thought to be caused by the core collapse of rapidly rotating massive stars 
+
+\textbf{Ultra-Long GRBs} are events that last more than 10,000 seconds. They have been proposed to be caused by the collapse of a \href{https://en.wikipedia.org/wiki/Blue_supergiant}{Blue Supergiant} star, a \href{https://en.wikipedia.org/wiki/Tidal_disruption_event}{tidal disruption event} or a newborn \href{https://en.wikipedia.org/wiki/Magnetar}{magnetar}
+
+\section{Astrosat and CZTI}
+\subsection{Astrosat - India's first multiwavelength space telescope}
+AstroSat is the first dedicated Indian astronomy mission aimed at studying celestial sources in X-ray, optical and UV spectral bands simultaneously. The payloads cover the energy bands of Ultraviolet (Near and Far), limited optical and X-ray regime (0.3 keV to 100keV). One of the unique features of AstroSat mission is that it enables the simultaneous multi-wavelength observations of various astronomical objects with a single satellite.
+
+AstroSat with a lift-off mass of 1515 kg was launched on September 28, 2015 into a 650 km orbit inclined at an angle of 6 deg to the equator by PSLV-C30 from Satish Dhawan Space Centre, Sriharikota. The minimum useful life of the AstroSat mission is expected to be 5 years.
+
+
+\begin{wrapfigure}{l}{0.4\textwidth}
+    \centering
+    \includegraphics[scale=0.8]{Pictures/astrosat_wireframe.png}
+    \caption{Various Payloads on Astrosat (Source: \href{https://webapps.issdc.gov.in/astro_archive/archive/astrosat_images/astrosat_wireframe.png}{ISSDC})}
+\end{wrapfigure}
+
+The spacecraft control centre at Mission Operations Complex (MOX) of ISRO Telemetry, Tracking and Command Network (ISTRAC), Bengaluru manages the satellite during its entire mission life. The science data gathered by five payloads of AstroSat are telemetered to the ground station at MOX. The data is then processed, archived and distributed by Indian Space Science Data Centre (ISSDC) located at Bylalu, near Bengaluru.
+
+\clearpage
+
+
+
+\subsection{Cadmium-Zinc-Telluride Imager (CZTI)}
+
+
+\begin{wrapfigure}[18]{r}{0.4\textwidth}
+    \centering
+    \includegraphics[scale=1]{Pictures/czti.jpg}
+\caption{CZTI (Source: \href{http://astrosat.iucaa.in/czti/?q=home}{IUCAA})}
+\end{wrapfigure}
+
+It is a hard X-ray imaging instrument covering the energy band from 10 to 100 keV, has a detector area of 976 cm$^2$ constructed using CZT modules, and uses a Coded Aperture Mask (CAM) for imaging.
+The CZTI carries a Cesium Iodide (Tl) based scintillator detector for Veto measurements. This is located just under the CZT detector modules. Further, there is a gap of about 8 cm between the base of the collimator slats and the detector plane, in order to accommodate a radioactive calibration source module in each quadrant. This source shines alpha-tagged 60 keV photons on the CZT detector in order to help calibrate the energy response.
+
+Veto Detector - a detector (CsI) covers the large area of 256 cm2 and the light collection is done using two photomultipliers (PMT), viewed from sides. On registering an event, a signal from the detector is sent to a pre-amplifier. This signal is processed and sent to the FEB for further analysis. After amplification of the signal from pre-amplifier, the signal is sent to a comparator via stretcher along with LLD level signal. If LLD is triggered the pulse is digitized to an 8-bit output by ADC through control circuit. This output is used to differentiate Compton scattered events and hence the background in main detector can be reduced.
+
+\begin{wrapfigure}[16]{l}{0.4\textwidth}
+    \centering
+    \includegraphics[scale=0.25]{Pictures/cztiassembly.png}
+    \caption{CZTI Assembly (Source: \href{https://arxiv.org/pdf/2108.06746.pdf}{Image Calibration Paper})}
+\end{wrapfigure}
+
+The full CZTI detector is illuminated
+only by the on-axis source. Off-axis sources illuminate
+only a part of the detector depending on the position of
+the source, this is called “partial coding”. The coded
+mask for CZTI is designed with seven patterns based
+on 255-element pseudo-noise Hadamard set Uniformly
+Redundant Arrays (URA).  Each
+pattern has 16×16 mask elements and used as a mask for an individual detector module. A random arrangement of these patterns into a 4 × 4 array results in the mask pattern for the first quadrant (quadrant A). The coded masks for the other quadrants (B, C, and D) were
+obtained by rotating the mask pattern of quadrant A by
+90°, 180° and 270° respectively.
+
+A passive collimator wall of height 400 mm separates any two adjacent modules, restricting the view
+of each detector module to the coded mask directly
+above it. The collimator thus restricts the Field of View
+(FOV) of CZTI to 4.6° × 4.6° FWHM at energies below
+100 keV. For energies above 100 keV, the collimator
+walls and the coded mask become progressively transparent, and allows the detection of Gamma-Ray Bursts
+from all over the sky
+
+\clearpage
+
+
+\subsection{Coded Aperture Mask Imaging}
+
+%\vspace{-1.1cm}
+
+\begin{wrapfigure}[17]{r}{0.5\textwidth}
+    \centering
+    \includegraphics[scale=0.53]{Pictures/cam_working.png}
+\caption{Working of a CAM (Source: \href{https://en.wikipedia.org/wiki/Coded_aperture}{Wikipedia})}
+\end{wrapfigure}
+
+
+Coded apertures or coded-aperture masks are grids, gratings, or other patterns of materials opaque to various wavelengths of electromagnetic radiation. The wavelengths are usually high-energy radiation such as X-rays and gamma rays. By blocking radiation in a known pattern, a coded "shadow" is cast upon a plane. The properties of the original radiation sources can then be mathematically reconstructed from this shadow. Coded apertures are used in X- and gamma ray imaging systems, because these high-energy rays cannot be focused with lenses or mirrors that work for visible light. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.69]{Pictures/CAM-czti.png}
+    \caption{CZTI coded aperture mask for all four quadrants designed using 255 element pseudo-noise Hadamard
+    set Uniformly Redundant Arrays. One extra closed element is added to each URA to obtain a square pattern. Here
+    black areas represent closed mask elements and white areas represent open ones. (Source: \href{https://arxiv.org/pdf/2108.06746.pdf}{Image Calibration Paper})}
+\end{figure}
+
+\clearpage
+
+\section{CZT Pipeline}
+
+\subsection{How It Works}
+The data received from the CZTI payload passes through a series of steps in a processing
+pipeline. Three major data levels have been designated for long-term storage. These are:
+
+\noindent\textbf{Level 0}
+
+This is the raw data received from satellite telemetry, which is segregated by instrument,
+along with auxiliary data. This data is archived internally and not distributed for public
+use.
+
+\noindent\textbf{Level 1}
+
+This is reorganized raw data, written in FITS format for Astronomical use. All auxiliary
+information necessary for further processing of this data are collated at this level and
+packed along with the respective science data. This data is released via Astrosat data
+archive, at first to the Principal Investigator (PI) of the corresponding observing proposal
+and, after a specified initial lock in period, to anyone interested in the data.
+
+\noindent\textbf{Level 2}
+
+This data contains standard science products derived from Level 1 data. Level 2 data is
+also in FITS format and is available for science use, with the same lock-in criteria and
+release mechanism as the Level 1 data.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.55]{Pictures/cztpipeline.png}
+    \caption{Pipeline Work Flow (Source: \href{http://astrosat-ssc.iucaa.in/uploads/czti/CZTI_level2_software_userguide_V2.1.pdf}{CZT Software Userguide})}
+\end{figure}
+
+\subsection{Work Flow}
+
+Data reduction for CZTI is performed in three stages. Each of these stages involves
+execution of several tasks of the pipeline.
+
+\begin{itemize}
+    \item Stage 1: Generation of event file and calibration. In this stage event file is generated
+    \item Stage 2: Selection of data and cleaning. In this stage events are selected based on Good Time Interval and noisy pixel events are removed from the data.
+    \item Stage 3: Generation of science products. In this last stage,DPI, image, spectrum, light curve and response matrix are generated.
+\end{itemize}
+
+The pipeline tasks can either be executed individually or by using the cztpipeline
+module which allows the user to run required stages of the pipeline tasks.
+
+
+\subsection{Pipeline Installation}
+
+I found Ubuntu 20.04 LTS to work best with the pipeline on WSL2. Other distros (including other versions of Ubuntu) gave various compilation errors.
+
+To start off, update the system by running 
+\begin{lstlisting}{language=bash}
+    $ sudo apt update && sudo apt upgrade
+\end{lstlisting}
+
+After this, we must install some packages that are essential to ensuring the pipeline installs smoothly. Install them by running 
+\begin{lstlisting}{language=bash}
+    $ sudo apt install gcc g++ gfortran perl make
+\end{lstlisting}
+
+
+Now download the pipeline from \href{http://astrosat-ssc.iucaa.in/uploads/czti/czti_pipeline_20180308_V2.1.tar}{here} and the CALDB from \href{http://astrosat-ssc.iucaa.in/uploads/czti/caldb_goodfiles_as1_czti_20180308_V1.1.tar.gz}{here}. 
+
+Untar these files, ideally in your home directory by running the following:
+\begin{lstlisting}{language=bash}
+    $ tar -xvf czti_pipeline_20180308_V2.1.tar
+    $ tar -xvf caldb_goodfiles_as1_czti_20180308_V1.1.tar.gz
+\end{lstlisting}
+
+
+Now add the following to your \lstinline[language=bash]{.bashrc} file (by running \lstinline[language=bash]{$ sudo nano ~/.bashrc})
+\begin{lstlisting}{language=bash}
+    export as1czt=~/czti_pipeline/CZTI/czti/
+    export PFILES="$PFILES:$as1czt/paramfiles"
+    export PATH=$as1czt/bin:$as1czt/scripts:$PATH
+    export GLOG_log_dir=$as1czt/log
+    export CZTI_templates=$as1czt/templates
+    export PERL5LIB="$as1czt/lib/":$PERL5LIB
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$as1czt/lib
+    export PYTHONPATH="$PYTHONPATH:$as1czt/scripts"
+    export CXXFLAGS="-fpermissive"
+    ulimit -s 65532
+    export CALDB=~/
+\end{lstlisting}
+
+
+Finally execute the following commands
+
+\begin{lstlisting}{language=bash}
+    $ source ~/.bashrc
+    $ cd $as1czt
+    $ cd ../
+    $ ./InstallLibs
+    $ cd $as1czt
+    $ make
+    $ cd scripts
+    $ chmod +x cztpipeline
+\end{lstlisting}
+
+\subsection{Automation of the Pipeline}
+% In a joint effort with \href{}{Shreyas N.B.} we have automated the pipeline using python. The code uses the subprocess module to run the pipeline commands in the terminal, along with the \lstinline[language=python]{tkinter} module to create a GUI for the user to interact with. The code can be found \href{}{here}
+
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER 2
+%----------------------------------------------------------------------------------------
+\chapterimage{Pictures/BOAT.png}
+\chapter{Playing With Data}
+
+\section{Introduction}
+
+\subsection{FITS Files}
+
+FITS (Flexible Image Transport System) is a standard format for storing astronomical data. FITS is much more than an image format (such as JPG or GIF) and is primarily designed to store scientific data sets consisting of multi-dimensional arrays (1-D spectra, 2-D images or 3-D data cubes) and 2-dimensional tables containing rows and columns of information.
+
+\noindent\textbf{Headers}
+
+The FITS header is a block of text at the beginning of the file that contains information about the data contained within the file. The header is arranged in a series of keyword-value pairs, known as header cards, that each consist of a keyword, a value, and an optional comment. The keyword tells the type of information that the header card contains, the value is the actual value of the information, and the comment describes the information or how it was derived. The header is terminated by the keyword END.
+
+\noindent\textbf{Data}
+
+The data in a FITS file is stored in a series of N-dimensional arrays, where N is any number between 0 (empty) and 999. The data arrays are preceded by a series of header keywords that describe the size (NAXIS), location (NAXISn), data type (BITPIX), and other characteristics of the data arrays. The data arrays are stored in the file in the same order that they are listed in the header.
+
+\subsection{Accessing Files via Astropy}
+
+Astropy is a community Python library for Astronomy. It contains among other things:
+
+\begin{itemize}
+    \item A powerful N-dimensional array object
+    \item Sophisticated (broadcasting) functions
+    \item Tools for integrating Fortran code
+    \item Useful linear algebra, Fourier transform, and random number capabilities
+\end{itemize}
+
+Opening a FITS file is as simple as:
+
+\begin{lstlisting}[language=Python]
+    from astropy.io import fits
+    hdul = fits.open('file.fits')
+    hdul.info()
+\end{lstlisting}
+
+This will print out the information about the file, including the number of HDUs in the file and the name and dimensions of each extension.
+
+To obtain the data and header from the file, we can use:
+
+\begin{lstlisting}[language=Python]
+    data = hdul[0].data
+    header = hdul[0].header
+\end{lstlisting}
+
+
+\subsection{Creating the Light Curve Files}
+
+The light curve files are created by running the \lstinline[language=bash]{cztbindata} command in the terminal. The command takes in the following input files along with time bin size and produces the .lc and .pha (spectrum) file:
+
+\begin{itemize}
+    \item \lstinline[language=bash]{inevtfile} - The input evt file
+    \item \lstinline[language=bash]{mkffile} - The input mkf file
+    \item \lstinline[language=bash]{badpixfile} - The input badpix file
+    \item \lstinline[language=bash]{livetimefile} - The input livetime file
+\end{itemize}
+
+Finally the .lc file can be opened using \lstinline[language=Python]{astropy.io.fits} and the required columns can be plotted. In our case we will be plotting the \lstinline[language=Python]{COUNTS} column against the \lstinline[language=Python]{TIME} column.
+
+Here is a sample light curve file plotted for the duration of the GRB190928A:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.65]{Pictures/sample_lc.png}
+    \caption{Light Curve for GRB190928A}
+\end{figure}
+
+\subsection{Creating the Spectrum Files}
+
+The process used in creating the light curve will automatically produce a .pha file which contains the spectrum of the GRB. We can plot the spectrum using \lstinline[language=Python]{astropy.io.fits} and \lstinline[language=Python]{matplotlib.pyplot}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.55]{Pictures/spectrum.png}
+    \caption{Spectrum for GRB190928A}
+\end{figure}
+
+\subsection{Some Anomalies in the Data}
+
+The above light curve was plotted around the time of the GRB, but if we plot the full light curve, we can see some anomalies in the data where the counts suddenly fall to zero.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.3]{Pictures/anomaly.png}
+    \caption{Anomaly in the Light Curve}
+    \label{fig:anomaly}
+\end{figure}
+
+The region shaded in red is the region where the counts start rising then fall to 0. This is because there is a high influx of cosmic rays in a particular region in the South Atlantic Ocean. This region is known as the South Atlantic Anomaly (SAA). 
+
+The SAA is a consequence of the fact that the Earth's inner Van Allen radiation belt comes closest to the Earth's surface at the south magnetic pole. This leads to an increased flux of energetic particles in this region and exposes orbiting satellites to higher than usual levels of radiation. 
+
+The detectors on Astrosat are shut off when the satellite passes through the SAA, and hence the counts fall to 0. 
+
+\section{Analysis of GRB190928A}
+
+\subsection{Finding the GRB}
+
+We notice two peaks in the light curve. The first peak is the \href{https://arxiv.org/pdf/1402.7022.pdf}{Prompt Emission}, and the second peak is the \href{https://astronomy.swin.edu.au/cosmos/G/gamma+ray+burst+afterglow}{Afterglow}. We can find the GRB by looking at the \lstinline[language=Python]{COUNTS} column and finding the maximum value. We can then use the \lstinline[language=Python]{TIME} column to find the time at which the maximum value occurs. In this case, the GRB occurs at 2019-09-28 13:12:17 UTC. 
+
+The duration of the GRB would be the time difference between the time at which the GRB starts and the time at which it ends. The start and end times are taken roughly before the prompt emission and after the afterglow respectively. In this case, the duration of the GRB is 132 seconds.
+
+A thing to note is that \lstinline{cztbindata} produces .lc files for each quadrant of the CZT detectors (namely Quad 0, Quad 1, Quad 2 and Quad 3). We must plot all four quadrants to get a good idea of the GRB.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.35]{Pictures/allquads.png}
+    \caption{Light Curves for all four quadrants}
+\end{figure}
+
+The above plot shows the light curves for all four quadrants along with the peaks of the prompt emission and afterglow and markers for the start and end of the GRB.
+
+\subsection{Filtering and Detrending}
+
+From Figure \ref{fig:anomaly}, we can see that the "backgorund" data (the signal apart from the GRB) has a mean value somewhere around $100$, along with a lot of variation around that mean value. This variation is known as \textit{noise} and is caused by the inherent physics of the working of the CZTI detectors. There is also an upward slope right before the SAA region which causes a "trend" in the data. We need to "detrend" the data to make any GRB in that region stand out. 
+
+We can do this by using the \lstinline[language=Python]{savgol_filter} function from \lstinline{scipy.stats} to filter the data. The \lstinline[language=Python]{savgol_filter} function applies a \href{https://en.wikipedia.org/wiki/Savitzky%E2%80%93Golay_filter}{Savitzky-Golay filter} to the data. 
+
+The \lstinline[language=Python]{savgol_filter} function takes in the data, the window length and the polynomial order as input. The filter fits a polynomial of a given order to the datapoints in the window, then we subtract this polynomial from the data. This is done for all the datapoints in the window and further for all windows in the data.
+
+The above process is done for the data points \textit{outside} of the GRB region, so as to not detrend the GRB itself. We also have to subtract the mean of the original background ($\approx 100$) from the GRB to get the final GRB data. This step can easily be done before the detrending.
+
+In python, filtering and detrending can be done as follows:
+
+\begin{lstlisting}[language=Python]
+    from scipy.signal import savgol_filter
+    import numpy as np
+
+    # Subtracting the mean of the original background
+    data[grb] -= np.mean(data[grb])
+
+
+    # Filtering and Detrending
+    data[noise] -= savgol_filter(data[noise], 101, 3)
+\end{lstlisting}
+
+\begin{wrapfigure}{l}{0.7\textwidth}
+    \centering
+    \includegraphics[scale=0.25]{Pictures/detrended.png}
+    \caption{Detrended Light Curve}
+\end{wrapfigure}
+
+
+For the purposes of our analysis, we will be using a window length of $101$s and a polynomial order of $3$. The results of the filtering and detrending are shown below:
+
+To the left we can see that the slope next to the SAA region has been removed, the background has been reduced to nearly $0$, and the GRB has been brought down from the original background of $\approx 100$ to $\approx 0$.
+
+We can also see that the "dip" that occurs during the SAA region is now a flat line with values equal to $0$.
+
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER 3
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER 4
+%----------------------------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+
+% \label{References}
+% \lhead{\emph{References}}
+% \chapterimage{erosita_allsky} % Chapter heading image
+
+% \chapter{Results and Discussion}
+
+% \chapterimage{orion}
+
+% \chapter{References}
+
+
+%----------------------------------------------------------------------------------------
+%	INDEX
+%----------------------------------------------------------------------------------------
+
+% \phantomsection
+% \setlength{\columnsep}{0.75cm} % Space between the 2 columns of the index
+% \printindex % Output the index
+
+\end{document}

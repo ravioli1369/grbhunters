@@ -1,0 +1,8 @@
+    $ source ~/.bashrc
+    $ cd $as1czt
+    $ cd ../
+    $ ./InstallLibs
+    $ cd $as1czt
+    $ make
+    $ cd scripts
+    $ chmod +x cztpipeline
