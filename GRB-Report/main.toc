@@ -3,23 +3,23 @@
 \contentsline {section}{\numberline {1.1}Gamma Ray Bursts}{4}{section.1.1}%
 \contentsline {subsection}{\numberline {1.1.1}What are Gamma Ray Bursts?}{4}{subsection.1.1.1}%
 \contentsline {subsection}{\numberline {1.1.2}Classification of GRBs}{5}{subsection.1.1.2}%
-\contentsline {section}{\numberline {1.2}Astrosat and CZTI}{5}{section.1.2}%
-\contentsline {subsection}{\numberline {1.2.1}Astrosat - India's first multiwavelength space telescope}{5}{subsection.1.2.1}%
-\contentsline {subsection}{\numberline {1.2.2}Cadmium-Zinc-Telluride Imager (CZTI)}{6}{subsection.1.2.2}%
-\contentsline {subsection}{\numberline {1.2.3}Coded Aperture Mask Imaging}{7}{subsection.1.2.3}%
-\contentsline {section}{\numberline {1.3}CZT Pipeline}{8}{section.1.3}%
-\contentsline {subsection}{\numberline {1.3.1}How It Works}{8}{subsection.1.3.1}%
-\contentsline {subsection}{\numberline {1.3.2}Work Flow}{9}{subsection.1.3.2}%
-\contentsline {subsection}{\numberline {1.3.3}Pipeline Installation}{9}{subsection.1.3.3}%
-\contentsline {subsection}{\numberline {1.3.4}Automation of the Pipeline}{9}{subsection.1.3.4}%
-\contentsline {chapter}{\numberline {2}Playing With Data}{10}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Introduction}{10}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}FITS Files}{10}{subsection.2.1.1}%
-\contentsline {subsection}{\numberline {2.1.2}Accessing Files via Astropy}{10}{subsection.2.1.2}%
-\contentsline {subsection}{\numberline {2.1.3}Creating the Light Curve Files}{11}{subsection.2.1.3}%
-\contentsline {subsection}{\numberline {2.1.4}Creating the Spectrum Files}{12}{subsection.2.1.4}%
-\contentsline {subsection}{\numberline {2.1.5}Some Anomalies in the Data}{12}{subsection.2.1.5}%
-\contentsline {section}{\numberline {2.2}Analysis of GRB190928A}{13}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Finding the GRB}{13}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}Filtering and Detrending}{14}{subsection.2.2.2}%
+\contentsline {section}{\numberline {1.2}Astrosat and CZTI}{6}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Astrosat - India's first multiwavelength space telescope}{6}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Cadmium-Zinc-Telluride Imager (CZTI)}{7}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}Coded Aperture Mask Imaging}{8}{subsection.1.2.3}%
+\contentsline {section}{\numberline {1.3}CZT Pipeline}{9}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}How It Works}{9}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}Work Flow}{10}{subsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.3.3}Pipeline Installation}{10}{subsection.1.3.3}%
+\contentsline {subsection}{\numberline {1.3.4}Automation of the Pipeline}{10}{subsection.1.3.4}%
+\contentsline {chapter}{\numberline {2}Playing With Data}{11}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Introduction}{11}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}FITS Files}{11}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Accessing Files via Astropy}{11}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Creating the Light Curve Files}{12}{subsection.2.1.3}%
+\contentsline {subsection}{\numberline {2.1.4}Creating the Spectrum Files}{13}{subsection.2.1.4}%
+\contentsline {subsection}{\numberline {2.1.5}Some Anomalies in the Data}{13}{subsection.2.1.5}%
+\contentsline {section}{\numberline {2.2}Analysis of GRB190928A}{14}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Finding the GRB}{14}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Filtering and Detrending}{15}{subsection.2.2.2}%
 \contentsfinish 
