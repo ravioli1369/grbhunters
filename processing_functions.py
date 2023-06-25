@@ -108,7 +108,7 @@ def snr_gauss(filename, start, end, polyorder=3, in_bins=80):
     n, bins = np.histogram(total_noise, bins=in_bins)
     bin_center = np.array([0.5*(bins[i]+bins[i+1]) for i in range(len(bins)-1)])
     popt, pcov = curve_fit(gaussian, bin_center, n, p0=[np.max(n), np.mean(total_noise), np.std(total_noise), 0])
-    signal = np.max(data['RATE'][start:end])
+    signal = np.max(data['RATE'][start:end])+popt[1]
     noise = popt[1]+3*popt[2]
     snr = signal/noise
     return snr, total_noise, bin_center, popt
@@ -130,7 +130,7 @@ def snr_poisson(filename, start, end, in_bins=100):
     n, bin_edges = np.histogram(noise_for_fit, bins=bins)
     bin_center = 0.5 * (bin_edges[1:] + bin_edges[:-1])
     popt, pcov = curve_fit(poisson_fit, bin_center, n, p0=[np.mean(noise_for_fit), 2000])
-    signal = np.max(data['RATE'][start:end])+lamb
+    signal = np.max(data['RATE'][start:end])+popt[0]
     noise = popt[0]+3*np.sqrt(popt[0])
     snr = signal/noise
     return snr, n, bin_center, popt
@@ -143,11 +143,11 @@ def snr_counts(filename, start, end, polyorder=3):
     duration_noise = duration_lc-duration_burst-duration_sao
     if end<south_atlantic_start:
         signal = np.sum(data['RATE'][start:end])/duration_burst
-        noise = np.sum(np.abs(data['RATE'][:start]))/duration_noise+np.sum(np.abs(data['RATE'][end:south_atlantic_start]))/duration_noise+np.sum(np.abs(data['RATE'][south_atlantic_end:]))/duration_noise
+        noise = (np.sum(np.abs(data['RATE'][:start]))+np.sum(np.abs(data['RATE'][end:south_atlantic_start]))+np.sum(np.abs(data['RATE'][south_atlantic_end:])))/duration_noise
         snr = signal/noise
     elif start>south_atlantic_end:
         signal = np.sum(data['RATE'][start:end])/duration_burst
-        noise = np.sum(np.abs(data['RATE'][:south_atlantic_start]))/duration_noise+np.sum(np.abs(data['RATE'][south_atlantic_end:start]))/duration_noise+np.sum(np.abs(data['RATE'][end:]))/duration_noise
+        noise = (np.sum(np.abs(data['RATE'][:south_atlantic_start]))+np.sum(np.abs(data['RATE'][south_atlantic_end:start]))+np.sum(np.abs(data['RATE'][end:])))/duration_noise
         snr = signal/noise
     else:
         print('Inputted start and end times are not valid')

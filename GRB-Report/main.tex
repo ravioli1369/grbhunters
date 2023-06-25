@@ -77,7 +77,8 @@
     keywordstyle=\color{magenta},
     numberstyle=\tiny\color{codegray},
     stringstyle=\color{codepurple},
-    basicstyle=\ttfamily\footnotesize,
+    basicstyle=\ttfamily,
+    \lst@ifdisplaystyle\scriptsize\fi,
     breakatwhitespace=false,         
     breaklines=true,                 
     captionpos=b,                    
@@ -211,24 +212,24 @@ Gamma-ray bursts (GRBs) are massively large explosions caused when a star dies r
 
 \begin{figure}[H]
 \centering
-    \includegraphics[scale=0.43]{Pictures/grb_shell_final_0.jpg}
-    \caption{Emissions of a GRB (Source: \href{https://www.nasa.gov/feature/goddard/2023/nasa-missions-study-what-may-be-a-1-in-10000-year-gamma-ray-burst}{NASA's Goddard Space Flight Center})}
+    \includegraphics[width=0.7\textwidth]{Pictures/grb_shell_final_0.jpg}
+    \caption{Emissions of a GRB (Source: \href{https://www.nasa.gov/feature/goddard/2023/nasa-missions-study-what-may-be-a-1-in-10000-year-Gamma-ray-burst}{NASA's Goddard Space Flight Center})}
 \end{figure}
 
-This illustration shows the ingredients of a long gamma-ray burst, the most common type. The core of a massive star (left) has collapsed, forming a black hole that sends a jet of particles moving through the collapsing star and out into space at nearly the speed of light. Radiation across the spectrum arises from hot ionized gas (plasma) in the vicinity of the newborn black hole, collisions among shells of fast-moving gas within the jet (internal shock waves), and from the leading edge of the jet as it sweeps up and interacts with its surroundings (external shock). The presence of a prompt emission and a much longer afterglow (in multiple wavelengths) is a common feature of GRBs.
+This illustration shows the ingredients of a long Gamma-ray burst, the most common type. The core of a massive star (left) has collapsed, forming a black hole that sends a jet of particles moving through the collapsing star and out into space at nearly the speed of light. Radiation across the spectrum arises from hot ionized gas (plasma) in the vicinity of the newborn black hole, collisions among shells of fast-moving gas within the jet (internal shock waves), and from the leading edge of the jet as it sweeps up and interacts with its surroundings (external shock). The presence of a prompt emission and a much longer afterglow (in multiple wavelengths) is a common feature of GRBs.
 
 \subsection{Classification of GRBs}
 GRBs are classified into 3 main classes, short, long and ultra-long, according to the duration for which they are detected.
 
-\textbf{Short GRBs} are events with a duration of less than 2 seconds, and the gamma rays from short bursts lean toward the high-energy end of the spectrum, while long GRBs emit lower-energy gamma rays. They are thought to be caused by the merger of two neutron stars or a neutron star and a black hole and account for about 30\% of detected GRBs.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{Pictures/neutronstars.jpg}
+\begin{wrapfigure}[15]{r}{0.4\textwidth}
+    \includegraphics[width=0.4\textwidth]{Pictures/neutronstars.jpg}
     \caption{Artist depiction of a GRB created by two merging neutron stars (Source: \href{http://www.markgarlick.com/index.html}{Mark A. Garlick})}
-\end{figure}
+\end{wrapfigure}
 
-\textbf{Long GRBs} are events with a duration of more than 2 seconds. Although the gamma rays emitted are of lower energy than short GRBs, the total energy output of long GRBs is generally higher owing to their longer duration. They are thought to be caused by the core collapse of rapidly rotating massive stars 
+\textbf{Short GRBs} are events with a duration of less than 2 seconds, and the Gamma rays from short bursts lean toward the high-energy end of the spectrum, while long GRBs emit lower-energy Gamma rays. They are thought to be caused by the merger of two neutron stars or a neutron star and a black hole and account for about 30\% of detected GRBs.
+
+
+\textbf{Long GRBs} are events with a duration of more than 2 seconds. Although the Gamma rays emitted are of lower energy than short GRBs, the total energy output of long GRBs is generally higher owing to their longer duration. They are thought to be caused by the core collapse of rapidly rotating massive stars 
 
 \textbf{Ultra-Long GRBs} are events that last more than 10,000 seconds. They have been proposed to be caused by the collapse of a \href{https://en.wikipedia.org/wiki/Blue_supergiant}{Blue Supergiant} star, a \href{https://en.wikipedia.org/wiki/Tidal_disruption_event}{tidal disruption event} or a newborn \href{https://en.wikipedia.org/wiki/Magnetar}{magnetar}
 
@@ -304,7 +305,7 @@ from all over the sky
 \end{wrapfigure}
 
 
-Coded apertures or coded-aperture masks are grids, gratings, or other patterns of materials opaque to various wavelengths of electromagnetic radiation. The wavelengths are usually high-energy radiation such as X-rays and gamma rays. By blocking radiation in a known pattern, a coded "shadow" is cast upon a plane. The properties of the original radiation sources can then be mathematically reconstructed from this shadow. Coded apertures are used in X- and gamma ray imaging systems, because these high-energy rays cannot be focused with lenses or mirrors that work for visible light. 
+Coded apertures or coded-aperture masks are grids, gratings, or other patterns of materials opaque to various wavelengths of electromagnetic radiation. The wavelengths are usually high-energy radiation such as X-rays and Gamma rays. By blocking radiation in a known pattern, a coded "shadow" is cast upon a plane. The properties of the original radiation sources can then be mathematically reconstructed from this shadow. Coded apertures are used in X- and Gamma ray imaging systems, because these high-energy rays cannot be focused with lenses or mirrors that work for visible light. 
 
 \begin{figure}[H]
     \centering
@@ -506,8 +507,7 @@ The above light curve was plotted around the time of the GRB, but if we plot the
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.3]{Pictures/anomaly.png}
-    \caption{Anomaly in the Light Curve}
-    \label{fig:anomaly}
+    \caption{Anomaly in the Light Curve}\label{fig:anomaly}
 \end{figure}
 
 The region shaded in red is the region where the counts start rising then fall to 0. This is because there is a high influx of cosmic rays in a particular region in the South Atlantic Ocean. This region is known as the South Atlantic Anomaly (SAA). 
@@ -520,7 +520,7 @@ The detectors on Astrosat are shut off when the satellite passes through the SAA
 
 \subsection{Finding the GRB}
 
-We notice two peaks in the light curve. The first peak is the \href{https://arxiv.org/pdf/1402.7022.pdf}{Prompt Emission}, and the second peak is the \href{https://astronomy.swin.edu.au/cosmos/G/gamma+ray+burst+afterglow}{Afterglow}. We can find the GRB by looking at the \lstinline[language=Python]{COUNTS} column and finding the maximum value. We can then use the \lstinline[language=Python]{TIME} column to find the time at which the maximum value occurs. In this case, the GRB occurs at 2019-09-28 13:12:17 UTC. 
+We notice two peaks in the light curve. The first peak is the \href{https://arxiv.org/pdf/1402.7022.pdf}{Prompt Emission}, and the second peak is the \href{https://astronomy.swin.edu.au/cosmos/G/Gamma+ray+burst+afterglow}{Afterglow}. We can find the GRB by looking at the \lstinline[language=Python]{COUNTS} column and finding the maximum value. We can then use the \lstinline[language=Python]{TIME} column to find the time at which the maximum value occurs. In this case, the GRB occurs at 2019-09-28 13:12:17 UTC. 
 
 The duration of the GRB would be the time difference between the time at which the GRB starts and the time at which it ends. The start and end times are taken roughly before the prompt emission and after the afterglow respectively. In this case, the duration of the GRB is 132 seconds.
 
@@ -535,7 +535,12 @@ A thing to note is that \lstinline{cztbindata} produces .lc files for each quadr
 The above plot shows the light curves for all four quadrants along with the peaks of the prompt emission and afterglow and markers for the start and end of the GRB.
 
 \subsection{Filtering and Detrending}
-
+%
+%
+%
+% REFER THE FIGURE HERE 
+% \ref{fig:anomaly}
+%
 From Figure \ref{fig:anomaly}, we can see that the "backgorund" data (the signal apart from the GRB) has a mean value somewhere around $100$, along with a lot of variation around that mean value. This variation is known as \textit{noise} and is caused by the inherent physics of the working of the CZTI detectors. There is also an upward slope right before the SAA region which causes a "trend" in the data. We need to "detrend" the data to make any GRB in that region stand out. 
 
 We can do this by using the \lstinline[language=Python]{savgol_filter} function from \lstinline{scipy.stats} to filter the data. The \lstinline[language=Python]{savgol_filter} function applies a \href{https://en.wikipedia.org/wiki/Savitzky%E2%80%93Golay_filter}{Savitzky-Golay filter} to the data. 
@@ -549,11 +554,8 @@ In python, filtering and detrending can be done as follows:
 \begin{lstlisting}[language=Python]
     from scipy.signal import savgol_filter
     import numpy as np
-
     # Subtracting the mean of the original background
     data[grb] -= np.mean(data[grb])
-
-
     # Filtering and Detrending
     data[noise] -= savgol_filter(data[noise], 101, 3)
 \end{lstlisting}
@@ -571,10 +573,177 @@ To the left we can see that the slope next to the SAA region has been removed, t
 
 We can also see that the "dip" that occurs during the SAA region is now a flat line with values equal to $0$.
 
+\clearpage
+
+\section{Different Bin Sizes}
+
+Uptil now we have analysed the data using a bin size of $1$s. We can also analyse the data using different bin sizes to see how the results change. For the purposes of this analysis, we will be using bin sizes of $0.1$s, $1$s, $10$s.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Pictures/allquads01s.png}
+    \caption{Light Curves for bins of 0.1s}
+    \label{fig:smallbins}
+\end{figure}
+
+Here we have the light curves of all four quadrants during the interval of the GRB. We can see that the smaller binsize causes the variations in the background to be more prominent. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Pictures/allquads10s.png}
+    \caption{Light Curves for bins of 10s}
+\end{figure}
+
+Here we can see that the larger binsize causes the variations in the background to be less prominent, as more of the noise gets smooothened (averaged) out.
+
 
 %----------------------------------------------------------------------------------------
 %	CHAPTER 3
 %----------------------------------------------------------------------------------------
+\chapterimage{lgm.png}
+\chapter{Signal To Noise Ratio}
+
+\section{Introduction}
+
+The signal-to-noise ratio (SNR) is a measure used in science and engineering that compares the level of a desired signal to the level of background noise. SNR is defined as the ratio of signal power to the noise power, often expressed in decibels. A ratio higher than 1:1 (greater than 0 dB) indicates more signal than noise. While SNR is commonly quoted for electrical signals, it can be applied to any form of signal, in out case, we will be finding the SNR of a single in a timeseries. 
+
+%
+% REFER THE FIGURE HERE
+% \ref{fig:smallbins}
+
+Now, comparing the levels of the signal and noise are easier said than done. The signal is the GRB, and the noise is the background. The background is not constant, and varies a lot. This particular variation can be seen most clearly in Figure \ref{fig:smallbins}. GRB 190928A is a particularly bright GRB, so it is easy to see the GRB in the light curve. But what about fainter GRBs? How do we find the SNR of a faint GRB? We'll look at the various methods used to determine the SNR in the upcoming sections.
+
+
+\subsection{Methodology}
+There are a plethora of methods that can be used to determine the SNR of a GRB. There are methods that involve integrating the signal and noise separately and then dividing the two, there are methods that involve fitting a distribution to the noise and taking a certain percentile of the distribution as the noise and so on. Regardless of the methods, the crux of the matter is to find quantities that best describe the signal and the noise.
+
+\newpage
+
+\section{Signal}
+
+Describing the signal is a fairly straightforward task as opposed to describing the noise.
+
+The signal is the GRB, and the GRB is a peak in the light curve. So, we can describe the signal as the maximum value of the light curve textit{in the GRB window}. This is the simplest way of describing the signal, and is the method we will be using for the majority of this project and will be referred to as \textbf{$M_s$}.
+
+Another method of describing the signal is to integrate the light curve over the duration of the GRB. This method will be taken as a baseline for the other methods.
+
+\section{Noise}
+
+Describing the noise is a much more difficult task than describing the signal. The noise is the background, and the background is not constant. The background varies a lot, and the variation is slightly different for each orbit of the satellite, as well as each quadrant of the CZT detectors.
+
+\subsection{Method 1 - Time Averaged Integrals}
+Since we are dealing with data that is already time binned, our "Integral" simply becomes the sum of the counts for both the noise and the signal. An important thing to note is that the duration of the GRB is not the same as the duration of the we sample from the lightcurve, so it's important to normalise the values of the signal and noise by dividing by their respective durations.
+
+Mathematically speaking, we can write this down as: 
+
+\begin{align*}
+    \text{Signal} = \frac{\sum_{i=0}^{n} \text{Counts}_i}{\text{Duration of GRB}} 
+    &&
+    \text{Noise} = \frac{\sum_{i=0}^{m} \text{Counts}_i}{\text{Duration of Noise}}
+\end{align*}
+    
+Where $n$ is the number of data points in the GRB, and $m$ is the number of data points in the noise.
+
+\subsection{Method 2 - Fitting a Distribution to the Noise} \label{sec:method2}
+
+This method involves fitting a distribution to the noise and then taking a certain sigma clip of the distribution as the noise. This method is more robust than the previous method as it takes into account the variation in the noise. Say for example, the noise is a Gaussian distribution, then we fit a Gaussian distribution by varying the mean ($\mu$) and standard deviation ($\sigma$) till we get the best fit. We then take the value of noise as $\mu+3\sigma$. 
+
+There are quite a few different distributions that are of interest to us, namely the Gaussian, Poisson, Gamma, Weibull and Rayleigh distributions. We will be looking at each of these distributions and the troubles faced in fitting them in the upcoming sections.
+
+\textit{\textbf{An important note:} When we fit the noise to some distrbution, according to the nature of the distribution, we get a value for the optimal mean and standard deviation that will fit our noise. Since the data has been detrended, our noise is centered around $0$, so our entire data must be shifted by the mean obtained by fitting, and our signal becomes \textbf{$M_s+\mu$.}}
+
+
+\newpage
+
+\subsection{Gaussian Distribution}
+
+A Gaussian distribution is a continuous function representing the distribution of many random variables as a symmetrical bell-shaped graph. The Gaussian distribution is also known as the normal distribution. The equation for a Gaussian distribution is given by:
+
+\begin{equation} \label{eq:gaussian}
+    f(x) = \tfrac{1}{\sigma\sqrt{2\pi}}e^{-\tfrac{(x-\mu)^2}{2\sigma^2}}
+\end{equation}
+
+Where $\mu$ is the mean and $\sigma$ is the standard deviation of the distribution. The Gaussian is of some interest to us because the noise in the light curves follows a rough bell-shaped distribution. 
+
+Fitting a Gaussian is pretty straight forward using the \lstinline[language=Python]{scipy.optimize.curve_fit} function, and defining a function that produces a purely Gaussian equation either by using the equation (\ref{eq:gaussian}) or the \lstinline[language=Python]{scipy.stats.norm.pdf} function. In either case, the function takes in the data as input and returns the mean and standard deviation of the distribution. 
+
+We can then take the noise as $\mu+3\sigma$ and the signal as $M_s+\mu$ (Recall the note at the end of Section \ref{sec:method2}).
+
+\begin{equation}
+    \therefore \text{SNR} = \frac{M_s+\mu}{\mu+3\sigma}
+\end{equation}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Pictures/gaussian_fit.png}
+    \caption{Fitting a Gaussian to the Noise (BinSize 0.1s) of Quadrant 0}
+\end{figure}
+
+It's clear from the above picture that our noise is \textit{not} Gaussian but a Gaussian is a good approximation of the noise.
+
+
+\subsection{Poisson Distribution}
+
+The Poisson distribution is a discrete probability distribution that expresses the probability of a given number of events occurring in a fixed interval of time or space if these events occur with a known constant mean rate and independently of the time since the last event. The Poisson distribution can also be used for the number of events in other specified intervals such as distance, area or volume. The Poisson distribution is defined as:
+
+\begin{equation} \label{eq:Poisson}
+    f(k; \lambda)=\frac{\lambda^k e^{-\lambda}}{k!}
+\end{equation}
+    
+Where $k$ is the number of events, and $\lambda$ is the average number of events per interval. An interesting thing to note is that the mean and variance of the Poisson distribution are both equal to $\lambda$. The Poisson distribution is of interest to us because the noise in the light curves seems to have a skewed distribution, and the Poisson distribution, in general, approximates a skewed distribution well.
+
+Fitting a Poisson distribution is a bit more complicated than fitting a Gaussian distribution. We use the \lstinline[language=Python]{scipy.optimize.curve_fit} function and defining a function that returns a Poisson distribution by using \lstinline[language=Python]{scipy.stats.poisson.pmf}. In this case we obtain only the mean of the distribution ($\lambda$). 
+
+We can now take the noise as $\lambda+3\sqrt{\lambda}$ and the signal as $M_s+\lambda$. 
+
+\begin{equation}
+    \therefore \text{SNR} = \frac{M_s+\lambda}{\lambda+3\sqrt{\lambda}}
+\end{equation}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Pictures/poisson_fit.png}
+    \caption{Fitting a Poisson Distribution to the Noise (BinSize 0.1s) of Quadrant 0}
+\end{figure}
+
+We can see that the Poisson distribution is a better fit to the noise than the Gaussian distribution.
+
+
+\subsection{Gamma Distribution}
+
+The Gamma distribution is a two-parameter family of continuous probability distributions. The exponential distribution, Erlang distribution, and chi-squared distribution are special cases of the Gamma distribution. There are two different parameterisations in common use:
+
+\begin{itemize}
+    \item With a shape parameter $k$ and a scale parameter $\theta$.
+    \item With a shape parameter $\alpha = k$ and an inverse scale parameter $\beta = 1/\theta$, called a rate parameter.
+\end{itemize}
+
+In either case, the probability density function of the Gamma distribution is given by:
+
+\begin{equation} \label{eq:Gamma}
+    f(x; k, \theta) = \frac{x^{k-1}e^{-x/\theta}}{\theta^k\Gamma(k)}
+\end{equation}
+    
+    Where $\Gamma(k)$ is the Gamma function, and the mean is given by $k\theta$ and variance is $k\theta^2$. The Gamma distribution is of interest to us because the noise in the light curves seems to have a skewed distribution, and the Gamma distribution can also approximate a skewed distribution well.
+
+Fitting a Gamma distribution is a bit simpler than fitting a Poisson distribution. We use the \lstinline[language=Python]{scipy.stats.gamma.fit} function that can directly give us the shape and scale parameters of the distribution.
+
+We can now take the noise as $k\theta + 3\sqrt{k\theta^2}$ and the signal as $M_s+k\theta$.
+
+\begin{equation}
+    \therefore \text{SNR} = \frac{M_s+k\theta}{k\theta + 3\sqrt{k\theta^2}}
+\end{equation}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Pictures/gamma_fit.png}
+    \caption{Fitting a Gamma Distribution to the Noise (BinSize 0.1s) of Quadrant 0}
+\end{figure}
+
+We can see that the Gamma distribution is very close to the Poisson distribution in terms of the fit, maybe even better. We will quantify the fits in future sections.
+
+
+
 
 %----------------------------------------------------------------------------------------
 %	CHAPTER 4
@@ -605,3 +774,4 @@ We can also see that the "dip" that occurs during the SAA region is now a flat l
 % \printindex % Output the index
 
 \end{document}
+
