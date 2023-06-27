@@ -555,7 +555,7 @@ In python, filtering and detrending can be done as follows:
     from scipy.signal import savgol_filter
     import numpy as np
     # Subtracting the mean of the original background
-    data[grb] -= np.mean(data[grb])
+    data[grb] -= np.mean(data[noise])
     # Filtering and Detrending
     data[noise] -= savgol_filter(data[noise], 101, 3)
 \end{lstlisting}
@@ -737,7 +737,7 @@ We can now take the noise as $k\theta + 3\sqrt{k\theta^2}$ and the signal as $M_
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{Pictures/gamma_fit.png}
-    \caption{Fitting a Gamma Distribution to the Noise (BinSize 0.1s) of Quadrant 0}
+    \caption{Fitting a Gamma Distribution to the Noise (Binsize 0.1s) of Quadrant 0}
 \end{figure}
 
 We can see that the Gamma distribution is very close to the Poisson distribution in terms of the fit, maybe even better. We will quantify the fits in future sections.

@@ -1172,17 +1172,19 @@ def confirm_auto():
 
 
 '''-----calling-----------------------------------------------------------------------------------------'''
-if type == 'gui':
-    homegui()
-elif type == 'cmd':
-    gtigen()
-    gaas()
-    datasel()
-    pixclean()
-    evtclean()
-    flagbadpix()
-    bindata()
-    dpigen()
-    image()
-    rspgen()
-    lightcurves()
+
+if __name__ == '__main__':
+    if type == 'gui':
+        homegui()
+    elif type == 'cmd':
+        gtigen()
+        gaas()
+        datasel()
+        pixclean()
+        evtclean()
+        flagbadpix()
+        bindata()
+        dpigen()
+        image()
+        rspgen()
+        lightcurves()

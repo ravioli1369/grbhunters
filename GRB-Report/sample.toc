@@ -1,0 +1,4 @@
+\babel@toc {english}{}
+\contentsline {part}{\@mypartnumtocformat {I}{Part One}}{3}{part.1}%
+\contentsline {chapter}{\numberline {1}Text Chapter}{5}{chapter.1}%
+\contentsfinish 
