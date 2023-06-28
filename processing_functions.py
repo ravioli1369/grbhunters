@@ -1,30 +1,11 @@
 from astropy.io import fits
-import matplotlib.pyplot as plt
 import numpy as np
 from scipy.signal import savgol_filter
-from scipy.ndimage import median_filter
-from scipy.special import factorial
 from scipy.stats import poisson
-from astropy.stats import sigma_clipped_stats
+from scipy.stats import gamma
+from scipy.stats import exponweib
 from scipy.optimize import curve_fit
-import matplotlib
-params={
-    'text.usetex':True,
-    'font.family':'serif',
-    'xtick.minor.visible':True,
-    'ytick.minor.visible':True,
-    'xtick.top':True,
-    'ytick.left':True,
-    'ytick.right':True,
-    'xtick.direction':'out',
-    'ytick.direction':'out',
-    'xtick.minor.size':2.5,
-    'xtick.major.size':5,
-    'ytick.minor.size':2.5,
-    'ytick.major.size':5,
-    'axes.axisbelow':True
-}
-matplotlib.rcParams.update(params)
+
 
 def openlc(filename):
     hdul = fits.open(filename)
@@ -93,31 +74,29 @@ def snr_abs(filename, start, end, polyorder=3):
 def gaussian(x, A, m, s, c):
     return A*np.exp(-(x-m)**2/(2*s**2)) + c
 
-def snr_gauss(filename, start, end, polyorder=3, in_bins=80):
-    data, south_atlantic_start, south_atlantic_end = filter_and_detrend(filename, start, end, polyorder)
+def snr_gauss(filename, start, end, polyorder=3, in_bins=100, window=101):
+    data, south_atlantic_start, south_atlantic_end = filter_and_detrend(filename, start, end, polyorder, window)
     if end<south_atlantic_start:
         total_noise = np.concatenate((data['RATE'][:start], data['RATE'][end:south_atlantic_start], data['RATE'][south_atlantic_end:]))
     elif start>south_atlantic_end:
         total_noise = np.concatenate((data['RATE'][:south_atlantic_start], data['RATE'][south_atlantic_end:start], data['RATE'][end:]))
     else:
         print('Inputted start and end times are not valid')
-        snr = 0
-        total_noise = 0
-        popt = [0]
-        bin_center = 0
-    n, bins = np.histogram(total_noise, bins=in_bins)
-    bin_center = np.array([0.5*(bins[i]+bins[i+1]) for i in range(len(bins)-1)])
+    mu = np.mean(total_noise)
+    bins = np.arange(int(mu-in_bins/2), int(mu+in_bins/2)) - 0.5
+    n, bin_edges = np.histogram(total_noise, bins=bins)
+    bin_center = 0.5 * (bin_edges[1:] + bin_edges[:-1])
     popt, pcov = curve_fit(gaussian, bin_center, n, p0=[np.max(n), np.mean(total_noise), np.std(total_noise), 0])
-    signal = np.max(data['RATE'][start:end])+popt[1]
+    signal = np.max(data['RATE'][start:end])
     noise = popt[1]+3*popt[2]
-    snr = signal/noise
-    return snr, total_noise, bin_center, popt
+    snr = (signal+popt[1])/noise
+    return snr, n, bin_center, popt
 
 def poisson_fit(k, lamb, c):
     return c*poisson.pmf(k, lamb)
 
-def snr_poisson(filename, start, end, in_bins=100):
-    data, south_atlantic_start, south_atlantic_end = filter_and_detrend(filename, start, end, 3, 11)
+def snr_poisson(filename, start, end, polyorder=3, in_bins=100, window=101):
+    data, south_atlantic_start, south_atlantic_end = filter_and_detrend(filename, start, end, polyorder, window)
     if end<south_atlantic_start:
         noise = np.concatenate((data['RATE'][:start], data['RATE'][end:south_atlantic_start], data['RATE'][south_atlantic_end:]))
     elif start>south_atlantic_end:
@@ -134,6 +113,58 @@ def snr_poisson(filename, start, end, in_bins=100):
     noise = popt[0]+3*np.sqrt(popt[0])
     snr = signal/noise
     return snr, n, bin_center, popt
+
+def snr_gamma(filename, start, end, polyorder=3, in_bins=100, window=101):
+    
+    def gamma_fit(x, c):
+        return c*gamma.pdf(x, k, scale=theta)
+    
+    data, south_atlantic_start, south_atlantic_end = filter_and_detrend(filename, start, end, polyorder, window)
+    if end<south_atlantic_start:
+        total_noise = np.concatenate((data['RATE'][:start], data['RATE'][end:south_atlantic_start], data['RATE'][south_atlantic_end:]))
+    elif start>south_atlantic_end:
+        total_noise = np.concatenate((data['RATE'][:south_atlantic_start], data['RATE'][south_atlantic_end:start], data['RATE'][end:]))
+    else:
+        print('Inputted start and end times are not valid')
+    
+    params = gamma.fit(total_noise)
+    k, loc, theta = params[0], params[1], params[2]
+    noise_for_fit = total_noise - loc
+    bins = np.arange(int(-loc-in_bins/2), int(-loc+in_bins/2)) - 0.5
+    n, bin_edges = np.histogram(noise_for_fit, bins=bins)
+    bin_center = 0.5 * (bin_edges[1:] + bin_edges[:-1])
+    popt, pcov = curve_fit(gamma_fit, bin_center, n)
+    fit = gamma_fit(bin_center, *popt)
+    signal = np.max(data['RATE'][start:end])-loc
+    noise = -loc + 3*np.sqrt(k*theta**2)
+    snr = signal/noise
+    return snr, n, bin_center, fit, popt
+
+def snr_weibull(filename, start, end, polyorder=3, in_bins=100, window=101):
+    
+    def weibull_fit(x, k):
+        return k*exponweib.pdf(x, a, c, scale=scale)
+
+    data, south_atlantic_start, south_atlantic_end = filter_and_detrend(filename, start, end, polyorder, window)
+    if end<south_atlantic_start:
+        total_noise = np.concatenate((data['RATE'][:start], data['RATE'][end:south_atlantic_start], data['RATE'][south_atlantic_end:]))
+    elif start>south_atlantic_end:
+        total_noise = np.concatenate((data['RATE'][:south_atlantic_start], data['RATE'][south_atlantic_end:start], data['RATE'][end:]))
+    else:
+        print('Inputted start and end times are not valid')
+    
+    params = exponweib.fit(total_noise)
+    a, c, loc, scale = params[0], params[1], params[2], params[3]
+    noise_for_fit = total_noise - loc
+    bins = np.arange(int(-loc-in_bins/2), int(-loc+in_bins/2)) - 0.5
+    n, bin_edges = np.histogram(noise_for_fit, bins=bins)
+    bin_center = 0.5 * (bin_edges[1:] + bin_edges[:-1])
+    popt, pcov = curve_fit(weibull_fit, bin_center, n)
+    fit = weibull_fit(bin_center, *popt)
+    signal = np.max(data['RATE'][start:end])-loc
+    noise = -loc + 3*exponweib.std(a, c, scale=scale)
+    snr = signal/noise
+    return snr, n, bin_center, fit, popt
 
 def snr_counts(filename, start, end, polyorder=3):
     data, south_atlantic_start, south_atlantic_end = filter_and_detrend(filename, start, end, polyorder)
