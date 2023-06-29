@@ -3,7 +3,7 @@ import numpy as np
 from scipy.signal import savgol_filter
 from scipy.stats import poisson
 from scipy.stats import gamma
-from scipy.stats import exponweib
+from scipy.stats import skewnorm
 from scipy.optimize import curve_fit
 
 
@@ -138,12 +138,12 @@ def snr_gamma(filename, start, end, polyorder=3, in_bins=100, window=101):
     signal = np.max(data['RATE'][start:end])-loc
     noise = -loc + 3*np.sqrt(k*theta**2)
     snr = signal/noise
+    popt = np.append(popt, (k, loc, theta))
     return snr, n, bin_center, fit, popt
 
-def snr_weibull(filename, start, end, polyorder=3, in_bins=100, window=101):
-    
-    def weibull_fit(x, k):
-        return k*exponweib.pdf(x, a, c, scale=scale)
+def snr_skewnorm(filename, start, end, polyorder=3, in_bins=100, window=101):
+    def skewnorm_fit(x, k):
+        return k*skewnorm.pdf(x, a, scale=scale)
 
     data, south_atlantic_start, south_atlantic_end = filter_and_detrend(filename, start, end, polyorder, window)
     if end<south_atlantic_start:
@@ -152,18 +152,19 @@ def snr_weibull(filename, start, end, polyorder=3, in_bins=100, window=101):
         total_noise = np.concatenate((data['RATE'][:south_atlantic_start], data['RATE'][south_atlantic_end:start], data['RATE'][end:]))
     else:
         print('Inputted start and end times are not valid')
-    
-    params = exponweib.fit(total_noise)
-    a, c, loc, scale = params[0], params[1], params[2], params[3]
+
+    params = skewnorm.fit(total_noise)
+    a, loc, scale = params[0], params[1], params[2]
     noise_for_fit = total_noise - loc
     bins = np.arange(int(-loc-in_bins/2), int(-loc+in_bins/2)) - 0.5
     n, bin_edges = np.histogram(noise_for_fit, bins=bins)
     bin_center = 0.5 * (bin_edges[1:] + bin_edges[:-1])
-    popt, pcov = curve_fit(weibull_fit, bin_center, n)
-    fit = weibull_fit(bin_center, *popt)
+    popt, pcov = curve_fit(skewnorm_fit, bin_center, n)
+    fit = skewnorm_fit(bin_center, *popt)
     signal = np.max(data['RATE'][start:end])-loc
-    noise = -loc + 3*exponweib.std(a, c, scale=scale)
+    noise = -loc + 3*skewnorm.std(a, scale=scale)
     snr = signal/noise
+    popt = np.append(popt, (a, loc, scale))
     return snr, n, bin_center, fit, popt
 
 def snr_counts(filename, start, end, polyorder=3):
