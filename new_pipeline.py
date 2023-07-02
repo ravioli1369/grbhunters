@@ -14,13 +14,14 @@ parser.add_argument('--e', '--evt', help='Input event file', type=str, default='
 parser.add_argument('--m', '--mkf', help='Input mkf file', type=str, default='')
 parser.add_argument('--t', '--threshold', help='Input mkf threshold', type=str, default='')
 parser.add_argument('--l', '--livetime', help='Input livetime file', type=str, default='')
-
+parser.add_argument('--timebinsize', help='Input timebinsize', type=float, default=1)
 '''-------------variable creation-----------------------------------------------------------------------------------'''
 args = parser.parse_args()
 evt = args.e
 mkf = args.m
 mkf_threshold = args.t
 livetime = args.l
+timebinsize = args.timebinsize
 
 '''-----Automatic Pipeline-----------------------------------------------------------------------------------------'''
 
@@ -99,7 +100,7 @@ def bindata():
              'livetimefile='+evt.replace("bc.evt", "quad_livetime.fits"),
              'outputtype=both',
              'energyrange=-',
-             'timebinsize=1',
+             'timebinsize='+str(timebinsize),
              'outfile='+evt.replace("bc.evt", "quad_clean"),
              'outevtfile='+evt.replace("bc.evt", "quad_clean_weight.evt"),
              'maskWeight=n',
@@ -186,6 +187,6 @@ if __name__ == '__main__':
     evtclean()
     flagbadpix()
     bindata()
-    dpigen()
-    image()
-    rspgen()
+    # dpigen()
+    # image()
+    # rspgen()
