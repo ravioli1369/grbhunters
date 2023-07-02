@@ -23,8 +23,14 @@ def zero_runs(a):
     max_zeros = np.where(no_of_zeros == np.max(no_of_zeros))[0][0]
     return ranges[max_zeros]
 
-def filter_and_detrend(filename, start, end, polyorder=3, window=101):
-    data = openlc(filename)
+def rebin(count_data, time_data, bin_size):
+    n = int(bin_size*10)
+    rebin_count = [np.median(count_data[i:i+n]) for i in range(0, len(count_data), n)]
+    rebin_time = [np.mean(time_data[i:i+n]) for i in range(0, len(time_data), n)]
+    return rebin_count, rebin_time
+
+def filter_and_detrend(filename, start, end, polyorder=3, window=101, data=None):
+    if data is None: data = openlc(filename)
     south_atlantic_start = zero_runs(data['RATE'])[0]
     south_atlantic_end = zero_runs(data['RATE'])[-1]
     if end<south_atlantic_start:
@@ -74,8 +80,8 @@ def snr_abs(filename, start, end, polyorder=3):
 def gaussian(x, A, m, s, c):
     return A*np.exp(-(x-m)**2/(2*s**2)) + c
 
-def snr_gauss(filename, start, end, polyorder=3, in_bins=100, window=101):
-    data, south_atlantic_start, south_atlantic_end = filter_and_detrend(filename, start, end, polyorder, window)
+def snr_gauss(filename, start, end, polyorder=3, in_bins=100, window=101, d=None):
+    data, south_atlantic_start, south_atlantic_end = filter_and_detrend(filename, start, end, polyorder, window, d)
     if end<south_atlantic_start:
         total_noise = np.concatenate((data['RATE'][:start], data['RATE'][end:south_atlantic_start], data['RATE'][south_atlantic_end:]))
     elif start>south_atlantic_end:
@@ -96,8 +102,8 @@ def snr_gauss(filename, start, end, polyorder=3, in_bins=100, window=101):
 def poisson_fit(k, lamb, c):
     return c*poisson.pmf(k, lamb)
 
-def snr_poisson(filename, start, end, polyorder=3, in_bins=100, window=101):
-    data, south_atlantic_start, south_atlantic_end = filter_and_detrend(filename, start, end, polyorder, window)
+def snr_poisson(filename, start, end, polyorder=3, in_bins=100, window=101, d=None):
+    data, south_atlantic_start, south_atlantic_end = filter_and_detrend(filename, start, end, polyorder, window, d)
     if end<south_atlantic_start:
         noise = np.concatenate((data['RATE'][:start], data['RATE'][end:south_atlantic_start], data['RATE'][south_atlantic_end:]))
     elif start>south_atlantic_end:
@@ -116,12 +122,12 @@ def snr_poisson(filename, start, end, polyorder=3, in_bins=100, window=101):
     snr = signal/noise
     return snr, n, bin_center, popt
 
-def snr_gamma(filename, start, end, polyorder=3, in_bins=100, window=101):
+def snr_gamma(filename, start, end, polyorder=3, in_bins=100, window=101, d=None):
     
     def gamma_fit(x, c):
         return c*gamma.pdf(x, k, scale=theta)
     
-    data, south_atlantic_start, south_atlantic_end = filter_and_detrend(filename, start, end, polyorder, window)
+    data, south_atlantic_start, south_atlantic_end = filter_and_detrend(filename, start, end, polyorder, window, d)
     if end<south_atlantic_start:
         total_noise = np.concatenate((data['RATE'][:start], data['RATE'][end:south_atlantic_start], data['RATE'][south_atlantic_end:]))
     elif start>south_atlantic_end:
@@ -143,11 +149,11 @@ def snr_gamma(filename, start, end, polyorder=3, in_bins=100, window=101):
     popt = np.append(popt, (k, loc, theta))
     return snr, n, bin_center, fit, popt
 
-def snr_skewnorm(filename, start, end, polyorder=3, in_bins=100, window=101):
+def snr_skewnorm(filename, start, end, polyorder=3, in_bins=100, window=101, d=None):
     def skewnorm_fit(x, k):
         return k*skewnorm.pdf(x, a, scale=scale)
     
-    data, south_atlantic_start, south_atlantic_end = filter_and_detrend(filename, start, end, polyorder, window)
+    data, south_atlantic_start, south_atlantic_end = filter_and_detrend(filename, start, end, polyorder, window, d)
     if end<south_atlantic_start:
         total_noise = np.concatenate((data['RATE'][:start], data['RATE'][end:south_atlantic_start], data['RATE'][south_atlantic_end:]))
     elif start>south_atlantic_end:
