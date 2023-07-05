@@ -1,28 +1,38 @@
-'''Written by ravioli1369@gmail.com and shreyasbharadwaj04@gmail.com'''
+'''Written by ravioli1369@gmail.com'''
 
 
 '''----------------------------------------------------------------------------------------------------------------'''
 import subprocess as sp
 import os
+import glob
 from astropy.io import fits
 import matplotlib.pyplot as plt
 import argparse
 
 '''----passing arguments----------------------------------------------------------------------------------------------'''
 parser = argparse.ArgumentParser(description='CZTI Pipeline', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-parser.add_argument('--e', '--evt', help='Input event file', type=str, default='')
-parser.add_argument('--m', '--mkf', help='Input mkf file', type=str, default='')
-parser.add_argument('--t', '--threshold', help='Input mkf threshold', type=str, default='')
-parser.add_argument('--l', '--livetime', help='Input livetime file', type=str, default='')
-parser.add_argument('--timebinsize', help='Input timebinsize', type=float, default=1)
+parser.add_argument('-d', help='Input directory', type=str, default='')
+parser.add_argument('-e', help='Input event file', type=str, default='')
+parser.add_argument('-m', help='Input mkf file', type=str, default='')
+parser.add_argument('-t', help='Input mkf threshold', type=str, default='')
+parser.add_argument('-l', help='Input livetime file', type=str, default='')
+parser.add_argument('-time', help='Input timebinsize', type=float, default=1)
+parser.add_argument('-emin', help='Energy lower limit', type=float, default=20)
+parser.add_argument('-emax', help='Energy upper limit', type=float, default=200)
 '''-------------variable creation-----------------------------------------------------------------------------------'''
 args = parser.parse_args()
-evt = args.e
-mkf = args.m
-mkf_threshold = args.t
-livetime = args.l
-timebinsize = args.timebinsize
-
+if args.d == '':
+    evt = args.e
+    mkf = args.m
+    mkf_threshold = args.t
+    livetime = args.l
+else:
+    evt = glob.glob(f"{args.d}/*bc.evt")[0]
+    mkf = glob.glob(f"{args.d}/*.mkf")[0]
+    mkf_threshold = glob.glob(f"{args.d}/*.txt")[0]
+    livetime = glob.glob(f"{args.d}/*bc_livetime.fits")[0]
+timebinsize = args.time
+print(evt, mkf, mkf_threshold, livetime, timebinsize)
 '''-----Automatic Pipeline-----------------------------------------------------------------------------------------'''
 
 
@@ -61,15 +71,15 @@ def datasel():
 #cztpixclean
 def pixclean():
     sp.call(['cztpixclean', 
-             'par_infile='+evt.replace("bc.evt", "bc_ds.evt"), 
-             'par_inlivetimefile='+livetime, 
-             'par_outfile1='+evt.replace("bc.evt", "quad_pc.evt"), 
-             'par_outlivetimefile='+evt.replace("bc.evt", "quad_livetime.fits"), 
-             'par_badpixfile='+evt.replace("bc.evt", "quad_badpix.fits"), 
-             'par_det_tbinsize=1', 
-             'par_pix_tbinsize=1', 
-             'par_det_count_thresh=100', 
-             'par_pix_count_thresh=1000'])
+             'infile='+evt.replace("bc.evt", "bc_ds.evt"), 
+             'inlivetimefile='+livetime, 
+             'outfile1='+evt.replace("bc.evt", "quad_pc.evt"), 
+             'outlivetimefile='+evt.replace("bc.evt", "quad_livetime.fits"), 
+             'badpixfile='+evt.replace("bc.evt", "quad_badpix.fits"), 
+             'det_tbinsize=1', 
+             'pix_tbinsize=1', 
+             'det_count_thresh=100', 
+             'pix_count_thresh=1000'])
 
 #cztevtclean
 def evtclean():
@@ -98,8 +108,9 @@ def bindata():
              'badpixfile='+evt.replace("bc.evt", "quad_badpix_out.fits"), 
              'badpixthreshold=0', 
              'livetimefile='+evt.replace("bc.evt", "quad_livetime.fits"),
-             'outputtype=both',
-             'energyrange=-',
+             'outputtype=lc',
+             'emin='+str(args.emin),
+             'emax='+str(args.emax),
              'timebinsize='+str(timebinsize),
              'outfile='+evt.replace("bc.evt", "quad_clean"),
              'outevtfile='+evt.replace("bc.evt", "quad_clean_weight.evt"),
@@ -181,7 +192,7 @@ def rspgen():
 
 if __name__ == '__main__':
     gtigen()
-    gaas()
+    #gaas()
     datasel()
     pixclean()
     evtclean()
