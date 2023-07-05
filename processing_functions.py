@@ -190,6 +190,6 @@ def snr_counts(filename, start, end, polyorder=3, window=101):
         print('Inputted start and end times are not valid')
         snr = 0
     
-    signal = np.sum(data['RATE'][start:end])/duration_burst
+    signal = np.sum(np.abs(data['RATE'][start:end]))/duration_burst
     snr = signal/noise
     return snr
