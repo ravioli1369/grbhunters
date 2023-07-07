@@ -1,5 +1,6 @@
-from astropy.io import fits
 import numpy as np
+from astropy.io import fits
+from astropy.table import QTable
 from scipy.signal import savgol_filter
 from scipy.stats import poisson
 from scipy.stats import gamma
@@ -46,6 +47,55 @@ def filter_and_detrend(filename, start, end, polyorder=3, window=101, data=None)
     else:
         print('Inputted start and end times are not valid')
     return data, south_atlantic_start, south_atlantic_end
+
+def quadratic(x, a, b, c):
+    return a*x**2+b*x+c
+
+def quadratic_detrend(filename, start, end, polyorder=3, window=101, data=None):
+    if data is None: data = openlc(filename)
+    south_atlantic_start = zero_runs(data['RATE'])[0]
+    south_atlantic_end = zero_runs(data['RATE'])[-1]
+    timebin = (data.TIME[end]-data.TIME[start])/(end-start)
+    background_window = np.rint(500/timebin).astype(int)
+    grb = np.ones_like(data['RATE'][start:end])*np.nan
+    if end<south_atlantic_start:
+        if start>background_window and (south_atlantic_start-end)>background_window:
+            counts = np.concatenate((data['RATE'][start-background_window:start], grb, data['RATE'][end:end+background_window]))
+            times = data['TIME'][start-background_window:end+background_window]
+        elif start<background_window and (south_atlantic_start-end)>background_window:
+            counts = np.concatenate((data['RATE'][:start], grb, data['RATE'][end:end+background_window]))
+            times = data['TIME'][:end+background_window]
+        elif start>background_window and (south_atlantic_start-end)<background_window:
+            counts = np.concatenate((data['RATE'][start-background_window:start], grb, data['RATE'][end:south_atlantic_start]))
+            times = data['TIME'][start-background_window:south_atlantic_start]
+        else:
+            counts = np.concatenate((data['RATE'][:start], grb, data['RATE'][end:]))
+            times = data['TIME'][:]
+    elif start>south_atlantic_end:
+        if (start-south_atlantic_end)>background_window and (len(data.RATE)-end)>background_window:
+            counts = np.concatenate((data['RATE'][start-background_window:start], grb, data['RATE'][end:end+background_window]))
+            times = data['TIME'][start-background_window:end+background_window]
+        elif (start-south_atlantic_end)<background_window and (len(data.RATE)-end)>background_window:
+            counts = np.concatenate((data['RATE'][south_atlantic_end:start], grb, data['RATE'][end:end+background_window]))
+            times = data['TIME'][south_atlantic_end:end+background_window]
+        elif (start-south_atlantic_end)>background_window and (len(data.RATE)-end)<background_window:
+            counts = np.concatenate((data['RATE'][start-background_window:start], grb, data['RATE'][end:]))
+            times = data['TIME'][start-background_window:]
+        else:
+            counts = np.concatenate((data['RATE'][:start], grb, data['RATE'][end:]))
+            times = data['TIME'][:]
+    else:
+        print('Inputted start and end times are not valid')
+    filtered = savgol_filter(counts, window, polyorder)
+    idx = np.isfinite(filtered)
+    x = times[idx]
+    y = filtered[idx]
+    popt, _ = curve_fit(quadratic, x, y)
+    nans = np.where(np.isnan(counts))[0]
+    counts[nans[0]:nans[-1]+1] = data['RATE'][start:end]
+    detrended = counts - quadratic(times, *popt)
+    t = QTable([times, detrended], names=('TIME', 'RATE'))
+    return t
 
 def snr_rms(filename, start, end, polyorder=3):
     data, south_atlantic_start, south_atlantic_end = filter_and_detrend(filename, start, end, polyorder)
