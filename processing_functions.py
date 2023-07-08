@@ -141,12 +141,14 @@ def gaussian(x, A, m, s, c):
 
 def snr_gauss(filename, start, end, polyorder=3, in_bins=100, window=101, d=None):
     data, saa_start, saa_end, start, end = quadratic_detrend(filename, start, end, polyorder, window, d)
-    if end<saa_start:
-        total_noise = np.concatenate((data['RATE'][:start], data['RATE'][end:saa_start], data['RATE'][saa_end:]))
-    elif start>saa_end:
-        total_noise = np.concatenate((data['RATE'][:saa_start], data['RATE'][saa_end:start], data['RATE'][end:]))
-    else:
-        print('Inputted start and end times are not valid')
+    # if end<saa_start:
+    #     total_noise = np.concatenate((data['RATE'][:start], data['RATE'][end:saa_start], data['RATE'][saa_end:]))
+    # elif start>saa_end:
+    #     total_noise = np.concatenate((data['RATE'][:saa_start], data['RATE'][saa_end:start], data['RATE'][end:]))
+    # else:
+    #     print('Inputted start and end times are not valid')
+    
+    total_noise = np.concatenate((data['RATE'][:start], data['RATE'][end:]))
     
     mu = np.mean(total_noise)
     bins = np.arange(int(mu-in_bins/2), int(mu+in_bins/2)) - 0.5
@@ -163,15 +165,17 @@ def poisson_fit(k, lamb, c):
 
 def snr_poisson(filename, start, end, polyorder=3, in_bins=100, window=101, d=None):
     data, saa_start, saa_end, start, end = quadratic_detrend(filename, start, end, polyorder, window, d)
-    if end<saa_start:
-        noise = np.concatenate((data['RATE'][:start], data['RATE'][end:saa_start], data['RATE'][saa_end:]))
-    elif start>saa_end:
-        noise = np.concatenate((data['RATE'][:saa_start], data['RATE'][saa_end:start], data['RATE'][end:]))
-    else:
-        print('Inputted start and end times are not valid')
+    # if end<saa_start:
+    #     noise = np.concatenate((data['RATE'][:start], data['RATE'][end:saa_start], data['RATE'][saa_end:]))
+    # elif start>saa_end:
+    #     noise = np.concatenate((data['RATE'][:saa_start], data['RATE'][saa_end:start], data['RATE'][end:]))
+    # else:
+    #     print('Inputted start and end times are not valid')
+    
+    total_noise = np.concatenate((data['RATE'][:start], data['RATE'][end:]))
     
     lamb = np.std(noise)**2
-    noise_for_fit = noise+lamb
+    noise_for_fit = total_noise+lamb
     bins = np.arange(int(lamb - in_bins/2), int(lamb + in_bins/2)) - 0.5
     n, bin_edges = np.histogram(noise_for_fit, bins=bins)
     bin_center = 0.5 * (bin_edges[1:] + bin_edges[:-1])
@@ -187,12 +191,14 @@ def snr_gamma(filename, start, end, polyorder=3, in_bins=100, window=101, d=None
         return c*gamma.pdf(x, k, scale=theta)
     
     data, saa_start, saa_end, start, end = quadratic_detrend(filename, start, end, polyorder, window, d)
-    if end<saa_start:
-        total_noise = np.concatenate((data['RATE'][:start], data['RATE'][end:saa_start], data['RATE'][saa_end:]))
-    elif start>saa_end:
-        total_noise = np.concatenate((data['RATE'][:saa_start], data['RATE'][saa_end:start], data['RATE'][end:]))
-    else:
-        print('Inputted start and end times are not valid')
+    # if end<saa_start:
+    #     total_noise = np.concatenate((data['RATE'][:start], data['RATE'][end:saa_start], data['RATE'][saa_end:]))
+    # elif start>saa_end:
+    #     total_noise = np.concatenate((data['RATE'][:saa_start], data['RATE'][saa_end:start], data['RATE'][end:]))
+    # else:
+    #     print('Inputted start and end times are not valid')
+    
+    total_noise = np.concatenate((data['RATE'][:start], data['RATE'][end:]))
     
     params = gamma.fit(total_noise)
     k, loc, theta = params[0], params[1], params[2]
@@ -213,12 +219,14 @@ def snr_skewnorm(filename, start, end, polyorder=3, in_bins=100, window=101, d=N
         return k*skewnorm.pdf(x, a, scale=scale)
     
     data, saa_start, saa_end, start, end = quadratic_detrend(filename, start, end, polyorder, window, d)
-    if end<saa_start:
-        total_noise = np.concatenate((data['RATE'][:start], data['RATE'][end:saa_start], data['RATE'][saa_end:]))
-    elif start>saa_end:
-        total_noise = np.concatenate((data['RATE'][:saa_start], data['RATE'][saa_end:start], data['RATE'][end:]))
-    else:
-        print('Inputted start and end times are not valid')
+    # if end<saa_start:
+    #     total_noise = np.concatenate((data['RATE'][:start], data['RATE'][end:saa_start], data['RATE'][saa_end:]))
+    # elif start>saa_end:
+    #     total_noise = np.concatenate((data['RATE'][:saa_start], data['RATE'][saa_end:start], data['RATE'][end:]))
+    # else:
+    #     print('Inputted start and end times are not valid')
+    
+    total_noise = np.concatenate((data['RATE'][:start], data['RATE'][end:]))
     
     params = skewnorm.fit(total_noise)
     a, loc, scale = params[0], params[1], params[2]
