@@ -3,10 +3,7 @@
 
 """----------------------------------------------------------------------------------------------------------------"""
 import subprocess as sp
-import os
 import glob
-from astropy.io import fits
-import matplotlib.pyplot as plt
 import argparse
 
 """----passing arguments----------------------------------------------------------------------------------------------"""
