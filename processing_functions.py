@@ -413,7 +413,8 @@ def gen_energy_bins(directory, n_bins=3):
                 directory, emin, emax
             )
         )
-        os.mkdir(f"{directory}/{n_bins}_bins/{int(emin)}-{int(emax)}")
+        if not os.path.exists(f"{directory}/{n_bins}_bins/{int(emin)}-{int(emax)}"):
+            os.mkdir(f"{directory}/{n_bins}_bins/{int(emin)}-{int(emax)}")
         os.system(
             f"mv {directory}/*.lc {directory}/{n_bins}_bins/{int(emin)}-{int(emax)}/"
         )
