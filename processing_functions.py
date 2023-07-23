@@ -1,3 +1,4 @@
+import os
 import numpy as np
 from astropy.io import fits
 from astropy.table import QTable
@@ -363,18 +364,56 @@ def snr_counts(filename, start, end, polyorder=3, window=101):
     snr = signal / noise
     return snr
 
+
 def outlier(filename, start, end):
     *_, popt = snr_skewnorm(filename, start, end)
     t, *_, start, end = quadratic_detrend(filename, start, end)
     mean, std = -popt[2], skewnorm.std(popt[1], scale=popt[3])
-    noise = np.concatenate((t['RATE'][:start], np.ones_like(t['RATE'][start:end])*np.nan, t['RATE'][end:])) + mean
-    outliers = np.where(noise > mean + 3*std)[0]
-    return outliers, mean, std
+    noise = (
+        np.concatenate(
+            (
+                t["RATE"][:start],
+                np.ones_like(t["RATE"][start:end]) * np.nan,
+                t["RATE"][end:],
+            )
+        )
+        + mean
+    )
+    outliers = np.where(noise > mean + 3 * std)[0]
+    return outliers
+
 
 def snr_outlier(filename1, filename2, start, end):
-    outliers, mean, std = outlier(filename1, start, end)
+    outliers = outlier(filename1, start, end)
+    *_, popt = snr_skewnorm(filename2, start, end)
+    mean, std = -popt[2], skewnorm.std(popt[1], scale=popt[3])
     t, *_, start, end = quadratic_detrend(filename2, start, end)
-    signal = t['RATE'][outliers]+mean
-    noise = mean+3*std
-    snr = signal/noise
+    signal = t["RATE"][outliers] + mean
+    noise = mean + 3 * std
+    snr = signal / noise
     return snr
+
+
+def gen_energy_bins(directory, n_bins=3):
+    """
+    Generates energy bins for the given number of bins
+    """
+    if n_bins != 3:
+        energy_ranges = np.linspace(20, 200, n_bins + 1)
+    else:
+        energy_ranges = [20, 60, 100, 200]
+    if not os.path.exists(f"{directory}/{n_bins}bins"):
+        os.mkdir(f"{directory}/{n_bins}_bins")
+    for i in range(n_bins):
+        emin = energy_ranges[i]
+        emax = energy_ranges[i + 1]
+        print(energy_ranges[i], energy_ranges[i + 1])
+        os.system(
+            "python3 pipelinev3.py -d {} -emin {} -emax {}".format(
+                directory, emin, emax
+            )
+        )
+        os.mkdir(f"{directory}/{n_bins}_bins/{int(emin)}-{int(emax)}")
+        os.system(
+            f"mv {directory}/*.lc {directory}/{n_bins}_bins/{int(emin)}-{int(emax)}/"
+        )
