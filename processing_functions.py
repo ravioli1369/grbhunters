@@ -362,3 +362,19 @@ def snr_counts(filename, start, end, polyorder=3, window=101):
     signal = np.sum(np.abs(data["RATE"][start:end])) / duration_burst
     snr = signal / noise
     return snr
+
+def outlier(filename, start, end):
+    *_, popt = snr_skewnorm(filename, start, end)
+    t, *_, start, end = quadratic_detrend(filename, start, end)
+    mean, std = -popt[2], skewnorm.std(popt[1], scale=popt[3])
+    noise = np.concatenate((t['RATE'][:start], np.ones_like(t['RATE'][start:end])*np.nan, t['RATE'][end:])) + mean
+    outliers = np.where(noise > mean + 3*std)[0]
+    return outliers, mean, std
+
+def snr_outlier(filename1, filename2, start, end):
+    outliers, mean, std = outlier(filename1, start, end)
+    t, *_, start, end = quadratic_detrend(filename2, start, end)
+    signal = t['RATE'][outliers]+mean
+    noise = mean+3*std
+    snr = signal/noise
+    return snr
