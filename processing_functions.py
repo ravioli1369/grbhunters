@@ -2,6 +2,7 @@ import os
 import numpy as np
 from astropy.io import fits
 from astropy.table import QTable
+from astropy.stats import sigma_clipped_stats, sigma_clip
 from scipy.signal import savgol_filter
 from scipy.stats import poisson
 from scipy.stats import gamma
@@ -170,6 +171,103 @@ def quadratic_detrend(filename, start, end, polyorder=3, window=101, data=None):
     return t, saa_start, saa_end, new_start, new_end
 
 
+def get_trigger_index(filename, trigger_time):
+    data = openlc(filename)
+    diffs = np.abs(
+        np.round(data["TIME"], 0).astype(int) - np.round(trigger_time, 0).astype(int)
+    )
+    trigger_index = np.where(diffs == np.min(diffs))[0][-1]
+    return trigger_index
+
+
+def quadratic_detrend_trigger(
+    filename, trigger_index, polyorder=3, window=101, data=None
+):
+    if data is None:
+        data = openlc(filename)
+    saa_start, saa_end = saa(data["TIME"])
+    timebin = data["TIME"][trigger_index + 1] - data["TIME"][trigger_index]
+    background_window = np.rint(700 / timebin).astype(int)
+    mean, median, std = sigma_clipped_stats(data["RATE"], sigma=3)
+    clipped_data = np.copy(data["RATE"])
+    clipped_data[clipped_data > mean + 3 * std] = np.nan
+    if trigger_index < saa_start:
+        if (
+            trigger_index > background_window
+            and trigger_index + background_window < saa_start
+        ):
+            counts = clipped_data[
+                trigger_index - background_window : trigger_index + background_window
+            ]
+            times = data["TIME"][
+                trigger_index - background_window : trigger_index + background_window
+            ]
+            new_trigger_index = background_window
+        elif (
+            trigger_index < background_window
+            and trigger_index + background_window < saa_start
+        ):
+            counts = clipped_data[: trigger_index + background_window]
+            times = data["TIME"][: trigger_index + background_window]
+            new_trigger_index = trigger_index
+        elif (
+            trigger_index > background_window
+            and trigger_index + background_window > saa_start
+        ):
+            counts = clipped_data[trigger_index - background_window :]
+            times = data["TIME"][trigger_index - background_window :]
+            new_trigger_index = background_window
+        else:
+            counts = clipped_data
+            times = data["TIME"]
+            new_trigger_index = trigger_index
+    elif trigger_index > saa_end:
+        if (
+            trigger_index > background_window
+            and trigger_index + background_window < len(data)
+        ):
+            counts = clipped_data[
+                trigger_index - background_window : trigger_index + background_window
+            ]
+            times = data["TIME"][
+                trigger_index - background_window : trigger_index + background_window
+            ]
+            new_trigger_index = background_window
+        elif (
+            trigger_index < background_window
+            and trigger_index + background_window < len(data)
+        ):
+            counts = clipped_data[: trigger_index + background_window]
+            times = data["TIME"][: trigger_index + background_window]
+            new_trigger_index = trigger_index
+        elif (
+            trigger_index > background_window
+            and trigger_index + background_window > len(data)
+        ):
+            counts = clipped_data[trigger_index - background_window :]
+            times = data["TIME"][trigger_index - background_window :]
+            new_trigger_index = background_window
+        else:
+            counts = clipped_data
+            times = data["TIME"]
+            new_trigger_index = trigger_index
+    else:
+        raise ValueError("Trigger index is in SAA")
+    filtered = savgol_filter(counts, window, polyorder)
+    idx = np.isfinite(filtered)
+    x = times[idx]
+    y = filtered[idx]
+    popt, _ = curve_fit(quadratic, x, y)
+    window_start, window_end = (
+        np.where(data["TIME"] == times[0])[0][0],
+        np.where(data["TIME"] == times[-1])[0][0],
+    )
+    counts = data["RATE"][window_start : window_end + 1]
+    detrended = counts - quadratic(times, *popt)
+    t = QTable([times, detrended], names=("TIME", "RATE"))
+    return t, new_trigger_index
+
+
 def snr_rms(filename, start, end, polyorder=3):
     data, saa_start, saa_end = filter_and_detrend(filename, start, end, polyorder)
     if end < saa_start:
@@ -335,6 +433,26 @@ def snr_skewnorm(filename, start, end, polyorder=3, in_bins=100, window=101, d=N
     return snr, n, bin_center, fit, popt
 
 
+def skewnorm_trigger(filename, trigger, polyorder=3, in_bins=100, window=101, d=None):
+    def skewnorm_fit(x, k):
+        return k * skewnorm.pdf(x, a, scale=scale)
+
+    data, trigger = quadratic_detrend_trigger(filename, trigger, polyorder, window, d)
+    total_noise = sigma_clip(data["RATE"], sigma=3)
+
+    params = skewnorm.fit(total_noise)
+    a, loc, scale = params[0], params[1], params[2]
+    noise_for_fit = total_noise - loc
+    bins = np.arange(int(-loc - in_bins / 2), int(-loc + in_bins / 2)) - 0.5
+    n, bin_edges = np.histogram(noise_for_fit, bins=bins)
+    bin_center = 0.5 * (bin_edges[1:] + bin_edges[:-1])
+    popt, pcov = curve_fit(skewnorm_fit, bin_center, n)
+    fit = skewnorm_fit(bin_center, *popt)
+    noise = -loc + 3 * skewnorm.std(a, scale=scale)
+    popt = np.append(popt, (a, loc, scale))
+    return n, bin_center, fit, popt
+
+
 def snr_counts(filename, start, end, polyorder=3, window=101):
     data, saa_start, saa_end = filter_and_detrend(
         filename, start, end, polyorder, window
@@ -365,33 +483,25 @@ def snr_counts(filename, start, end, polyorder=3, window=101):
     return snr
 
 
-def outlier(filename, start, end):
-    *_, popt = snr_skewnorm(filename, start, end)
-    t, *_, start, end = quadratic_detrend(filename, start, end)
-    mean, std = -popt[2], skewnorm.std(popt[1], scale=popt[3])
-    noise = (
-        np.concatenate(
-            (
-                t["RATE"][:start],
-                np.ones_like(t["RATE"][start:end]) * np.nan,
-                t["RATE"][end:],
-            )
-        )
-        + mean
-    )
-    outliers = np.where(noise > mean + 3 * std)[0]
+def outlier(filename, trigger_index, sigma=3):
+    # *_, popt = skewnorm_trigger(filename, trigger_index)
+    t, *_ = quadratic_detrend_trigger(filename, trigger_index)
+    mean, median, std = sigma_clipped_stats(t["RATE"], sigma=3)
+    # _, std = -popt[2], skewnorm.std(popt[1], scale=popt[3])
+    outliers = np.where(t["RATE"] > mean + sigma * std)[0]
     return outliers
 
 
-def snr_outlier(filename1, filename2, start, end):
-    outliers = outlier(filename1, start, end)
-    *_, popt = snr_skewnorm(filename2, start, end)
-    mean, std = -popt[2], skewnorm.std(popt[1], scale=popt[3])
-    t, *_, start, end = quadratic_detrend(filename2, start, end)
+def snr_outlier(filename1, filename2, trigger_index, sigma=3):
+    outliers = outlier(filename1, trigger_index, sigma)
+    # *_, popt = skewnorm_trigger(filename2, trigger_index)
+    # mean, std = -popt[2], skewnorm.std(popt[1], scale=popt[3])
+    t, *_ = quadratic_detrend_trigger(filename2, trigger_index)
+    mean, median, std = sigma_clipped_stats(t["RATE"], sigma=3)
     signal = t["RATE"][outliers] + mean
-    noise = mean + 3 * std
+    noise = mean + sigma * std
     snr = signal / noise
-    return snr
+    return snr, outliers
 
 
 def gen_energy_bins(directory, n_bins=3):
@@ -402,8 +512,9 @@ def gen_energy_bins(directory, n_bins=3):
         energy_ranges = np.linspace(20, 200, n_bins + 1)
     else:
         energy_ranges = [20, 60, 100, 200]
-    if not os.path.exists(f"{directory}/{n_bins}bins"):
+    if not os.path.exists(f"{directory}/{n_bins}_bins"):
         os.mkdir(f"{directory}/{n_bins}_bins")
+    lc_paths = []
     for i in range(n_bins):
         emin = energy_ranges[i]
         emax = energy_ranges[i + 1]
@@ -418,3 +529,5 @@ def gen_energy_bins(directory, n_bins=3):
         os.system(
             f"mv {directory}/*.lc {directory}/{n_bins}_bins/{int(emin)}-{int(emax)}/"
         )
+        lc_paths.append(f"{directory}/{n_bins}_bins/{int(emin)}-{int(emax)}/")
+    return lc_paths
