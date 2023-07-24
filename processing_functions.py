@@ -1,4 +1,5 @@
 import os
+import glob
 import numpy as np
 from astropy.io import fits
 from astropy.table import QTable
@@ -531,3 +532,43 @@ def gen_energy_bins(directory, n_bins=3):
         )
         lc_paths.append(f"{directory}/{n_bins}_bins/{int(emin)}-{int(emax)}/")
     return lc_paths
+
+
+def create_master_lc(directory):
+    emin, emax = 20, 200
+    if not os.path.exists(f"{directory}/master_lc"):
+        os.mkdir(f"{directory}/master_lc")
+    os.system(
+        "python3 pipelinev3.py -d {} -emin {} -emax {}".format(directory, emin, emax)
+    )
+    os.system("mv {}/*.lc {}/master_lc".format(directory, directory))
+
+
+def find_grb(directory, trigger_time, sigma=3):
+    def each_quad(lc_paths, trigger_index, quadrant, sigma):
+        snr = []
+        lcs = []
+        for path in lc_paths:
+            lcs.append(glob.glob(f"{path}/*{str(quadrant)}.lc"))
+        for i in range(3):
+            snr.append(snr_outlier(lcs[0][0], lcs[i][0], trigger_index, sigma=sigma)[0])
+        return snr, snr_outlier(lcs[0][0], lcs[0][0], trigger_index, sigma=sigma)[1]
+
+    def snr_grb(master_lc, possible_grb, trigger_index, sigma=sigma):
+        t, *_ = quadratic_detrend_trigger(master_lc, trigger_index)
+        mean, _, std = sigma_clipped_stats(t["RATE"], sigma=sigma)
+        noise = mean + sigma * std
+        signal = t["RATE"][possible_grb]
+        snr = signal / noise
+        return snr
+
+    create_master_lc(directory)
+    master_lcs = np.sort(glob.glob(f"{directory}/master_lc/*.lc"))
+    trigger_index = get_trigger_index(master_lcs[0], trigger_time)
+    lc_paths = gen_energy_bins(directory)
+    print(master_lcs)
+    snr, outliers = each_quad(lc_paths, trigger_index, 0, sigma)
+    grb_mask = np.logical_or(snr[1] > 1, snr[2] > 1)
+    possible_grb = outliers[grb_mask]
+    grb_snr = snr_grb(master_lcs[0], possible_grb, trigger_index, sigma)
+    return snr, outliers, grb_mask, grb_snr
