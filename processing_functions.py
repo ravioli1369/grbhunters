@@ -484,23 +484,23 @@ def snr_counts(filename, start, end, polyorder=3, window=101):
     return snr
 
 
-def outlier(filename, trigger_index, sigma=3):
+def outlier(filename, trigger_index, detection_sigma=3):
     # *_, popt = skewnorm_trigger(filename, trigger_index)
     t, *_ = quadratic_detrend_trigger(filename, trigger_index)
-    mean, median, std = sigma_clipped_stats(t["RATE"], sigma=3)
+    mean, median, std = sigma_clipped_stats(t["RATE"])
     # _, std = -popt[2], skewnorm.std(popt[1], scale=popt[3])
-    outliers = np.where(t["RATE"] > mean + sigma * std)[0]
+    outliers = np.where(t["RATE"] > mean + detection_sigma * std)[0]
     return outliers
 
 
-def snr_outlier(filename1, filename2, trigger_index, sigma=3):
-    outliers = outlier(filename1, trigger_index, sigma)
+def snr_outlier(filename1, filename2, trigger_index, detection_sigma=3):
+    outliers = outlier(filename1, trigger_index, detection_sigma)
     # *_, popt = skewnorm_trigger(filename2, trigger_index)
     # mean, std = -popt[2], skewnorm.std(popt[1], scale=popt[3])
     t, *_ = quadratic_detrend_trigger(filename2, trigger_index)
-    mean, median, std = sigma_clipped_stats(t["RATE"], sigma=3)
+    mean, median, std = sigma_clipped_stats(t["RATE"])
     signal = t["RATE"][outliers] + mean
-    noise = mean + sigma * std
+    noise = mean + std
     snr = signal / noise
     return snr, outliers
 
@@ -513,24 +513,34 @@ def gen_energy_bins(directory, n_bins=3):
         energy_ranges = np.linspace(20, 200, n_bins + 1)
     else:
         energy_ranges = [20, 60, 100, 200]
+    lc_paths = []
     if not os.path.exists(f"{directory}/{n_bins}_bins"):
         os.mkdir(f"{directory}/{n_bins}_bins")
-    lc_paths = []
-    for i in range(n_bins):
-        emin = energy_ranges[i]
-        emax = energy_ranges[i + 1]
-        print(energy_ranges[i], energy_ranges[i + 1])
-        os.system(
-            "python3 pipelinev3.py -d {} -emin {} -emax {}".format(
-                directory, emin, emax
+        for i in range(n_bins):
+            emin = energy_ranges[i]
+            emax = energy_ranges[i + 1]
+            print(energy_ranges[i], energy_ranges[i + 1])
+            os.system(
+                "python3 pipelinev3.py -d {} -emin {} -emax {}".format(
+                    directory, emin, emax
+                )
+            )
+            if not os.path.exists(f"{directory}/{n_bins}_bins/{int(emin)}-{int(emax)}"):
+                os.mkdir(f"{directory}/{n_bins}_bins/{int(emin)}-{int(emax)}")
+            os.system(
+                f"mv {directory}/*.lc {directory}/{n_bins}_bins/{int(emin)}-{int(emax)}/"
+            )
+            lc_paths.append(f"{directory}/{n_bins}_bins/{int(emin)}-{int(emax)}/")
+    else:
+        print(
+            "Requested energy bins already exist at {}/{}_bins".format(
+                directory, n_bins
             )
         )
-        if not os.path.exists(f"{directory}/{n_bins}_bins/{int(emin)}-{int(emax)}"):
-            os.mkdir(f"{directory}/{n_bins}_bins/{int(emin)}-{int(emax)}")
-        os.system(
-            f"mv {directory}/*.lc {directory}/{n_bins}_bins/{int(emin)}-{int(emax)}/"
-        )
-        lc_paths.append(f"{directory}/{n_bins}_bins/{int(emin)}-{int(emax)}/")
+        for i in range(n_bins):
+            emin = energy_ranges[i]
+            emax = energy_ranges[i + 1]
+            lc_paths.append(f"{directory}/{n_bins}_bins/{int(emin)}-{int(emax)}/")
     return lc_paths
 
 
@@ -538,26 +548,32 @@ def create_master_lc(directory):
     emin, emax = 20, 200
     if not os.path.exists(f"{directory}/master_lc"):
         os.mkdir(f"{directory}/master_lc")
-    os.system(
-        "python3 pipelinev3.py -d {} -emin {} -emax {}".format(directory, emin, emax)
-    )
-    os.system("mv {}/*.lc {}/master_lc".format(directory, directory))
+        os.system(
+            "python3 pipelinev3.py -d {} -emin {} -emax {}".format(
+                directory, emin, emax
+            )
+        )
+        os.system("mv {}/*.lc {}/master_lc".format(directory, directory))
+    else:
+        print("Master light curve already exists at {}/master_lc".format(directory))
 
 
-def find_grb(directory, trigger_time, sigma=3):
-    def each_quad(lc_paths, trigger_index, quadrant, sigma):
+def find_grb(directory, trigger_time, detection_sigma=3):
+    def each_quad(lc_paths, trigger_index, quadrant):
         snr = []
         lcs = []
         for path in lc_paths:
             lcs.append(glob.glob(f"{path}/*{str(quadrant)}.lc"))
         for i in range(3):
-            snr.append(snr_outlier(lcs[0][0], lcs[i][0], trigger_index, sigma=sigma)[0])
-        return snr, snr_outlier(lcs[0][0], lcs[0][0], trigger_index, sigma=sigma)[1]
+            snr.append(
+                snr_outlier(lcs[0][0], lcs[i][0], trigger_index, detection_sigma)[0]
+            )
+        return snr, snr_outlier(lcs[0][0], lcs[0][0], trigger_index, detection_sigma)[1]
 
-    def snr_grb(master_lc, possible_grb, trigger_index, sigma=sigma):
+    def snr_grb(master_lc, possible_grb, trigger_index):
         t, *_ = quadratic_detrend_trigger(master_lc, trigger_index)
-        mean, _, std = sigma_clipped_stats(t["RATE"], sigma=sigma)
-        noise = mean + sigma * std
+        mean, _, std = sigma_clipped_stats(t["RATE"])
+        noise = mean + std
         signal = t["RATE"][possible_grb]
         snr = signal / noise
         return snr
@@ -566,9 +582,15 @@ def find_grb(directory, trigger_time, sigma=3):
     master_lcs = np.sort(glob.glob(f"{directory}/master_lc/*.lc"))
     trigger_index = get_trigger_index(master_lcs[0], trigger_time)
     lc_paths = gen_energy_bins(directory)
-    print(master_lcs)
-    snr, outliers = each_quad(lc_paths, trigger_index, 0, sigma)
-    grb_mask = np.logical_or(snr[1] > 1, snr[2] > 1)
-    possible_grb = outliers[grb_mask]
-    grb_snr = snr_grb(master_lcs[0], possible_grb, trigger_index, sigma)
-    return snr, outliers, grb_mask, grb_snr
+    results = []
+    for i in range(4):
+        snr_each_quad, outliers_each_quad = each_quad(lc_paths, trigger_index, i)
+        grb_mask_each_quad = np.logical_or(snr_each_quad[1] > 3, snr_each_quad[2] > 3)
+        possible_grb_each_quad = outliers_each_quad[grb_mask_each_quad]
+        grb_snr_each_quad = snr_grb(
+            master_lcs[0], possible_grb_each_quad, trigger_index
+        )
+        results.append(
+            [snr_each_quad, outliers_each_quad, grb_mask_each_quad, grb_snr_each_quad]
+        )
+    return results
