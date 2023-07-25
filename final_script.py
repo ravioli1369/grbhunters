@@ -14,8 +14,9 @@ import numpy as np
 from astropy.io import fits
 from astropy.table import QTable
 from astropy.stats import sigma_clipped_stats
-from scipy.signal import savgol_filter
 from scipy.optimize import curve_fit
+from scipy.signal import savgol_filter
+from pipelinev3 import bindata
 
 ##############################################################################################
 ############ Functions for detrending, outlier detection, snr, energy binning ################
@@ -171,6 +172,7 @@ def create_master_lc(directory):
     """
     emin, emax = 20, 200
     if not os.path.exists(f"{directory}/master_lc"):
+        print("Creating master light curve at {}/master_lc".format(directory))
         os.mkdir(f"{directory}/master_lc")
         os.system(
             "python3 pipelinev3.py -d {} -emin {} -emax {}".format(
@@ -192,16 +194,15 @@ def gen_energy_bins(directory, n_bins=3):
         energy_ranges = [20, 60, 100, 200]
     lc_paths = []
     if not os.path.exists(f"{directory}/{n_bins}_bins"):
+        print("Creating {} energy bins at {}/{}_bins".format(n_bins, directory, n_bins))
         os.mkdir(f"{directory}/{n_bins}_bins")
         for i in range(n_bins):
             emin = energy_ranges[i]
             emax = energy_ranges[i + 1]
-            print(energy_ranges[i], energy_ranges[i + 1])
-            os.system(
-                "python3 pipelinev3.py -d {} -emin {} -emax {}".format(
-                    directory, emin, emax
-                )
-            )
+            evt = glob.glob(f"{directory}/*bc.evt")[0]
+            mkf = glob.glob(f"{directory}/*.mkf")[0]
+            print(emin, emax)
+            bindata(evt, mkf, 1, emin, emax)
             if not os.path.exists(f"{directory}/{n_bins}_bins/{int(emin)}-{int(emax)}"):
                 os.mkdir(f"{directory}/{n_bins}_bins/{int(emin)}-{int(emax)}")
             os.system(
