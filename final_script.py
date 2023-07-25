@@ -84,7 +84,16 @@ def quadratic_detrend_trigger(
     """
     if data is None:
         data = fits.getdata(filename)
-    saa_start, saa_end = saa(data["TIME"])
+    if zero_runs(data["RATE"])[-1] == len(data["RATE"]):
+        saa_start, saa_end = saa(data["TIME"])
+    else:
+        length_saa_zeroes = data['TIME'][zero_runs(data["RATE"])[-1]] - data['TIME'][zero_runs(data["RATE"])[0]]
+        length_saa_nans = data['TIME'][saa(data["TIME"])[-1]] - data['TIME'][saa(data["TIME"])[0]]
+        if length_saa_zeroes > length_saa_nans:
+            saa_start, saa_end = zero_runs(data["RATE"])
+        else:
+            saa_start, saa_end = saa(data["TIME"])
+    # saa_start, saa_end = saa(data["TIME"])
     timebin = data["TIME"][trigger_index + 1] - data["TIME"][trigger_index]
     detrend_window = (
         np.rint(detrend_window / timebin).astype(int) // 2 * 2 + 1
@@ -288,15 +297,15 @@ def find_grb(directory, trigger_time, detection_sigma=3):
 
     create_master_lc(directory)
     master_lcs = np.sort(glob.glob(f"{directory}/master_lc/*.lc"))
-    trigger_index = get_trigger_index(master_lcs[0], trigger_time)
     lc_paths = gen_energy_bins(directory)
     results = []
     for i in range(4):
+        trigger_index = get_trigger_index(master_lcs[i], trigger_time)
         snr_each_quad, outliers_each_quad = each_quad(lc_paths, trigger_index, i)
         grb_mask_each_quad = np.logical_or(snr_each_quad[1] > 3, snr_each_quad[2] > 3)
         possible_grb_each_quad = outliers_each_quad[grb_mask_each_quad]
         grb_snr_each_quad = snr_grb(
-            master_lcs[0], possible_grb_each_quad, trigger_index
+            master_lcs[i], possible_grb_each_quad, trigger_index
         )
         results.append(
             [snr_each_quad, outliers_each_quad, grb_mask_each_quad, grb_snr_each_quad]
