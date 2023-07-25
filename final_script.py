@@ -301,6 +301,8 @@ def find_grb(directory, trigger_time, detection_sigma=3):
         results.append(
             [snr_each_quad, outliers_each_quad, grb_mask_each_quad, grb_snr_each_quad]
         )
+    results.append(master_lcs)
+    results.append(lc_paths)
     return results
 
 
