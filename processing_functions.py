@@ -224,7 +224,7 @@ def quadratic_detrend_trigger(
             new_trigger_index = trigger_index
     elif trigger_index > saa_end:
         if (
-            trigger_index > background_window
+            trigger_index-saa_end > background_window
             and trigger_index + background_window < len(data)
         ):
             counts = clipped_data[
@@ -235,14 +235,14 @@ def quadratic_detrend_trigger(
             ]
             new_trigger_index = background_window
         elif (
-            trigger_index < background_window
+            trigger_index-saa_end < background_window
             and trigger_index + background_window < len(data)
         ):
-            counts = clipped_data[: trigger_index + background_window]
-            times = data["TIME"][: trigger_index + background_window]
+            counts = clipped_data[saa_end : trigger_index + background_window]
+            times = data["TIME"][saa_end : trigger_index + background_window]
             new_trigger_index = trigger_index
         elif (
-            trigger_index > background_window
+            trigger_index-saa_end > background_window
             and trigger_index + background_window > len(data)
         ):
             counts = clipped_data[trigger_index - background_window :]
