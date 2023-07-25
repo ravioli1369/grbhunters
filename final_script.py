@@ -77,7 +77,7 @@ def get_trigger_index(filename, trigger_time):
 
 
 def quadratic_detrend_trigger(
-    filename, trigger_index, polyorder=2, detrend_window=101, data=None
+    filename, trigger_index, polyorder=2, detrend_window=51, data=None
 ):
     """
     Detrends the given file using a quadratic fit to the data around the trigger
@@ -98,7 +98,7 @@ def quadratic_detrend_trigger(
     detrend_window = (
         np.rint(detrend_window / timebin).astype(int) // 2 * 2 + 1
     )  # make it odd
-    background_window = np.rint(700 / timebin).astype(int)
+    background_window = np.rint(500 / timebin).astype(int)
     if trigger_index < saa_start:
         if (
             trigger_index > background_window
@@ -165,8 +165,8 @@ def quadratic_detrend_trigger(
     mean, _, std = sigma_clipped_stats(counts)
     counts = np.copy(counts)
     counts[np.abs(counts - mean) > 3 * std] = np.nan
-    filtered = counts
-    # filtered = savgol_filter(counts, detrend_window, 3)
+    # filtered = counts
+    filtered = savgol_filter(counts, detrend_window, 5)
     idx = np.isfinite(filtered)
     x = times[idx]
     y = filtered[idx]
