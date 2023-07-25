@@ -18,6 +18,10 @@ from scipy.optimize import curve_fit
 from scipy.signal import savgol_filter
 from pipelinev3 import bindata
 
+import warnings
+
+warnings.simplefilter("ignore", np.RankWarning)
+
 ##############################################################################################
 ############ Functions for detrending, outlier detection, snr, energy binning ################
 ##############################################################################################
@@ -73,7 +77,7 @@ def get_trigger_index(filename, trigger_time):
 
 
 def quadratic_detrend_trigger(
-    filename, trigger_index, polyorder=3, detrend_window=101, data=None
+    filename, trigger_index, polyorder=2, detrend_window=101, data=None
 ):
     """
     Detrends the given file using a quadratic fit to the data around the trigger
@@ -86,15 +90,12 @@ def quadratic_detrend_trigger(
         np.rint(detrend_window / timebin).astype(int) // 2 * 2 + 1
     )  # make it odd
     background_window = np.rint(700 / timebin).astype(int)
-    mean, _, std = sigma_clipped_stats(data["RATE"], sigma=3)
-    clipped_data = np.copy(data["RATE"])
-    clipped_data[clipped_data > mean + 3 * std] = np.nan
     if trigger_index < saa_start:
         if (
             trigger_index > background_window
             and trigger_index + background_window < saa_start
         ):
-            counts = clipped_data[
+            counts = data["RATE"][
                 trigger_index - background_window : trigger_index + background_window
             ]
             times = data["TIME"][
@@ -105,18 +106,18 @@ def quadratic_detrend_trigger(
             trigger_index < background_window
             and trigger_index + background_window < saa_start
         ):
-            counts = clipped_data[: trigger_index + background_window]
+            counts = data["RATE"][: trigger_index + background_window]
             times = data["TIME"][: trigger_index + background_window]
             new_trigger_index = trigger_index
         elif (
             trigger_index > background_window
             and trigger_index + background_window > saa_start
         ):
-            counts = clipped_data[trigger_index - background_window :]
+            counts = data["RATE"][trigger_index - background_window :]
             times = data["TIME"][trigger_index - background_window :]
             new_trigger_index = background_window
         else:
-            counts = clipped_data
+            counts = data["RATE"]
             times = data["TIME"]
             new_trigger_index = trigger_index
     elif trigger_index > saa_end:
@@ -124,7 +125,7 @@ def quadratic_detrend_trigger(
             trigger_index - saa_end > background_window
             and trigger_index + background_window < len(data)
         ):
-            counts = clipped_data[
+            counts = data["RATE"][
                 trigger_index - background_window : trigger_index + background_window
             ]
             times = data["TIME"][
@@ -135,35 +136,45 @@ def quadratic_detrend_trigger(
             trigger_index - saa_end < background_window
             and trigger_index + background_window < len(data)
         ):
-            counts = clipped_data[saa_end : trigger_index + background_window]
+            counts = data["RATE"][saa_end : trigger_index + background_window]
             times = data["TIME"][saa_end : trigger_index + background_window]
             new_trigger_index = trigger_index
         elif (
             trigger_index - saa_end > background_window
             and trigger_index + background_window > len(data)
         ):
-            counts = clipped_data[trigger_index - background_window :]
+            counts = data["RATE"][trigger_index - background_window :]
             times = data["TIME"][trigger_index - background_window :]
             new_trigger_index = background_window
         else:
-            counts = clipped_data
+            counts = data["RATE"]
             times = data["TIME"]
             new_trigger_index = trigger_index
     else:
         raise ValueError("Trigger index is in SAA")
-    filtered = savgol_filter(counts, detrend_window, polyorder)
+    # clipping the outliers before fitting the quadratic
+    mean, _, std = sigma_clipped_stats(counts)
+    counts = np.copy(counts)
+    counts[np.abs(counts - mean) > 3 * std] = np.nan
+    filtered = savgol_filter(counts, detrend_window, 3)
     idx = np.isfinite(filtered)
     x = times[idx]
     y = filtered[idx]
-    popt, _ = curve_fit(quadratic, x, y)
+    popt = np.polyfit(x, y, polyorder)
+    # popt, _ = curve_fit(quadratic, x, y)
     window_start, window_end = (
         np.where(data["TIME"] == times[0])[0][0],
         np.where(data["TIME"] == times[-1])[0][0],
     )
+    # putting back the outliers before detrending
     counts = data["RATE"][window_start : window_end + 1]
-    detrended = counts - quadratic(times, *popt)
-    t = QTable([times, detrended], names=("TIME", "RATE"))
-    return t, new_trigger_index
+    # detrending
+    # trend = quadratic(times, *popt)
+    trend = np.polyval(popt, times)
+    detrended_counts = counts - trend
+    detrended = QTable([times, detrended_counts], names=("TIME", "RATE"))
+    raw = QTable([times, counts], names=("TIME", "RATE"))
+    return detrended, raw, trend, new_trigger_index, popt
 
 
 def create_master_lc(directory):
