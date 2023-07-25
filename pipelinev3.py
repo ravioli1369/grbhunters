@@ -6,32 +6,7 @@ import subprocess as sp
 import glob
 import argparse
 
-"""----passing arguments----------------------------------------------------------------------------------------------"""
-parser = argparse.ArgumentParser(
-    description="CZTI Pipeline", formatter_class=argparse.ArgumentDefaultsHelpFormatter
-)
-parser.add_argument("-d", help="Input directory", type=str, default="")
-parser.add_argument("-e", help="Input event file", type=str, default="")
-parser.add_argument("-m", help="Input mkf file", type=str, default="")
-parser.add_argument("-t", help="Input mkf threshold", type=str, default="")
-parser.add_argument("-l", help="Input livetime file", type=str, default="")
-parser.add_argument("-time", help="Input timebinsize", type=float, default=1)
-parser.add_argument("-emin", help="Energy lower limit", type=float, default=20)
-parser.add_argument("-emax", help="Energy upper limit", type=float, default=200)
-"""-------------variable creation-----------------------------------------------------------------------------------"""
-args = parser.parse_args()
-if args.d == "":
-    evt = args.e
-    mkf = args.m
-    mkf_threshold = args.t
-    livetime = args.l
-else:
-    evt = glob.glob(f"{args.d}/*bc.evt")[0]
-    mkf = glob.glob(f"{args.d}/*.mkf")[0]
-    mkf_threshold = glob.glob(f"{args.d}/*.txt")[0]
-    livetime = glob.glob(f"{args.d}/*bc_livetime.fits")[0]
-timebinsize = args.time
-print(evt, mkf, mkf_threshold, livetime, timebinsize)
+
 """-----Automatic Pipeline-----------------------------------------------------------------------------------------"""
 
 
@@ -39,7 +14,7 @@ print(evt, mkf, mkf_threshold, livetime, timebinsize)
 
 
 # cztgtigen
-def gtigen():
+def gtigen(evt, mkf, mkf_threshold):
     sp.call(
         [
             "cztgtigen",
@@ -55,7 +30,7 @@ def gtigen():
 
 
 # cztgaas
-def gaas():
+def gaas(evt, mkf):
     sp.call(
         [
             "cztgaas",
@@ -69,7 +44,7 @@ def gaas():
 
 
 # cztdatasel
-def datasel():
+def datasel(evt):
     sp.call(
         [
             "cztdatasel",
@@ -84,7 +59,7 @@ def datasel():
 
 
 # cztpixclean
-def pixclean():
+def pixclean(evt, livetime):
     sp.call(
         [
             "cztpixclean",
@@ -102,7 +77,7 @@ def pixclean():
 
 
 # cztevtclean
-def evtclean():
+def evtclean(evt):
     sp.call(
         [
             "cztevtclean",
@@ -117,7 +92,7 @@ def evtclean():
 
 
 # cztflagbadpix
-def flagbadpix():
+def flagbadpix(evt):
     sp.call(
         [
             "cztflagbadpix",
@@ -131,7 +106,7 @@ def flagbadpix():
 
 
 # cztbindata
-def bindata():
+def bindata(evt, mkf, timebinsize, emin, emax):
     sp.call(
         [
             "cztbindata",
@@ -141,8 +116,8 @@ def bindata():
             "badpixthreshold=0",
             "livetimefile=" + evt.replace("bc.evt", "quad_livetime.fits"),
             "outputtype=lc",
-            "emin=" + str(args.emin),
-            "emax=" + str(args.emax),
+            "emin=" + emin,
+            "emax=" + emax,
             "timebinsize=" + str(timebinsize),
             "outfile=" + evt.replace("bc.evt", "quad_clean"),
             "outevtfile=" + evt.replace("bc.evt", "quad_clean_weight.evt"),
@@ -156,7 +131,7 @@ def bindata():
 
 
 # cztdpigen
-def dpigen():
+def dpigen(evt):
     sp.call(
         [
             "cztdpigen",
@@ -175,7 +150,7 @@ def dpigen():
 
 
 # cztimage
-def image():
+def image(evt):
     sp.call(
         [
             "cztimage",
@@ -194,7 +169,7 @@ def image():
 
 
 # cztrspgen
-def rspgen():
+def rspgen(evt):
     quad_clean = evt.replace("bc.evt", "quad_clean")
     quad_cleanevt = evt.replace("bc.evt", "quad_clean.evt")
     quad_badpix_outfits = evt.replace("bc.evt", "quad_badpix_out.fits")
@@ -253,13 +228,40 @@ def rspgen():
 
 
 if __name__ == "__main__":
-    gtigen()
-    # gaas()
-    datasel()
-    pixclean()
-    evtclean()
-    flagbadpix()
-    bindata()
-    # dpigen()
-    # image()
-    # rspgen()
+    parser = argparse.ArgumentParser(
+        description="CZTI Pipeline",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    parser.add_argument("-d", help="Input directory", type=str, default="")
+    parser.add_argument("-e", help="Input event file", type=str, default="")
+    parser.add_argument("-m", help="Input mkf file", type=str, default="")
+    parser.add_argument("-t", help="Input mkf threshold", type=str, default="")
+    parser.add_argument("-l", help="Input livetime file", type=str, default="")
+    parser.add_argument("-time", help="Input timebinsize", type=float, default=1)
+    parser.add_argument("-emin", help="Energy lower limit", type=float, default=20)
+    parser.add_argument("-emax", help="Energy upper limit", type=float, default=200)
+
+    """-------------variable creation-----------------------------------------------------------------------------------"""
+    args = parser.parse_args()
+    if args.d == "":
+        evt = args.e
+        mkf = args.m
+        mkf_threshold = args.t
+        livetime = args.l
+    else:
+        evt = glob.glob(f"{args.d}/*bc.evt")[0]
+        mkf = glob.glob(f"{args.d}/*.mkf")[0]
+        mkf_threshold = glob.glob(f"{args.d}/*.txt")[0]
+        livetime = glob.glob(f"{args.d}/*bc_livetime.fits")[0]
+    emin = args.emin
+    emax = args.emax
+    timebinsize = args.time
+    print(evt, mkf, mkf_threshold, livetime, timebinsize)
+
+    """-------------calling functions-----------------------------------------------------------------------------------"""
+    gtigen(evt, mkf, mkf_threshold)
+    datasel(evt)
+    pixclean(evt, livetime)
+    evtclean(evt)
+    flagbadpix(evt)
+    bindata(evt, mkf, timebinsize, emin, emax)
