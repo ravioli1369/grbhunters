@@ -165,7 +165,8 @@ def quadratic_detrend_trigger(
     mean, _, std = sigma_clipped_stats(counts)
     counts = np.copy(counts)
     counts[np.abs(counts - mean) > 3 * std] = np.nan
-    filtered = savgol_filter(counts, detrend_window, 3)
+    filtered = counts
+    # filtered = savgol_filter(counts, detrend_window, 3)
     idx = np.isfinite(filtered)
     x = times[idx]
     y = filtered[idx]
