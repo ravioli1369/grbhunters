@@ -77,7 +77,7 @@ def get_trigger_index(filename, trigger_time):
 
 
 def quadratic_detrend_trigger(
-    filename, trigger_index, polyorder=2, detrend_window=51, data=None
+    filename, trigger_index, polyorder=2, detrend_window=21, data=None
 ):
     """
     Detrends the given file using a quadratic fit to the data around the trigger
@@ -166,7 +166,7 @@ def quadratic_detrend_trigger(
     counts = np.copy(counts)
     counts[np.abs(counts - mean) > 3 * std] = np.nan
     # filtered = counts
-    filtered = savgol_filter(counts, detrend_window, 5)
+    filtered = savgol_filter(counts, detrend_window, 2)
     idx = np.isfinite(filtered)
     x = times[idx]
     y = filtered[idx]
@@ -184,7 +184,7 @@ def quadratic_detrend_trigger(
     detrended_counts = counts - trend
     detrended = QTable([times, detrended_counts], names=("TIME", "RATE"))
     raw = QTable([times, counts], names=("TIME", "RATE"))
-    return detrended, raw, trend, new_trigger_index, popt
+    return detrended, raw, trend, filtered, new_trigger_index, popt
 
 
 def create_master_lc(directory):
