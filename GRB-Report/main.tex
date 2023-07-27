@@ -144,7 +144,7 @@
 	\begingroup
 	\thispagestyle{empty}
         \begin{center}
-	\AddToShipoutPicture*{\includegraphics[height=\paperheight, width=\paperwidth]{Pictures/cover.png}}
+	% \AddToShipoutPicture*{\includegraphics[height=\paperheight, width=\paperwidth]{Pictures/cover.png}}
         \end{center}
 	\vspace*{25em}
 	{\centering
@@ -631,24 +631,23 @@ Another method of describing the signal is to integrate the light curve over the
 
 Describing the noise is a much more difficult task than describing the signal. The noise is the background, and the background is not constant. The background varies a lot, and the variation is slightly different for each orbit of the satellite, as well as each quadrant of the CZT detectors.
 
-\subsection{Method 1 - Time Averaged Integrals}
-Since we are dealing with data that is already time binned, our "Integral" simply becomes the sum of the counts for both the noise and the signal. An important thing to note is that the duration of the GRB is not the same as the duration of the we sample from the lightcurve, so it's important to normalise the values of the signal and noise by dividing by their respective durations.
+\subsection{Method 1 - Raw Statistics of the Noise}
 
-Mathematically speaking, we can write this down as: 
+This method involves taking the raw statistics of the noise, namely the mean and standard deviation of the noise. The mean of the noise is taken as the mean of the light curve \textit{outside} of the GRB window. The standard deviation of the noise is taken as the standard deviation of the light curve \textit{outside} of the GRB window.
 
-\begin{align*}
-    \text{Signal} = \frac{\sum_{i=0}^{n} \text{Counts}_i}{\text{Duration of GRB}} 
-    &&
-    \text{Noise} = \frac{\sum_{i=0}^{m} \text{Counts}_i}{\text{Duration of Noise}}
-\end{align*}
-    
-Where $n$ is the number of data points in the GRB, and $m$ is the number of data points in the noise.
+We can then take the noise as $\mu+\sigma$ and the signal as $M_s+\mu$. 
+
+\begin{equation}
+    \therefore \text{SNR} = \frac{M_s+\mu}{\mu+\sigma}
+\end{equation}
 
 \subsection{Method 2 - Fitting a Distribution to the Noise} \label{sec:method2}
 
 This method involves fitting a distribution to the noise and then taking a certain sigma clip of the distribution as the noise. This method is more robust than the previous method as it takes into account the variation in the noise. Say for example, the noise is a Gaussian distribution, then we fit a Gaussian distribution by varying the mean ($\mu$) and standard deviation ($\sigma$) till we get the best fit. We then take the value of noise as $\mu+3\sigma$. 
 
 There are quite a few different distributions that are of interest to us, namely the Gaussian, Poisson, Gamma, Weibull and Rayleigh distributions. We will be looking at each of these distributions and the troubles faced in fitting them in the upcoming sections.
+
+\vspace{2cm}
 
 \textit{\textbf{An important note:} When we fit the noise to some distrbution, according to the nature of the distribution, we get a value for the optimal mean and standard deviation that will fit our noise. Since the data has been detrended, our noise is centered around $0$, so our entire data must be shifted by the mean obtained by fitting, and our signal becomes \textbf{$M_s+\mu$.}}
 
@@ -667,10 +666,10 @@ Where $\mu$ is the mean and $\sigma$ is the standard deviation of the distributi
 
 Fitting a Gaussian is pretty straight forward using the \lstinline[language=Python]{scipy.optimize.curve_fit} function, and defining a function that produces a purely Gaussian equation either by using the equation (\ref{eq:gaussian}) or the \lstinline[language=Python]{scipy.stats.norm.pdf} function. In either case, the function takes in the data as input and returns the mean and standard deviation of the distribution. 
 
-We can then take the noise as $\mu+3\sigma$ and the signal as $M_s+\mu$ (Recall the note at the end of Section \ref{sec:method2}).
+We can then take the noise as $\mu+\sigma$ and the signal as $M_s+\mu$ (Recall the note at the end of Section \ref{sec:method2}).
 
 \begin{equation}
-    \therefore \text{SNR} = \frac{M_s+\mu}{\mu+3\sigma}
+    \therefore \text{SNR} = \frac{M_s+\mu}{\mu+\sigma}
 \end{equation}
 
 \begin{figure}[H]
@@ -694,10 +693,10 @@ Where $k$ is the number of events, and $\lambda$ is the average number of events
 
 Fitting a Poisson distribution is a bit more complicated than fitting a Gaussian distribution. We use the \lstinline[language=Python]{scipy.optimize.curve_fit} function and defining a function that returns a Poisson distribution by using \lstinline[language=Python]{scipy.stats.poisson.pmf}. In this case we obtain only the mean of the distribution ($\lambda$). 
 
-We can now take the noise as $\lambda+3\sqrt{\lambda}$ and the signal as $M_s+\lambda$. 
+We can now take the noise as $\lambda+\sqrt{\lambda}$ and the signal as $M_s+\lambda$. 
 
 \begin{equation}
-    \therefore \text{SNR} = \frac{M_s+\lambda}{\lambda+3\sqrt{\lambda}}
+    \therefore \text{SNR} = \frac{M_s+\lambda}{\lambda+\sqrt{\lambda}}
 \end{equation}
 
 \begin{figure}[H]
@@ -728,10 +727,10 @@ In either case, the probability density function of the Gamma distribution is gi
 
 Fitting a Gamma distribution is a bit simpler than fitting a Poisson distribution. We use the \lstinline[language=Python]{scipy.stats.gamma.fit} function that can directly give us the shape and scale parameters of the distribution.
 
-We can now take the noise as $k\theta + 3\sqrt{k\theta^2}$ and the signal as $M_s+k\theta$.
+We can now take the noise as $k\theta + \sqrt{k\theta^2}$ and the signal as $M_s+k\theta$.
 
 \begin{equation}
-    \therefore \text{SNR} = \frac{M_s+k\theta}{k\theta + 3\sqrt{k\theta^2}}
+    \therefore \text{SNR} = \frac{M_s+k\theta}{k\theta + \sqrt{k\theta^2}}
 \end{equation}
 
 \begin{figure}[H]
@@ -742,12 +741,110 @@ We can now take the noise as $k\theta + 3\sqrt{k\theta^2}$ and the signal as $M_
 
 We can see that the Gamma distribution is very close to the Poisson distribution in terms of the fit, maybe even better. 
 
+\subsection{Skewnorm Distribution}
 
+The skew normal distribution is a continuous probability distribution that generalises the normal distribution to allow for non-zero skewness. The probability density function of the skew normal distribution is given by:
 
+\begin{equation} \label{eq:skewnorm}
+    f(x; \omega, \alpha, \xi) = \dfrac{2}{\omega \sqrt{2 \pi}} e^{-\frac{(x-\xi)^2}{2\omega^2}} \int_{-\infty}^{\alpha \left(\frac{x-\xi}{\omega} \right)} \dfrac{1}{\sqrt{2 \pi}} e^{-\frac{t^2}{2}} dt
+\end{equation}
+
+Where $\omega$ is the scale parameter, $\alpha$ is the shape parameter and $\xi$ is the location parameter. The mean ($\mu$) of the distribution is given by $\xi + \omega \delta \sqrt{\frac{2}{\pi}}$, where $\delta = \frac{\alpha}{\sqrt{1+\alpha^2}}$ and the variance ($\sigma^2$) is given by $\omega^2 \left( 1 - \frac{2 \delta^2}{\pi} \right)$. The skew normal distribution is of interest to us because the noise in the light curves seems to have a skewed distribution, and the skew normal distribution can also approximate a skewed distribution well.
+
+Fitting a skew normal distribution is similar to fitting a Gamma distribution. We use the \lstinline[language=Python]{scipy.stats.skewnorm.fit} function that can directly give us the shape, location and scale parameters of the distribution.
+
+We can now take the noise as $\mu+\sigma$ and the signal as $M_s+\mu$.
+
+\begin{equation}
+    \therefore \text{SNR} = \frac{M_s+\mu}{\mu+\sigma}
+\end{equation}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Pictures/skewnorm_fit.png}
+    \caption{Fitting a Skewnorm Distribution to the Noise (Binsize 0.1s) of Quadrant 0}
+\end{figure}
+
+We can see that the Skew Normal distribution is an equivalent or better fit to the noise than the Gamma distribution.
+
+\subsection{Quantifying the Fits}
+
+We can quantify the fits by calculating the \href{https://en.wikipedia.org/wiki/Root-mean-square_deviation}{Root Mean Square Deviation/Error} (RMSD or RMSE) of the fits. The RMSD is defined as:
+
+\begin{equation}
+    \text{RMSD} = \sqrt{\frac{\sum_{i=1}^{n} (f_i - o_i)^2}{n}}
+\end{equation}
+    
+    Where $f_i$ is the value of the fitted distribution at the $i^{th}$ data point, and $o_i$ is the value of the original data at the $i^{th}$ data point. The RMSD is a measure of the differences between the values predicted by a model or an estimator and the values observed. The lower the RMSD, the better the fit.
+
+Along with RMSD we can also calculate and compare various statistical properies of the fits such as the variance, skewness and kurtosis. These are referred to as the moments of the distribution. The moments of the original data and the fitted distribution can be compared to see how well the distribution fits the data.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|c|c|c|c}
+        & RMSD & Variance & Skewness & Kurtosis \\
+        \hline
+        Gaussian & 14.35 & 855.78 & 0 & 0 \\
+        \hline
+        Poisson & 16.51 & 934.95 & 0.032 & 0.001 \\
+        \hline
+        Gamma & 13.12 & 937.23 & 0.311 & 0.145 \\
+        \hline
+        Skewnorm & 13.10 & 932.53 & 0.299 & 0.175 \\
+        \hline
+        Original Data & - & 1201.03 & 0.632 & 2.856 \\
+    \end{tabular}
+    \caption{Moments of the Original Data and the Fitted Distributions}
+\end{table}
+
+We can see that the Gamma and Skewnorm distributions have the lowest RMSD, and the moments of the Gamma and Skewnorm distributions are closest to the moments of the original data. However, upon fitting the distributions to the noise of the other quadrants as well as other light curves, we can see that the Skewnorm distribution is a better fit to the noise than the Gamma distribution.
+
+\vfill
+
+\textsl{Although we have fitted a variety of distributions, the true nature of the noise still remains a mystery. The noise is not a perfect fit to any of the distributions, thus, for SNR calculations, we will be using the \textbf{raw statistics} of the noise.}
+\newpage 
+
+\section{Energy Dependence of the SNR}
+
+Every detection (count) made by the CZT detectors has an associated energy spectrum. \lstinline[language=Python]{cztbindata} produces a .pha file along with the .lc file. The .pha file contains the energy spectrum of the GRB. We can use this energy spectrum to find the energy distribution of all the counts in the orbit. We are also able to produce lightcurve files for different energy ranges.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Pictures/spectogram.png}
+    \caption{Spectogram of the region around GRB 190928A}
+\end{figure}
+
+We can see that the GRB is present in most of the energy range (20-200 keV) whereas the noise is predominantly present in the lower energy range (20-60 keV). These "noise" events with sufficiently high counts in the lower 20-50 keV range are known as cosmic rays. 
+
+In order to distiguish between cosmic and real sources of counts, we can calculate the SNR of "outliers" in the lowest energy range and compare it with the SNR of the same outliers in higher energy ranges. If the SNR of the outliers in the higher energy ranges drops below a certain threshold, we can safely assume that the outliers in the lower energy range are cosmic rays and not real sources of counts. A real source of counts would have a SNR higher than our threshold in at least one of the higher energy ranges.
+\newpage
+So, how do we determine the right amount of energy ranges to use? We can plot the Signal, Noise and SNR for different energy ranges and see how they change with energy. For the purposes of this project, we tried using 2, 4, 6, 8 and 10 \textit{equal} energy ranges between 20-200 keV and 3 \textit{unequal} energy ranges (20-60, 60-100 and 100-200 keV respectively).
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Pictures/signalvsenergy.png}
+        \caption{Signal vs Energy}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}  
+        \centering 
+        \includegraphics[width=\textwidth]{Pictures/noisevsenergy.png}
+        \caption{Noise vs Energy}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}   
+        \centering 
+        \includegraphics[width=\textwidth]{Pictures/snrvsenergy.png}
+        \caption{SNR vs Energy}
+    \end{subfigure}
+    \caption{Energy Dependence of the Signal, Noise and SNR}
+\end{figure}
 
 %----------------------------------------------------------------------------------------
 %	CHAPTER 4
 %----------------------------------------------------------------------------------------
+
+
 
 
 %----------------------------------------------------------------------------------------

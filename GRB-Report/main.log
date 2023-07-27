@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2023.6.21)  27 JUL 2023 19:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2023.6.21)  28 JUL 2023 03:06
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1114,15 +1114,10 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `T1/pag/b/n' in size <35> not available
 (Font)              Font shape `T1/pag/db/n' tried instead on input line 152.
-<Pictures/cover.png, id=7, 4791.9025pt x 6775.3125pt>
-File: Pictures/cover.png Graphic file (type png)
-<use Pictures/cover.png>
-Package pdftex.def Info: Pictures/cover.png  used on input line 158.
-(pdftex.def)             Requested size: 597.45087pt x 845.05112pt.
 [1
 
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/cover.png>] [2
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2
 
 ]
 LaTeX Font Info:    Trying to load font information for OT1+ztmcm on input line 174.
@@ -1187,7 +1182,7 @@ l.174 \end
                    \relax 
 l.198 \tableofcontents
                        % Print the table of contents itself [2]
-<Pictures/index.jpg, id=27, 3270.2175pt x 1635.10875pt>
+<Pictures/index.jpg, id=25, 3270.2175pt x 1635.10875pt>
 File: Pictures/index.jpg Graphic file (type jpg)
 <use Pictures/index.jpg>
 Package pdftex.def Info: Pictures/index.jpg  used on input line 198.
@@ -1209,12 +1204,12 @@ LaTeX Font Info:    Font shape `T1/pag/b/n' in size <10.95> not available
 
  [4]
 Chapter 1.
-<Pictures/astrosat.jpg, id=139, 1682.285pt x 841.1425pt>
+<Pictures/astrosat.jpg, id=146, 1682.285pt x 841.1425pt>
 File: Pictures/astrosat.jpg Graphic file (type jpg)
 <use Pictures/astrosat.jpg>
 Package pdftex.def Info: Pictures/astrosat.jpg  used on input line 208.
 (pdftex.def)             Requested size: 597.50787pt x 298.75528pt.
-<Pictures/grb_shell_final_0.jpg, id=142, 988.69376pt x 556.0775pt>
+<Pictures/grb_shell_final_0.jpg, id=149, 988.69376pt x 556.0775pt>
 File: Pictures/grb_shell_final_0.jpg Graphic file (type jpg)
 <use Pictures/grb_shell_final_0.jpg>
 Package pdftex.def Info: Pictures/grb_shell_final_0.jpg  used on input line 215.
@@ -1222,12 +1217,12 @@ Package pdftex.def Info: Pictures/grb_shell_final_0.jpg  used on input line 215.
 [5
 
  </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/astrosat.jpg> </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/grb_shell_final_0.jpg>]
-<Pictures/neutronstars.jpg, id=151, 1059.96pt x 787.94376pt>
+<Pictures/neutronstars.jpg, id=158, 1059.96pt x 787.94376pt>
 File: Pictures/neutronstars.jpg Graphic file (type jpg)
 <use Pictures/neutronstars.jpg>
 Package pdftex.def Info: Pictures/neutronstars.jpg  used on input line 225.
 (pdftex.def)             Requested size: 170.71393pt x 126.90317pt.
-<Pictures/astrosat_wireframe.png, id=157, 227.8914pt x 147.9126pt>
+<Pictures/astrosat_wireframe.png, id=164, 227.8914pt x 147.9126pt>
 File: Pictures/astrosat_wireframe.png Graphic file (type png)
 <use Pictures/astrosat_wireframe.png>
 Package pdftex.def Info: Pictures/astrosat_wireframe.png  used on input line 245.
@@ -1238,7 +1233,7 @@ Overfull \hbox (11.59943pt too wide) in paragraph at lines 245--246
  []
 
 [6 </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/neutronstars.jpg> </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/astrosat_wireframe.png>]
-<Pictures/czti.jpg, id=170, 170.66168pt x 201.71747pt>
+<Pictures/czti.jpg, id=177, 170.66168pt x 201.71747pt>
 File: Pictures/czti.jpg Graphic file (type jpg)
 <use Pictures/czti.jpg>
 Package pdftex.def Info: Pictures/czti.jpg  used on input line 260.
@@ -1247,7 +1242,7 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 264.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 264.
-<Pictures/cztiassembly.png, id=173, 687.56876pt x 619.31375pt>
+<Pictures/cztiassembly.png, id=180, 687.56876pt x 619.31375pt>
 File: Pictures/cztiassembly.png Graphic file (type png)
 <use Pictures/cztiassembly.png>
 Package pdftex.def Info: Pictures/cztiassembly.png  used on input line 271.
@@ -1260,12 +1255,12 @@ Overfull \hbox (1.17784pt too wide) in paragraph at lines 271--272
 [7
 
  </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/czti.jpg> </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/cztiassembly.png (PNG copy)>]
-<Pictures/cam_working.png, id=183, 331.2375pt x 331.2375pt>
+<Pictures/cam_working.png, id=190, 331.2375pt x 331.2375pt>
 File: Pictures/cam_working.png Graphic file (type png)
 <use Pictures/cam_working.png>
 Package pdftex.def Info: Pictures/cam_working.png  used on input line 303.
 (pdftex.def)             Requested size: 175.55502pt x 175.55502pt.
-<Pictures/CAM-czti.png, id=186, 494.44725pt x 492.6405pt>
+<Pictures/CAM-czti.png, id=193, 494.44725pt x 492.6405pt>
 File: Pictures/CAM-czti.png Graphic file (type png)
 <use Pictures/CAM-czti.png>
 Package pdftex.def Info: Pictures/CAM-czti.png  used on input line 312.
@@ -1273,7 +1268,7 @@ Package pdftex.def Info: Pictures/CAM-czti.png  used on input line 312.
  [8
 
  </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/cam_working.png> </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/CAM-czti.png>]
-<Pictures/cztpipeline.png, id=196, 526.96875pt x 649.2255pt>
+<Pictures/cztpipeline.png, id=203, 526.96875pt x 649.2255pt>
 File: Pictures/cztpipeline.png Graphic file (type png)
 <use Pictures/cztpipeline.png>
 Package pdftex.def Info: Pictures/cztpipeline.png  used on input line 348.
@@ -1295,7 +1290,7 @@ File: lstlang1.sty 2019/09/10 1.8c listings language file
 File: lstlang1.sty 2019/09/10 1.8c listings language file
 ) [10] [11]
 Chapter 2.
-<Pictures/BOAT.png, id=246, 1907.125pt x 953.5625pt>
+<Pictures/BOAT.png, id=253, 1907.125pt x 953.5625pt>
 File: Pictures/BOAT.png Graphic file (type png)
 <use Pictures/BOAT.png>
 Package pdftex.def Info: Pictures/BOAT.png  used on input line 428.
@@ -1313,24 +1308,24 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmtt' (encoding: TS1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-<Pictures/sample_lc.png, id=251, 514.5624pt x 404.89267pt>
+<Pictures/sample_lc.png, id=258, 514.5624pt x 404.89267pt>
 File: Pictures/sample_lc.png Graphic file (type png)
 <use Pictures/sample_lc.png>
 Package pdftex.def Info: Pictures/sample_lc.png  used on input line 490.
 (pdftex.def)             Requested size: 334.4616pt x 263.17711pt.
  [13 </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/sample_lc.png>]
-<Pictures/spectrum.png, id=266, 517.59773pt x 409.91544pt>
+<Pictures/spectrum.png, id=273, 517.59773pt x 409.91544pt>
 File: Pictures/spectrum.png Graphic file (type png)
 <use Pictures/spectrum.png>
 Package pdftex.def Info: Pictures/spectrum.png  used on input line 500.
 (pdftex.def)             Requested size: 284.67963pt x 225.45418pt.
-<Pictures/anomaly.png, id=267, 907.13304pt x 631.20618pt>
+<Pictures/anomaly.png, id=274, 907.13304pt x 631.20618pt>
 File: Pictures/anomaly.png Graphic file (type png)
 <use Pictures/anomaly.png>
 Package pdftex.def Info: Pictures/anomaly.png  used on input line 509.
 (pdftex.def)             Requested size: 272.14201pt x 189.36331pt.
  [14 </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/spectrum.png> </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/anomaly.png>]
-<Pictures/allquads.png, id=278, 1076.823pt x 711.8595pt>
+<Pictures/allquads.png, id=285, 1076.823pt x 711.8595pt>
 File: Pictures/allquads.png Graphic file (type png)
 <use Pictures/allquads.png>
 Package pdftex.def Info: Pictures/allquads.png  used on input line 531.
@@ -1338,7 +1333,7 @@ Package pdftex.def Info: Pictures/allquads.png  used on input line 531.
 LaTeX Font Info:    Font shape `T1/pag/m/it' in size <10.95> not available
 (Font)              Font shape `T1/pag/m/sl' tried instead on input line 544.
  [15 </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/allquads.png>]
-<Pictures/detrended.png, id=287, 1148.94846pt x 1291.32036pt>
+<Pictures/detrended.png, id=294, 1148.94846pt x 1291.32036pt>
 File: Pictures/detrended.png Graphic file (type png)
 <use Pictures/detrended.png>
 Package pdftex.def Info: Pictures/detrended.png  used on input line 565.
@@ -1364,12 +1359,12 @@ Underfull \hbox (badness 1184) in paragraph at lines 574--575
  []
 
 [16 </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/detrended.png>]
-<Pictures/allquads01s.png, id=303, 1076.823pt x 711.8595pt>
+<Pictures/allquads01s.png, id=310, 1076.823pt x 711.8595pt>
 File: Pictures/allquads01s.png Graphic file (type png)
 <use Pictures/allquads01s.png>
 Package pdftex.def Info: Pictures/allquads01s.png  used on input line 584.
 (pdftex.def)             Requested size: 341.43437pt x 225.71417pt.
-<Pictures/allquads10s.png, id=304, 1076.823pt x 711.8595pt>
+<Pictures/allquads10s.png, id=311, 1076.823pt x 711.8595pt>
 File: Pictures/allquads10s.png Graphic file (type png)
 <use Pictures/allquads10s.png>
 Package pdftex.def Info: Pictures/allquads10s.png  used on input line 593.
@@ -1378,7 +1373,7 @@ Package pdftex.def Info: Pictures/allquads10s.png  used on input line 593.
 
  </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/allquads01s.png> </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/allquads10s.png>]
 Chapter 3.
-<Pictures/lgm.png, id=315, 253.6677pt x 126.9543pt>
+<Pictures/lgm.png, id=322, 253.6677pt x 126.9543pt>
 File: Pictures/lgm.png Graphic file (type png)
 <use Pictures/lgm.png>
 Package pdftex.def Info: Pictures/lgm.png  used on input line 604.
@@ -1387,47 +1382,78 @@ Package pdftex.def Info: Pictures/lgm.png  used on input line 604.
 
  </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/lgm.png (PNG copy)>]
 LaTeX Font Info:    Font shape `T1/pag/b/it' in size <10.95> not available
-(Font)              Font shape `T1/pag/db/it' tried instead on input line 653.
+(Font)              Font shape `T1/pag/db/it' tried instead on input line 652.
 LaTeX Font Info:    Font shape `T1/pag/db/it' in size <10.95> not available
-(Font)              Font shape `T1/pag/db/sl' tried instead on input line 653.
+(Font)              Font shape `T1/pag/db/sl' tried instead on input line 652.
  [19]
-<Pictures/gaussian_fit.png, id=333, 715.32846pt x 570.933pt>
+<Pictures/gaussian_fit.png, id=341, 715.32846pt x 570.933pt>
 File: Pictures/gaussian_fit.png Graphic file (type png)
 <use Pictures/gaussian_fit.png>
-Package pdftex.def Info: Pictures/gaussian_fit.png  used on input line 678.
+Package pdftex.def Info: Pictures/gaussian_fit.png  used on input line 677.
 (pdftex.def)             Requested size: 341.43437pt x 272.51146pt.
  [20 </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/gaussian_fit.png>]
-<Pictures/poisson_fit.png, id=343, 715.32846pt x 570.933pt>
+<Pictures/poisson_fit.png, id=350, 715.32846pt x 570.933pt>
 File: Pictures/poisson_fit.png Graphic file (type png)
 <use Pictures/poisson_fit.png>
-Package pdftex.def Info: Pictures/poisson_fit.png  used on input line 705.
+Package pdftex.def Info: Pictures/poisson_fit.png  used on input line 704.
 (pdftex.def)             Requested size: 341.43437pt x 272.51146pt.
  [21 </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/poisson_fit.png>]
-<Pictures/gamma_fit.png, id=352, 715.32846pt x 570.933pt>
+<Pictures/gamma_fit.png, id=359, 715.32846pt x 570.933pt>
 File: Pictures/gamma_fit.png Graphic file (type png)
 <use Pictures/gamma_fit.png>
-Package pdftex.def Info: Pictures/gamma_fit.png  used on input line 739.
+Package pdftex.def Info: Pictures/gamma_fit.png  used on input line 738.
 (pdftex.def)             Requested size: 341.43437pt x 272.51146pt.
  [22 </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/gamma_fit.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 776.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 776.
+<Pictures/skewnorm_fit.png, id=369, 894.34125pt x 894.34125pt>
+File: Pictures/skewnorm_fit.png Graphic file (type png)
+<use Pictures/skewnorm_fit.png>
+Package pdftex.def Info: Pictures/skewnorm_fit.png  used on input line 764.
+(pdftex.def)             Requested size: 256.07741pt x 256.07715pt.
+ [23 </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/skewnorm_fit.png (PNG copy)>]
+LaTeX Font Info:    Font shape `T1/pag/b/sl' in size <10.95> not available
+(Font)              Font shape `T1/pag/db/sl' tried instead on input line 804.
+ [24]
+<Pictures/spectogram.png, id=386, 446.8695pt x 483.60675pt>
+File: Pictures/spectogram.png Graphic file (type png)
+<use Pictures/spectogram.png>
+Package pdftex.def Info: Pictures/spectogram.png  used on input line 813.
+(pdftex.def)             Requested size: 341.43437pt x 369.52258pt.
+ [25 </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/spectogram.png>]
+<Pictures/signalvsenergy.png, id=393, 628.0263pt x 522.15076pt>
+File: Pictures/signalvsenergy.png Graphic file (type png)
+<use Pictures/signalvsenergy.png>
+Package pdftex.def Info: Pictures/signalvsenergy.png  used on input line 827.
+(pdftex.def)             Requested size: 128.0387pt x 106.45201pt.
+<Pictures/noisevsenergy.png, id=394, 617.9085pt x 522.15076pt>
+File: Pictures/noisevsenergy.png Graphic file (type png)
+<use Pictures/noisevsenergy.png>
+Package pdftex.def Info: Pictures/noisevsenergy.png  used on input line 832.
+(pdftex.def)             Requested size: 128.0387pt x 108.18889pt.
+<Pictures/snrvsenergy.png, id=395, 622.9674pt x 522.15076pt>
+File: Pictures/snrvsenergy.png Graphic file (type png)
+<use Pictures/snrvsenergy.png>
+Package pdftex.def Info: Pictures/snrvsenergy.png  used on input line 837.
+(pdftex.def)             Requested size: 128.0387pt x 107.31248pt.
+ [26 </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/signalvsenergy.png> </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/noisevsenergy.png> </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/snrvsenergy.png>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 873.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 873.
  (/home/ravioli/astro/ksp/grb/GRB-Report/main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 776.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 776.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 873.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 873.
  ) 
 Here is how much of TeX's memory you used:
- 31068 strings out of 481239
- 561422 string characters out of 5920377
- 1253345 words of memory out of 5000000
- 45311 multiletter control sequences out of 15000+600000
- 650892 words of font info for 274 fonts, out of 8000000 for 9000
+ 31135 strings out of 481239
+ 562642 string characters out of 5920377
+ 1254339 words of memory out of 5000000
+ 45347 multiletter control sequences out of 15000+600000
+ 654608 words of font info for 285 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 63i,11n,98p,879b,1524s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1095.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/avantgar/uagd8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/avantgar/uagdo8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/avantgar/uagk8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/avantgar/uagko8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on /home/ravioli/astro/ksp/grb/GRB-Report/main.pdf (24 pages, 25828443 bytes).
+ 63i,12n,98p,879b,1524s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1095.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/avantgar/uagd8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/avantgar/uagdo8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/avantgar/uagk8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/avantgar/uagko8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on /home/ravioli/astro/ksp/grb/GRB-Report/main.pdf (28 pages, 10796386 bytes).
 PDF statistics:
- 539 PDF objects out of 1000 (max. 8388607)
- 416 compressed objects within 5 object streams
- 124 named destinations out of 1000 (max. 500000)
- 55184 words of extra memory for PDF output out of 61914 (max. 10000000)
+ 597 PDF objects out of 1000 (max. 8388607)
+ 459 compressed objects within 5 object streams
+ 139 named destinations out of 1000 (max. 500000)
+ 55228 words of extra memory for PDF output out of 61914 (max. 10000000)
 

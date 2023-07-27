@@ -28,9 +28,12 @@
 \contentsline {subsection}{\numberline {3.1.1}Methodology}{18}{subsection.3.1.1}%
 \contentsline {section}{\numberline {3.2}Signal}{19}{section.3.2}%
 \contentsline {section}{\numberline {3.3}Noise}{19}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Method 1 - Time Averaged Integrals}{19}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.1}Method 1 - Raw Statistics of the Noise}{19}{subsection.3.3.1}%
 \contentsline {subsection}{\numberline {3.3.2}Method 2 - Fitting a Distribution to the Noise}{19}{subsection.3.3.2}%
 \contentsline {subsection}{\numberline {3.3.3}Gaussian Distribution}{20}{subsection.3.3.3}%
 \contentsline {subsection}{\numberline {3.3.4}Poisson Distribution}{21}{subsection.3.3.4}%
 \contentsline {subsection}{\numberline {3.3.5}Gamma Distribution}{22}{subsection.3.3.5}%
+\contentsline {subsection}{\numberline {3.3.6}Skewnorm Distribution}{23}{subsection.3.3.6}%
+\contentsline {subsection}{\numberline {3.3.7}Quantifying the Fits}{24}{subsection.3.3.7}%
+\contentsline {section}{\numberline {3.4}Energy Dependence of the SNR}{25}{section.3.4}%
 \contentsfinish 
