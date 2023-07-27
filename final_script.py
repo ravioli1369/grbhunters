@@ -27,7 +27,7 @@ warnings.simplefilter("ignore", np.RankWarning)
 ##############################################################################################
 
 
-def zero_runs(a):
+def saav2(a):
     """
     Return maximum runs of consecutive zeros in a 1D array.
     """
@@ -41,13 +41,30 @@ def zero_runs(a):
     return ranges[max_zeros]
 
 
-def saa(a):
+def saav3(a):
     """
     Returns the start and end indices of the South Atlantic Anomaly
     """
     diff = np.diff(a)
     saa_start = np.argmax(diff)
     saa_end = saa_start + 1
+    return saa_start, saa_end
+
+
+def get_saa_indices(data):
+    if saav2(data["RATE"])[-1] == len(data["RATE"]):
+        saa_start, saa_end = saav3(data["TIME"])
+    else:
+        length_saa_zeroes = (
+            data["TIME"][saav2(data["RATE"])[-1]] - data["TIME"][saav2(data["RATE"])[0]]
+        )
+        length_saa_nans = (
+            data["TIME"][saav3(data["TIME"])[-1]] - data["TIME"][saav3(data["TIME"])[0]]
+        )
+        if length_saa_zeroes > length_saa_nans:
+            saa_start, saa_end = saav2(data["RATE"])
+        else:
+            saa_start, saa_end = saav3(data["TIME"])
     return saa_start, saa_end
 
 
@@ -84,81 +101,70 @@ def quadratic_detrend_trigger(
     """
     if data is None:
         data = fits.getdata(filename)
-    if zero_runs(data["RATE"])[-1] == len(data["RATE"]):
-        saa_start, saa_end = saa(data["TIME"])
-    else:
-        length_saa_zeroes = data['TIME'][zero_runs(data["RATE"])[-1]] - data['TIME'][zero_runs(data["RATE"])[0]]
-        length_saa_nans = data['TIME'][saa(data["TIME"])[-1]] - data['TIME'][saa(data["TIME"])[0]]
-        if length_saa_zeroes > length_saa_nans:
-            saa_start, saa_end = zero_runs(data["RATE"])
-        else:
-            saa_start, saa_end = saa(data["TIME"])
-    # saa_start, saa_end = saa(data["TIME"])
+    saa_start, saa_end = get_saa_indices(data)
     timebin = data["TIME"][trigger_index + 1] - data["TIME"][trigger_index]
     detrend_window = (
         np.rint(detrend_window / timebin).astype(int) // 2 * 2 + 1
     )  # make it odd
     background_window = np.rint(500 / timebin).astype(int)
     if trigger_index < saa_start:
-        if (
-            trigger_index > background_window
-            and trigger_index + background_window < saa_start
-        ):
-            counts = data["RATE"][
-                trigger_index - background_window : trigger_index + background_window
-            ]
-            times = data["TIME"][
-                trigger_index - background_window : trigger_index + background_window
-            ]
-            new_trigger_index = background_window
-        elif (
-            trigger_index < background_window
-            and trigger_index + background_window < saa_start
-        ):
-            counts = data["RATE"][: trigger_index + background_window]
-            times = data["TIME"][: trigger_index + background_window]
-            new_trigger_index = trigger_index
-        elif (
-            trigger_index > background_window
-            and trigger_index + background_window > saa_start
-        ):
-            counts = data["RATE"][trigger_index - background_window :]
-            times = data["TIME"][trigger_index - background_window :]
-            new_trigger_index = background_window
+        if trigger_index > background_window:
+            if trigger_index + background_window < saa_start:
+                counts = data["RATE"][
+                    trigger_index
+                    - background_window : trigger_index
+                    + background_window
+                ]
+                times = data["TIME"][
+                    trigger_index
+                    - background_window : trigger_index
+                    + background_window
+                ]
+                new_trigger_index = background_window
+            elif trigger_index + background_window >= saa_start:
+                counts = data["RATE"][trigger_index - background_window : saa_start]
+                times = data["TIME"][trigger_index - background_window : saa_start]
+                new_trigger_index = background_window
+        elif trigger_index <= background_window:
+            if trigger_index + background_window < saa_start:
+                counts = data["RATE"][: trigger_index + background_window]
+                times = data["TIME"][: trigger_index + background_window]
+                new_trigger_index = trigger_index
+            elif trigger_index + background_window >= saa_start:
+                counts = data["RATE"][:saa_start]
+                times = data["TIME"][:saa_start]
+                new_trigger_index = trigger_index
         else:
-            counts = data["RATE"]
-            times = data["TIME"]
-            new_trigger_index = trigger_index
+            raise ValueError("Please check manually, something is wrong")
     elif trigger_index > saa_end:
-        if (
-            trigger_index - saa_end > background_window
-            and trigger_index + background_window < len(data)
-        ):
-            counts = data["RATE"][
-                trigger_index - background_window : trigger_index + background_window
-            ]
-            times = data["TIME"][
-                trigger_index - background_window : trigger_index + background_window
-            ]
-            new_trigger_index = background_window
-        elif (
-            trigger_index - saa_end < background_window
-            and trigger_index + background_window < len(data)
-        ):
-            counts = data["RATE"][saa_end : trigger_index + background_window]
-            times = data["TIME"][saa_end : trigger_index + background_window]
-            new_trigger_index = trigger_index
-        elif (
-            trigger_index - saa_end > background_window
-            and trigger_index + background_window > len(data)
-        ):
-            counts = data["RATE"][trigger_index - background_window :]
-            times = data["TIME"][trigger_index - background_window :]
-            new_trigger_index = background_window
+        if trigger_index - saa_end > background_window:
+            if trigger_index + background_window < len(data):
+                counts = data["RATE"][
+                    trigger_index
+                    - background_window : trigger_index
+                    + background_window
+                ]
+                times = data["TIME"][
+                    trigger_index
+                    - background_window : trigger_index
+                    + background_window
+                ]
+                new_trigger_index = background_window
+            elif trigger_index + background_window >= len(data):
+                counts = data["RATE"][trigger_index - background_window :]
+                times = data["TIME"][trigger_index - background_window :]
+                new_trigger_index = background_window
+        elif trigger_index - saa_end < background_window:
+            if trigger_index + background_window < len(data):
+                counts = data["RATE"][saa_end : trigger_index + background_window]
+                times = data["TIME"][saa_end : trigger_index + background_window]
+                new_trigger_index = trigger_index - saa_end
+            elif trigger_index + background_window >= len(data):
+                counts = data["RATE"][saa_end:]
+                times = data["TIME"][saa_end:]
+                new_trigger_index = trigger_index - saa_end
         else:
-            counts = data["RATE"]
-            times = data["TIME"]
-            new_trigger_index = trigger_index
+            raise ValueError("Please check manually, something is wrong")
     else:
         raise ValueError("Trigger index is in SAA")
     # clipping the outliers before fitting the quadratic
