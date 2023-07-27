@@ -840,6 +840,12 @@ So, how do we determine the right amount of energy ranges to use? We can plot th
     \caption{Energy Dependence of the Signal, Noise and SNR}
 \end{figure}
 
+
+We can see that the Signal as well as Noise decrease with increase in energy, which is to be expected as the spectrum of a GRB or any source for that matter cannot be infinitely increasing with energy. However, the SNR increases with energy, which is a direct result of the cosmic rays being present predominantly in the lower energy range. Overall the noise drops faster than the signal with increase in energy, which is a good thing as it means that the SNR will increase with energy.
+
+Now comes the part of choosing the right amount of energy ranges. We can see that the SNR \textsl{in general} increases with increase in energy, reaches a maxima and then starts decreasing. This shows the spectrum of the GRB. Something like 2 - 4 energy bins are ideal for SNR calculations and outlier rejection as taking many energy bins leads to limited data in each bin, and taking too few energy bins leads to a lot of cosmic rays in the lower energy bins.
+
+For the purposes of this project, we will be using 3 energy bins (20-60, 60-100 and 100-200 keV) as 20-60 keV will contain majority of the cosmic rays and random noise spikes, 60-100 keV will contain the GRB as well as some cosmic rays and 100-200 keV will predominantly contain the GRB.
 %----------------------------------------------------------------------------------------
 %	CHAPTER 4
 %----------------------------------------------------------------------------------------

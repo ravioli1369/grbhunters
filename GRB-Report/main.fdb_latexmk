@@ -1,14 +1,14 @@
 # Fdb version 3
-["makeindex main.idx"] 1690493587 "main.idx" "main.ind" "main" 1690493818
-  "main.idx" 1690493803 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+["makeindex main.idx"] 1690493587 "main.idx" "main.ind" "main" 1690495233
+  "main.idx" 1690495219 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   (generated)
-  "main.ind"
   "main.ilg"
-["pdflatex"] 1690493803 "/home/ravioli/astro/ksp/grb/GRB-Report/main.tex" "/home/ravioli/astro/ksp/grb/GRB-Report/main.pdf" "main" 1690493818
+  "main.ind"
+["pdflatex"] 1690495219 "/home/ravioli/astro/ksp/grb/GRB-Report/main.tex" "/home/ravioli/astro/ksp/grb/GRB-Report/main.pdf" "main" 1690495233
   "/dev/null" 1690475345 0 d41d8cd98f00b204e9800998ecf8427e ""
   "/etc/texmf/web2c/texmf.cnf" 1686361542 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/ravioli/astro/ksp/grb/GRB-Report/main.aux" 1690493818 16339 b1da6f3c401db4b86cc12befc8b8317d ""
-  "/home/ravioli/astro/ksp/grb/GRB-Report/main.tex" 1690493803 46740 86bdfcc5a48a33d1217afee0856f8dec ""
+  "/home/ravioli/astro/ksp/grb/GRB-Report/main.aux" 1690495233 16339 b1da6f3c401db4b86cc12befc8b8317d ""
+  "/home/ravioli/astro/ksp/grb/GRB-Report/main.tex" 1690495219 47979 36c69f34f6ed0434c16696074b6cc87c ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/avantgar/pagd8r.tfm" 1136768653 4840 6a894dde946186de9a64269f0edd24e5 ""
@@ -300,16 +300,16 @@
   "Pictures/spectogram.png" 1690491658 63134 77f1614c92ce6072117572faf1518a45 ""
   "Pictures/spectrum.png" 1687357915 215174 dd13b01daf9bd3b676ef96eb8858671a ""
   "aas_macros.sty" 1687330737 5890 7cbd952ddad525c1698b12ec0e043a96 ""
-  "main.aux" 1690493818 16339 b1da6f3c401db4b86cc12befc8b8317d "pdflatex"
+  "main.aux" 1690495233 16339 b1da6f3c401db4b86cc12befc8b8317d "pdflatex"
   "main.ind" 1690493587 0 d41d8cd98f00b204e9800998ecf8427e "makeindex main.idx"
-  "main.tex" 1690493803 46740 86bdfcc5a48a33d1217afee0856f8dec ""
-  "main.toc" 1690493818 3303 c5dc77feec54b916ca593ba514aae3e7 "pdflatex"
+  "main.tex" 1690495219 47979 36c69f34f6ed0434c16696074b6cc87c ""
+  "main.toc" 1690495233 3303 c5dc77feec54b916ca593ba514aae3e7 "pdflatex"
   "structure.tex" 1687330737 21424 b2693d93ca5ba267b0540c24131cdbb0 ""
   (generated)
   "main.log"
   "/home/ravioli/astro/ksp/grb/GRB-Report/main.log"
-  "main.toc"
-  "main.aux"
   "main.idx"
+  "main.aux"
+  "main.toc"
   "main.pdf"
   "/home/ravioli/astro/ksp/grb/GRB-Report/main.pdf"
