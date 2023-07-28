@@ -690,46 +690,57 @@ def main(directory, trigger_time, grb_name, detection_sigma=1):
             run_timebins(directory, trigger_time, grb_name, timebin, detection_sigma)[0]
         )
         snr = snr[snr > 0]
-        snrs.append(np.mean(snr))
-    optimal_timebin = timebins[np.argmax(snrs)]
-    print("\nOptimal timebin found!!!")
-    print("Generating plots for the optimal timebin of {}s\n".format(optimal_timebin))
-    potential_grb_snrs, potential_grb_times, figs = run_timebins(
-        directory, trigger_time, grb_name, optimal_timebin, detection_sigma, plot=True
-    )
-
-    fig_snrvstime, ax_snrvstime = plt.subplots(
-        figsize=(15, 10), sharex=True, sharey=True
-    )
-    ax_snrvstime.plot(
-        timebins,
-        snrs,
-        color="slateblue",
-        marker="o",
-        markersize=7,
-        linewidth=2,
-        linestyle="--",
-    )
-    ax_snrvstime.set_xlabel("Timebin (s)", fontsize=16, labelpad=10)
-    ax_snrvstime.set_ylabel("SNR", fontsize=16, labelpad=10)
-    ax_snrvstime.set_title(
-        f"SNR vs Timebin for {grb_name}",
-        fontsize=18,
-        pad=10,
-    )
-    pdf = PdfPages(f"output_for_{grb_name}.pdf")
-    for fig in figs:
-        pdf.savefig(fig)
-        plt.close()
-    pdf.savefig(fig_snrvstime)
-    plt.close()
-    pdf.close()
-    print(f"\n\nBEST TIMEBIN: {optimal_timebin}s")
-    quadrants = np.nonzero(potential_grb_snrs)[0]
-    for i in quadrants:
+        if len(snr) > 0:
+            snrs.append(np.mean(snr))
+        else:
+            snrs.append(0)
+    if len(np.nonzero(snrs)[0]) > 0:
+        optimal_timebin = timebins[np.argmax(snrs)]
+        print("\nOptimal timebin found!!!")
         print(
-            f"Potential GRB found in Quadrant {i} at {potential_grb_times[i]}s with SNR {np.round(potential_grb_snrs[i], 2)}!!!!"
+            "Generating plots for the optimal timebin of {}s\n".format(optimal_timebin)
         )
+        potential_grb_snrs, potential_grb_times, figs = run_timebins(
+            directory,
+            trigger_time,
+            grb_name,
+            optimal_timebin,
+            detection_sigma,
+            plot=True,
+        )
+
+        fig_snrvstime, ax_snrvstime = plt.subplots(
+            figsize=(15, 10), sharex=True, sharey=True
+        )
+        ax_snrvstime.plot(
+            timebins,
+            snrs,
+            color="slateblue",
+            marker="o",
+            markersize=7,
+            linewidth=2,
+            linestyle="--",
+        )
+        ax_snrvstime.set_xlabel("Timebin (s)", fontsize=16, labelpad=10)
+        ax_snrvstime.set_ylabel("SNR", fontsize=16, labelpad=10)
+        ax_snrvstime.set_title(
+            f"SNR vs Timebin for {grb_name}",
+            fontsize=18,
+            pad=10,
+        )
+        pdf = PdfPages(f"output_for_{grb_name}.pdf")
+        for fig in figs:
+            pdf.savefig(fig)
+            plt.close()
+        pdf.savefig(fig_snrvstime)
+        plt.close()
+        pdf.close()
+        print(f"\n\nBEST TIMEBIN: {optimal_timebin}s")
+        quadrants = np.nonzero(potential_grb_snrs)[0]
+        for i in quadrants:
+            print(
+                f"Potential GRB found in Quadrant {i} at {potential_grb_times[i]}s with SNR {np.round(potential_grb_snrs[i], 2)}!!!!"
+            )
 
 
 if __name__ == "__main__":
