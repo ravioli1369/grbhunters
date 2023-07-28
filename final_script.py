@@ -11,9 +11,12 @@ import os
 import glob
 import argparse
 import numpy as np
+import matplotlib
+import matplotlib.pyplot as plt
 from astropy.io import fits
 from astropy.table import QTable
 from astropy.stats import sigma_clipped_stats
+from matplotlib.backends.backend_pdf import PdfPages
 from scipy.optimize import curve_fit
 from scipy.signal import savgol_filter
 from pipelinev3 import bindata
@@ -22,6 +25,25 @@ import warnings
 
 warnings.simplefilter("ignore", np.RankWarning)
 
+# Using LaTeX fonts
+params = {
+    "text.usetex": True,
+    "font.family": "serif",
+    "figure.dpi": 150,
+    "xtick.minor.visible": True,
+    "ytick.minor.visible": True,
+    "xtick.top": True,
+    "ytick.left": True,
+    "ytick.right": True,
+    "xtick.direction": "out",
+    "ytick.direction": "out",
+    "xtick.minor.size": 2.5,
+    "xtick.major.size": 5,
+    "ytick.minor.size": 2.5,
+    "ytick.major.size": 5,
+    "axes.axisbelow": True,
+}
+matplotlib.rcParams.update(params)
 ##############################################################################################
 ############ Functions for detrending, outlier detection, snr, energy binning ################
 ##############################################################################################
@@ -272,7 +294,7 @@ def snr_outlier(filename1, filename2, trigger_index, detection_sigma=3):
     return snr, outliers
 
 
-def find_grb(directory, trigger_time, detection_sigma=3):
+def find_outliers(directory, trigger_time, detection_sigma=3):
     """
     Finds the outliers and potential GRBs in each quadrant and returns their SNRs and indices
     """
@@ -291,14 +313,14 @@ def find_grb(directory, trigger_time, detection_sigma=3):
             )
         return snr, snr_outlier(lcs[0][0], lcs[0][0], trigger_index, detection_sigma)[1]
 
-    def snr_grb(master_lc, possible_grb, trigger_index):
+    def snr_grb(master_lc, filtered_outliers, trigger_index):
         """
         Returns the SNR of the potential GRBs in the master light curve
         """
         t, *_ = quadratic_detrend_trigger(master_lc, trigger_index)
         mean, _, std = sigma_clipped_stats(t["RATE"])
         noise = mean + std
-        signal = t["RATE"][possible_grb]
+        signal = t["RATE"][filtered_outliers]
         snr = signal / noise
         return snr
 
@@ -308,20 +330,319 @@ def find_grb(directory, trigger_time, detection_sigma=3):
     results = []
     for i in range(4):
         trigger_index = get_trigger_index(master_lcs[i], trigger_time)
-        snr_each_quad, outliers_each_quad = each_quad(lc_paths, trigger_index, i)
-        grb_mask_each_quad = np.logical_or(snr_each_quad[1] > 3, snr_each_quad[2] > 3)
-        possible_grb_each_quad = outliers_each_quad[grb_mask_each_quad]
-        grb_snr_each_quad = snr_grb(
-            master_lcs[i], possible_grb_each_quad, trigger_index
+        snr_outliers_each_quad, outliers_each_quad = each_quad(
+            lc_paths, trigger_index, i
+        )
+        filtered_outliers_mask_each_quad = np.logical_or(
+            snr_outliers_each_quad[1] > 3, snr_outliers_each_quad[2] > 3
+        )
+        filtered_outliers_each_quad = outliers_each_quad[
+            filtered_outliers_mask_each_quad
+        ]
+        filtered_outliers_snr_each_quad = snr_grb(
+            master_lcs[i], filtered_outliers_each_quad, trigger_index
         )
         results.append(
-            [snr_each_quad, outliers_each_quad, grb_mask_each_quad, grb_snr_each_quad]
+            [
+                snr_outliers_each_quad,
+                outliers_each_quad,
+                filtered_outliers_mask_each_quad,
+                filtered_outliers_snr_each_quad,
+            ]
         )
     results.append(master_lcs)
     results.append(lc_paths)
     return results
 
 
+def find_possible_grbs(
+    master_lcs, lc_paths, trigger_time, results, grb_name, plot=True
+):
+    u = potential_grb_times(master_lcs, trigger_time, results)
+    counter = 0
+    possible_grb_snr = []
+    for i in range(4):
+        trigger_index = get_trigger_index(master_lcs[i], trigger_time)
+        detrended, *_ = quadratic_detrend_trigger(
+            master_lcs[i], trigger_index, polyorder=2
+        )
+        _, outliers, filtered_outliers_mask, filtered_outliers_snr = results[i]
+        filtered_outliers = np.zeros_like(detrended["RATE"])
+        filtered_outliers[outliers[filtered_outliers_mask]] = filtered_outliers_snr
+        possible_grbs = np.intersect1d(
+            u, detrended["TIME"][outliers[filtered_outliers_mask]]
+        )
+        if len(possible_grbs) > 0:
+            matched_times_mask = np.isin(detrended["TIME"], possible_grbs)
+            u_mask = np.isin(u, possible_grbs)
+            possible_grb_time = u[u_mask][
+                np.argmax(filtered_outliers[matched_times_mask])
+            ]
+            possible_grb_snr.append(np.max(filtered_outliers[matched_times_mask]))
+            print(
+                f"Potential GRB found in Quadrant {i} at {possible_grb_time}s with SNR {np.round(possible_grb_snr[counter], 2)}!!!!"
+            )
+            counter += 1
+        if i == 3:
+            if counter > 1:
+                if plot:
+                    plot_a_bunch_of_stuff(
+                        master_lcs, lc_paths, results, u, grb_name, trigger_time
+                    )
+                print(f"Potential GRB found for trigger time {trigger_time}s.")
+            else:
+                print(f"No Potential GRB found for trigger time {trigger_time}s.")
+    return possible_grb_snr
+
+
+def potential_grb_times(master_lcs, trigger_time, results):
+    outlier_times = []
+    for i in range(4):
+        trigger_index = get_trigger_index(master_lcs[i], trigger_time)
+        detrended, raw, trend, *_ = quadratic_detrend_trigger(
+            master_lcs[i], trigger_index, polyorder=2
+        )
+        _, outliers, grb_mask, _ = results[i]
+        quad_outlier_times = detrended["TIME"][outliers[grb_mask]]
+        quad_outlier_times = np.concatenate(
+            (quad_outlier_times, quad_outlier_times + 1, quad_outlier_times - 1)
+        )
+        outlier_times = np.concatenate((outlier_times, np.unique(quad_outlier_times)))
+    u, c = np.unique(outlier_times, return_counts=True)
+    u = u[c > 1]
+    return u
+
+
+def plot_a_bunch_of_stuff(master_lcs, lc_paths, results, u, grb_name, trigger_time):
+    fig_raw, ax_raw = plt.subplots(2, 2, figsize=(15, 10), sharex=True, sharey=True)
+    fig_raw.set_tight_layout(True)
+    fig_detrended, ax_detrended = plt.subplots(
+        2, 2, figsize=(15, 10), sharex=True, sharey=True
+    )
+    fig_detrended.set_tight_layout(True)
+    fig_mark_outlier, ax_mark_outlier = plt.subplots(
+        2, 2, figsize=(15, 10), sharex=True, sharey=True
+    )
+    fig_mark_outlier.set_tight_layout(True)
+    fig_snr_outlier, ax_snr_outlier = plt.subplots(
+        4, 2, figsize=(15, 10), sharex=True, sharey=True
+    )
+    fig_snr_outlier.set_tight_layout(True)
+    fig_snrvsenergy, ax_snrvsenergy = plt.subplots(
+        2, 2, figsize=(15, 10), sharex=True, sharey=True
+    )
+    fig_snrvsenergy.set_tight_layout(True)
+    figs = [fig_raw, fig_detrended, fig_mark_outlier, fig_snr_outlier, fig_snrvsenergy]
+
+    for i in range(4):
+        trigger_index = get_trigger_index(master_lcs[i], trigger_time)
+        detrended, raw, trend, *_ = quadratic_detrend_trigger(
+            master_lcs[i], trigger_index, polyorder=2
+        )
+        detrended20to60, *_ = quadratic_detrend_trigger(
+            lc_paths[i], trigger_index, polyorder=2
+        )
+        snr, outliers, grb_mask, grb_snr = results[i]
+        ax_raw[i // 2, i % 2].plot(
+            raw["TIME"],
+            raw["RATE"],
+            color="slateblue",
+            label="Raw Count Rate",
+            alpha=0.85,
+        )
+        ax_raw[i // 2, i % 2].plot(
+            raw["TIME"], trend, color="salmon", label="Trend", linewidth=2
+        )
+        ax_raw[i // 2, i % 2].fill_between(
+            raw["TIME"], 0, raw["RATE"], color="slateblue", alpha=0.2
+        )
+        ax_raw[i // 2, i % 2].set_xlim(raw["TIME"][0], raw["TIME"][-1])
+        ax_raw[i // 2, i % 2].set_xlabel("Time (s)")
+        ax_raw[i // 2, i % 2].set_ylabel("Count Rate (counts/s)")
+        ax_raw[i // 2, i % 2].set_title("Quadrant {}".format(i))
+        if i == 1:
+            ax_raw[i // 2, i % 2].legend()
+
+        ax_detrended[i // 2, i % 2].plot(
+            detrended["TIME"],
+            detrended["RATE"],
+            color="salmon",
+            label="Detrended Count Rate",
+        )
+        ax_detrended[i // 2, i % 2].set_xlim(
+            detrended["TIME"][0], detrended["TIME"][-1]
+        )
+        ax_detrended[i // 2, i % 2].set_xlabel("Time (s)")
+        ax_detrended[i // 2, i % 2].set_ylabel("Count Rate (counts/s)")
+        ax_detrended[i // 2, i % 2].set_title("Quadrant {}".format(i))
+        if i == 1:
+            ax_detrended[i // 2, i % 2].legend()
+
+        ax_mark_outlier[i // 2, i % 2].plot(
+            detrended20to60["TIME"],
+            detrended20to60["RATE"],
+            color="slateblue",
+            label="20-60 keV",
+        )
+        ax_mark_outlier[i // 2, i % 2].scatter(
+            detrended20to60["TIME"][outliers],
+            detrended20to60["RATE"][outliers],
+            color="red",
+            alpha=0.6,
+            s=10 * snr[0],
+            label="Outliers",
+        )
+        ax_mark_outlier[i // 2, i % 2].set_xlim(
+            detrended20to60["TIME"][0], detrended20to60["TIME"][-1]
+        )
+        ax_mark_outlier[i // 2, i % 2].set_xlabel("Time (s)")
+        ax_mark_outlier[i // 2, i % 2].set_ylabel("Count Rate (counts/s)")
+        ax_mark_outlier[i // 2, i % 2].set_title("Quadrant {}".format(i))
+        if i == 1:
+            ax_mark_outlier[i // 2, i % 2].legend()
+        grb = np.zeros_like(detrended["RATE"])
+        grb[outliers] = snr[0]
+        ax_snr_outlier[i, 0].plot(
+            detrended["TIME"], grb, alpha=0.6, color="red", label="20-60keV"
+        )
+        grb[outliers] = snr[1]
+        ax_snr_outlier[i, 0].plot(
+            detrended["TIME"], grb, alpha=0.6, color="blue", label="60-100keV"
+        )
+        grb[outliers] = snr[2]
+        ax_snr_outlier[i, 0].plot(
+            detrended["TIME"], grb, alpha=0.6, color="green", label="100-200keV"
+        )
+        ax_snr_outlier[i, 0].set_xlim(detrended["TIME"][0], detrended["TIME"][-1])
+        ax_snr_outlier[i, 0].set_title("Quadrant {} Outliers".format(i))
+        ax_snr_outlier[i, 0].set_xlabel("Outliers")
+        ax_snr_outlier[i, 0].set_ylabel("SNR")
+        grb[outliers] = 0
+        grb[outliers[grb_mask]] = grb_snr
+        ax_snr_outlier[i, 1].plot(
+            detrended["TIME"], grb, alpha=0.6, color="slateblue", label="20-200keV"
+        )
+        ax_snr_outlier[i, 1].set_xlim(detrended["TIME"][0], detrended["TIME"][-1])
+        ax_snr_outlier[i, 1].set_title("Quadrant {} Potential GRBs".format(i))
+        ax_snr_outlier[i, 1].set_xlabel("Outliers")
+        ax_snr_outlier[i, 1].set_ylabel("SNR")
+        eranges = [40, 80, 150]
+        for j in range(len(snr[0])):
+            if j == 0:
+                ax_snrvsenergy[i // 2, i % 2].plot(
+                    eranges,
+                    [snr[0][j], snr[1][j], snr[2][j]],
+                    color="slateblue",
+                    marker="o",
+                    markersize=5,
+                    alpha=0.05,
+                    label="Outliers",
+                    linestyle="--",
+                )
+            else:
+                ax_snrvsenergy[i // 2, i % 2].plot(
+                    eranges,
+                    [snr[0][j], snr[1][j], snr[2][j]],
+                    color="slateblue",
+                    marker="o",
+                    markersize=5,
+                    alpha=0.05,
+                    linestyle="--",
+                )
+        for j in range(len(snr[0][grb_mask])):
+            if j == 0:
+                ax_snrvsenergy[i // 2, i % 2].plot(
+                    eranges,
+                    [snr[0][grb_mask][j], snr[1][grb_mask][j], snr[2][grb_mask][j]],
+                    color="tomato",
+                    marker="o",
+                    markersize=5,
+                    alpha=0.3,
+                    label="Filtered Outliers",
+                    linestyle="--",
+                )
+            else:
+                ax_snrvsenergy[i // 2, i % 2].plot(
+                    eranges,
+                    [snr[0][grb_mask][j], snr[1][grb_mask][j], snr[2][grb_mask][j]],
+                    color="tomato",
+                    marker="o",
+                    markersize=5,
+                    alpha=0.3,
+                    linestyle="--",
+                )
+        possible_grbs = np.intersect1d(u, detrended["TIME"][outliers[grb_mask]])
+        if len(possible_grbs) > 0:
+            matched_times_mask = np.isin(detrended["TIME"], possible_grbs)
+            u_mask = np.isin(u, possible_grbs)
+            snr_potential_grbs = []
+            grb[outliers] = snr[0]
+            snr_potential_grbs.append(grb[matched_times_mask])
+            grb[outliers] = snr[1]
+            snr_potential_grbs.append(grb[matched_times_mask])
+            grb[outliers] = snr[2]
+            snr_potential_grbs.append(grb[matched_times_mask])
+            grb[outliers] = 0
+            grb[outliers[grb_mask]] = grb_snr
+            for j in range(len(snr_potential_grbs[0])):
+                if j == 0:
+                    ax_snrvsenergy[i // 2, i % 2].plot(
+                        eranges,
+                        [
+                            snr_potential_grbs[0][j],
+                            snr_potential_grbs[1][j],
+                            snr_potential_grbs[2][j],
+                        ],
+                        color="forestgreen",
+                        marker="o",
+                        markersize=5,
+                        alpha=1,
+                        label="Potential GRBs",
+                        linestyle="--",
+                    )
+                else:
+                    ax_snrvsenergy[i // 2, i % 2].plot(
+                        eranges,
+                        [
+                            snr_potential_grbs[0][j],
+                            snr_potential_grbs[1][j],
+                            snr_potential_grbs[2][j],
+                        ],
+                        color="forestgreen",
+                        marker="o",
+                        markersize=5,
+                        alpha=1,
+                        linestyle="--",
+                    )
+            ax_snr_outlier[i, 1].scatter(
+                u[u_mask],
+                grb[matched_times_mask],
+                color="red",
+                alpha=0.6,
+                s=2 * grb[matched_times_mask],
+                label="Potential GRBs",
+            )
+        if i == 0:
+            ax_snr_outlier[i, 0].legend()
+            ax_snr_outlier[i, 1].legend()
+            ax_snrvsenergy[i // 2, i % 2].legend(loc="best")
+        ax_snrvsenergy[i // 2, i % 2].set_title("Quadrant {}".format(i))
+        ax_snrvsenergy[i // 2, i % 2].set_xlabel("Energy (keV)")
+        ax_snrvsenergy[i // 2, i % 2].set_ylabel("SNR")
+
+    fig_detrended.suptitle(f"Detrended Count Rate for {grb_name}")
+    fig_raw.suptitle(f"Raw Count Rate and Trend for {grb_name}")
+    fig_mark_outlier.suptitle(f"Detrended Count Rate + Outliers for {grb_name}")
+    fig_snr_outlier.suptitle(f"SNR vs Outliers for {grb_name}")
+    fig_snrvsenergy.suptitle(f"SNR vs Energy for {grb_name}")
+    pdf = PdfPages(f"output_for_{grb_name}.pdf")
+    for fig in figs:
+        pdf.savefig(fig)
+        plt.close()
+    pdf.close()
+
+
+# def main(directory, trigger_time):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Script to identify potential GRBs in the given directory"
