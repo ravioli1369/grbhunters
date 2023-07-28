@@ -355,12 +355,12 @@ def find_outliers(directory, trigger_time, detection_sigma=3):
     return results
 
 
-def find_possible_grbs(
+def find_potential_grbs(
     master_lcs, lc_paths, trigger_time, results, grb_name, plot=True
 ):
     u = potential_grb_times(master_lcs, trigger_time, results)
     counter = 0
-    possible_grb_snr = []
+    potential_grb_snr = []
     for i in range(4):
         trigger_index = get_trigger_index(master_lcs[i], trigger_time)
         detrended, *_ = quadratic_detrend_trigger(
@@ -369,18 +369,18 @@ def find_possible_grbs(
         _, outliers, filtered_outliers_mask, filtered_outliers_snr = results[i]
         filtered_outliers = np.zeros_like(detrended["RATE"])
         filtered_outliers[outliers[filtered_outliers_mask]] = filtered_outliers_snr
-        possible_grbs = np.intersect1d(
+        potential_grbs = np.intersect1d(
             u, detrended["TIME"][outliers[filtered_outliers_mask]]
         )
-        if len(possible_grbs) > 0:
-            matched_times_mask = np.isin(detrended["TIME"], possible_grbs)
-            u_mask = np.isin(u, possible_grbs)
-            possible_grb_time = u[u_mask][
+        if len(potential_grbs) > 0:
+            matched_times_mask = np.isin(detrended["TIME"], potential_grbs)
+            u_mask = np.isin(u, potential_grbs)
+            potential_grb_time = u[u_mask][
                 np.argmax(filtered_outliers[matched_times_mask])
             ]
-            possible_grb_snr.append(np.max(filtered_outliers[matched_times_mask]))
+            potential_grb_snr.append(np.max(filtered_outliers[matched_times_mask]))
             print(
-                f"Potential GRB found in Quadrant {i} at {possible_grb_time}s with SNR {np.round(possible_grb_snr[counter], 2)}!!!!"
+                f"Potential GRB found in Quadrant {i} at {potential_grb_time}s with SNR {np.round(potential_grb_snr[counter], 2)}!!!!"
             )
             counter += 1
         if i == 3:
@@ -392,7 +392,9 @@ def find_possible_grbs(
                 print(f"Potential GRB found for trigger time {trigger_time}s.")
             else:
                 print(f"No Potential GRB found for trigger time {trigger_time}s.")
-    return possible_grb_snr
+    if len(potential_grb_snr) == 0:
+        potential_grb_snr = 0
+    return potential_grb_snr
 
 
 def potential_grb_times(master_lcs, trigger_time, results):
@@ -571,10 +573,10 @@ def plot_a_bunch_of_stuff(master_lcs, lc_paths, results, u, grb_name, trigger_ti
                     alpha=0.3,
                     linestyle="--",
                 )
-        possible_grbs = np.intersect1d(u, detrended["TIME"][outliers[grb_mask]])
-        if len(possible_grbs) > 0:
-            matched_times_mask = np.isin(detrended["TIME"], possible_grbs)
-            u_mask = np.isin(u, possible_grbs)
+        potential_grbs = np.intersect1d(u, detrended["TIME"][outliers[grb_mask]])
+        if len(potential_grbs) > 0:
+            matched_times_mask = np.isin(detrended["TIME"], potential_grbs)
+            u_mask = np.isin(u, potential_grbs)
             snr_potential_grbs = []
             grb[outliers] = snr[0]
             snr_potential_grbs.append(grb[matched_times_mask])
