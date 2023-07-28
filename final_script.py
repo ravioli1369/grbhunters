@@ -9,6 +9,7 @@
 
 import os
 import glob
+import time
 import argparse
 import numpy as np
 import matplotlib
@@ -365,11 +366,13 @@ def find_outliers(directory, trigger_time, timebin=1, detection_sigma=3):
 
 
 def find_potential_grbs(
-    master_lcs, lc_paths, trigger_time, results, timebin, grb_name, plot=True
+    master_lcs, lc_paths, trigger_time, results, timebin, grb_name, plot=False
 ):
     u = potential_grb_times(master_lcs, trigger_time, results, timebin)
     counter = 0
-    potential_grb_snr = []
+    potential_grb_snr = [0, 0, 0, 0]
+    potential_grb_time = [0, 0, 0, 0]
+    figs = []
     for i in range(4):
         trigger_index = get_trigger_index(master_lcs[i], trigger_time)
         detrended, *_ = quadratic_detrend_trigger(
@@ -384,26 +387,30 @@ def find_potential_grbs(
         if len(potential_grbs) > 0:
             matched_times_mask = np.isin(detrended["TIME"], potential_grbs)
             u_mask = np.isin(u, potential_grbs)
-            potential_grb_time = u[u_mask][
+            potential_grb_time[i] = u[u_mask][
                 np.argmax(filtered_outliers[matched_times_mask])
             ]
-            potential_grb_snr.append(np.max(filtered_outliers[matched_times_mask]))
+            potential_grb_snr[i] = np.max(filtered_outliers[matched_times_mask])
             print(
-                f"Potential GRB found in Quadrant {i} at {potential_grb_time}s with SNR {np.round(potential_grb_snr[counter], 2)}!!!!"
+                f"Potential GRB found in Quadrant {i} at {potential_grb_time[i]}s with SNR {np.round(potential_grb_snr[i], 2)}!!!!"
             )
             counter += 1
         if i == 3:
             if counter > 1:
                 if plot:
-                    plot_a_bunch_of_stuff(
-                        master_lcs, lc_paths, results, u, grb_name, trigger_time
+                    figs = plot_a_bunch_of_stuff(
+                        master_lcs,
+                        lc_paths,
+                        results,
+                        u,
+                        grb_name,
+                        trigger_time,
+                        timebin,
                     )
                 print(f"Potential GRB found for trigger time {trigger_time}s.")
             else:
                 print(f"No Potential GRB found for trigger time {trigger_time}s.")
-    if len(potential_grb_snr) == 0:
-        potential_grb_snr = 0
-    return potential_grb_snr
+    return potential_grb_snr, potential_grb_time, figs
 
 
 def potential_grb_times(master_lcs, trigger_time, results, timebin=1):
@@ -428,7 +435,9 @@ def potential_grb_times(master_lcs, trigger_time, results, timebin=1):
     return u
 
 
-def plot_a_bunch_of_stuff(master_lcs, lc_paths, results, u, grb_name, trigger_time):
+def plot_a_bunch_of_stuff(
+    master_lcs, lc_paths, results, u, grb_name, trigger_time, timebin
+):
     fig_raw, ax_raw = plt.subplots(2, 2, figsize=(15, 10), sharex=True, sharey=True)
     fig_raw.set_tight_layout(True)
     fig_detrended, ax_detrended = plt.subplots(
@@ -645,24 +654,96 @@ def plot_a_bunch_of_stuff(master_lcs, lc_paths, results, u, grb_name, trigger_ti
         ax_snrvsenergy[i // 2, i % 2].set_xlabel("Energy (keV)")
         ax_snrvsenergy[i // 2, i % 2].set_ylabel("SNR")
 
-    fig_detrended.suptitle(f"Detrended Count Rate for {grb_name}")
-    fig_raw.suptitle(f"Raw Count Rate and Trend for {grb_name}")
-    fig_mark_outlier.suptitle(f"Detrended Count Rate + Outliers for {grb_name}")
-    fig_snr_outlier.suptitle(f"SNR vs Outliers for {grb_name}")
-    fig_snrvsenergy.suptitle(f"SNR vs Energy for {grb_name}")
+    fig_detrended.suptitle(f"Detrended Count Rate for {grb_name} - {timebin}s Binsize")
+    fig_raw.suptitle(f"Raw Count Rate and Trend for {grb_name} - {timebin}s Binsize")
+    fig_mark_outlier.suptitle(
+        f"Detrended Count Rate + Outliers for {grb_name} - {timebin}s Binsize"
+    )
+    fig_snr_outlier.suptitle(f"SNR vs Outliers for {grb_name} - {timebin}s Binsize")
+    fig_snrvsenergy.suptitle(f"SNR vs Energy for {grb_name} - {timebin}s Binsize")
+    # pdf = PdfPages(f"output_for_{grb_name}.pdf")
+    # for fig in figs:
+    #     pdf.savefig(fig)
+    #     plt.close()
+    # pdf.close()
+    return figs
+
+
+def run_timebins(
+    directory, trigger_time, grb_name, timebin, detection_sigma=1, plot=False
+):
+    results = find_outliers(directory, trigger_time, timebin, detection_sigma)
+    master_lcs = results[4]
+    lc_paths = np.sort(glob.glob(f"{results[5][0]}/*.lc"))
+
+    potential_grb_snrs, potential_grb_times, figs = find_potential_grbs(
+        master_lcs, lc_paths, trigger_time, results, timebin, grb_name, plot
+    )
+    return potential_grb_snrs, potential_grb_times, figs
+
+
+def main(directory, trigger_time, grb_name, detection_sigma=1):
+    timebins = [0.2, 0.4, 0.8, 1, 2, 4, 8]
+    snrs = []
+    for timebin in timebins:
+        snr = np.array(
+            run_timebins(directory, trigger_time, grb_name, timebin, detection_sigma)[0]
+        )
+        snr = snr[snr > 0]
+        snrs.append(np.mean(snr))
+    optimal_timebin = timebins[np.argmax(snrs)]
+    potential_grb_snrs, potential_grb_times, figs = run_timebins(
+        directory, trigger_time, grb_name, optimal_timebin, detection_sigma, plot=True
+    )
+
+    fig_snrvstime, ax_snrvstime = plt.subplots(
+        figsize=(15, 10), sharex=True, sharey=True
+    )
+    ax_snrvstime.plot(
+        timebins,
+        snrs,
+        color="slateblue",
+        marker="o",
+        markersize=7,
+        linewidth=2,
+        linestyle="--",
+    )
+    ax_snrvstime.set_xlabel("Timebin (s)", fontsize=16, labelpad=10)
+    ax_snrvstime.set_ylabel("SNR", fontsize=16, labelpad=10)
+    ax_snrvstime.set_title(
+        f"SNR vs Timebin for {grb_name}",
+        fontsize=18,
+        pad=10,
+    )
     pdf = PdfPages(f"output_for_{grb_name}.pdf")
     for fig in figs:
         pdf.savefig(fig)
         plt.close()
+    pdf.savefig(fig_snrvstime)
+    plt.close()
     pdf.close()
+    print(f"BEST TIMEBIN: {optimal_timebin}s")
+    quadrants = np.nonzero(potential_grb_snrs)[0]
+    for i in quadrants:
+        print(
+            f"Potential GRB found in Quadrant {i} at {potential_grb_times[i]}s with SNR {np.round(potential_grb_snrs[i], 2)}!!!!"
+        )
 
 
-# def main(directory, trigger_time):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Script to identify potential GRBs in the given directory"
     )
     parser.add_argument("-d", help="Input directory", type=str)
     parser.add_argument("-t", help="Trigger time", type=float)
+    parser.add_argument("-s", help="Detection sigma", type=float, default=1)
+    parser.add_argument("-n", help="GRB name", type=str)
+
     directory = parser.parse_args().d
     trigger_time = parser.parse_args().t
+    detection_sigma = parser.parse_args().s
+    grb_name = parser.parse_args().n
+
+    t = time.time()
+    main(directory, trigger_time, grb_name, detection_sigma)
+    print(f"Total Time taken: {time.time() - t}s")
