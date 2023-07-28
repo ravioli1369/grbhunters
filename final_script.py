@@ -52,6 +52,7 @@ matplotlib.rcParams.update(params)
 def saav2(a):
     """
     Return maximum runs of consecutive zeros in a 1D array.
+    Equivalent to SAA start and end indices for lc created with v2 pipeline
     """
     # Create an array that is 1 where a is 0, and pad each end with an extra 0.
     iszero = np.concatenate(([0], np.equal(a, 0).view(np.int8), [0]))
@@ -66,6 +67,7 @@ def saav2(a):
 def saav3(a):
     """
     Returns the start and end indices of the South Atlantic Anomaly
+    for lcs created with v3 pipeline
     """
     diff = np.diff(a)
     saa_start = np.argmax(diff)
@@ -74,6 +76,9 @@ def saav3(a):
 
 
 def get_saa_indices(data):
+    """
+    Returns the final SAA start and end indices regardless of the pipeline used
+    """
     if saav2(data["RATE"])[-1] == len(data["RATE"]):
         saa_start, saa_end = saav3(data["TIME"])
     else:
@@ -88,15 +93,6 @@ def get_saa_indices(data):
         else:
             saa_start, saa_end = saav3(data["TIME"])
     return saa_start, saa_end
-
-
-def rebin(count_data, time_data, bin_size):
-    n = int(bin_size * 10)
-    rebin_count = [
-        np.median(count_data[i : i + n]) for i in range(0, len(count_data), n)
-    ]
-    rebin_time = [np.mean(time_data[i : i + n]) for i in range(0, len(time_data), n)]
-    return rebin_count, rebin_time
 
 
 def quadratic(x, a, b, c):
@@ -215,59 +211,70 @@ def quadratic_detrend_trigger(
     return detrended, raw, trend, filtered, new_trigger_index, popt
 
 
-def create_master_lc(directory):
+def create_master_lc(directory, timebin=1):
     """
     Creates the master light curve (20-200 keV) for the given directory
     """
-    emin, emax = 20, 200
-    if not os.path.exists(f"{directory}/master_lc"):
-        print("Creating master light curve at {}/master_lc".format(directory))
-        os.mkdir(f"{directory}/master_lc")
-        os.system(
-            "python3 pipelinev3.py -d {} -emin {} -emax {}".format(
-                directory, emin, emax
+    if not os.path.exists(f"{directory}/{timebin}s/master_lc"):
+        print(
+            "Creating master light curve at {}/{}s/master_lc".format(directory, timebin)
+        )
+        os.makedirs(f"{directory}/{timebin}s/master_lc")
+        os.system("python3 pipelinev3.py -d {} -time {}".format(directory, timebin))
+        os.system("mv {}/*.lc {}/{}s/master_lc".format(directory, directory, timebin))
+    else:
+        print(
+            "Master light curve already exists at {}/{}s/master_lc".format(
+                directory, timebin
             )
         )
-        os.system("mv {}/*.lc {}/master_lc".format(directory, directory))
-    else:
-        print("Master light curve already exists at {}/master_lc".format(directory))
 
 
-def gen_energy_bins(directory, n_bins=3):
+def gen_energy_bins(directory, timebin=1):
     """
     Generates energy bins for the given number of bins
     """
-    if n_bins != 3:
-        energy_ranges = np.linspace(20, 200, n_bins + 1)
-    else:
-        energy_ranges = [20, 60, 100, 200]
+    n_bins = 3
+    energy_ranges = [20, 60, 100, 200]
     lc_paths = []
-    if not os.path.exists(f"{directory}/{n_bins}_bins"):
-        print("Creating {} energy bins at {}/{}_bins".format(n_bins, directory, n_bins))
-        os.mkdir(f"{directory}/{n_bins}_bins")
+    if not os.path.exists(f"{directory}/{timebin}s/{n_bins}_bins"):
+        print(
+            "{}s: Creating {} energy bins at {}/{}s/{}_bins".format(
+                timebin, n_bins, directory, timebin, n_bins
+            )
+        )
+        os.makedirs(f"{directory}/{timebin}s/{n_bins}_bins")
         for i in range(n_bins):
             emin = energy_ranges[i]
             emax = energy_ranges[i + 1]
             evt = glob.glob(f"{directory}/*bc.evt")[0]
             mkf = glob.glob(f"{directory}/*.mkf")[0]
             print(emin, emax)
-            bindata(evt, mkf, 1, emin, emax)
-            if not os.path.exists(f"{directory}/{n_bins}_bins/{int(emin)}-{int(emax)}"):
-                os.mkdir(f"{directory}/{n_bins}_bins/{int(emin)}-{int(emax)}")
+            bindata(evt, mkf, timebin, emin, emax)
+            if not os.path.exists(
+                f"{directory}/{timebin}s/{n_bins}_bins/{int(emin)}-{int(emax)}"
+            ):
+                os.makedirs(
+                    f"{directory}/{timebin}s/{n_bins}_bins/{int(emin)}-{int(emax)}"
+                )
             os.system(
-                f"mv {directory}/*.lc {directory}/{n_bins}_bins/{int(emin)}-{int(emax)}/"
+                f"mv {directory}/*.lc {directory}/{timebin}s/{n_bins}_bins/{int(emin)}-{int(emax)}/"
             )
-            lc_paths.append(f"{directory}/{n_bins}_bins/{int(emin)}-{int(emax)}/")
+            lc_paths.append(
+                f"{directory}/{timebin}s/{n_bins}_bins/{int(emin)}-{int(emax)}/"
+            )
     else:
         print(
-            "Requested energy bins already exist at {}/{}_bins".format(
-                directory, n_bins
+            "{}s: Requested energy bins already exist at {}/{}s/{}_bins".format(
+                timebin, directory, timebin, n_bins
             )
         )
         for i in range(n_bins):
             emin = energy_ranges[i]
             emax = energy_ranges[i + 1]
-            lc_paths.append(f"{directory}/{n_bins}_bins/{int(emin)}-{int(emax)}/")
+            lc_paths.append(
+                f"{directory}/{timebin}s/{n_bins}_bins/{int(emin)}-{int(emax)}/"
+            )
     return lc_paths
 
 
@@ -294,7 +301,7 @@ def snr_outlier(filename1, filename2, trigger_index, detection_sigma=3):
     return snr, outliers
 
 
-def find_outliers(directory, trigger_time, detection_sigma=3):
+def find_outliers(directory, trigger_time, timebin=1, detection_sigma=3):
     """
     Finds the outliers and potential GRBs in each quadrant and returns their SNRs and indices
     """
@@ -324,17 +331,19 @@ def find_outliers(directory, trigger_time, detection_sigma=3):
         snr = signal / noise
         return snr
 
-    create_master_lc(directory)
-    master_lcs = np.sort(glob.glob(f"{directory}/master_lc/*.lc"))
-    lc_paths = gen_energy_bins(directory)
+    create_master_lc(directory, timebin)
+    master_lcs = np.sort(glob.glob(f"{directory}/{timebin}s/master_lc/*.lc"))
+    lc_paths = gen_energy_bins(directory, timebin)
     results = []
     for i in range(4):
         trigger_index = get_trigger_index(master_lcs[i], trigger_time)
         snr_outliers_each_quad, outliers_each_quad = each_quad(
             lc_paths, trigger_index, i
         )
-        filtered_outliers_mask_each_quad = np.logical_or(
-            snr_outliers_each_quad[1] > 3, snr_outliers_each_quad[2] > 3
+        master_snr_each_quad = snr_grb(master_lcs[i], outliers_each_quad, trigger_index)
+        filtered_outliers_mask_each_quad = np.logical_and(
+            np.logical_or(snr_outliers_each_quad[1] > 3, snr_outliers_each_quad[2] > 3),
+            master_snr_each_quad > 3,
         )
         filtered_outliers_each_quad = outliers_each_quad[
             filtered_outliers_mask_each_quad
@@ -356,9 +365,9 @@ def find_outliers(directory, trigger_time, detection_sigma=3):
 
 
 def find_potential_grbs(
-    master_lcs, lc_paths, trigger_time, results, grb_name, plot=True
+    master_lcs, lc_paths, trigger_time, results, timebin, grb_name, plot=True
 ):
-    u = potential_grb_times(master_lcs, trigger_time, results)
+    u = potential_grb_times(master_lcs, trigger_time, results, timebin)
     counter = 0
     potential_grb_snr = []
     for i in range(4):
@@ -397,17 +406,21 @@ def find_potential_grbs(
     return potential_grb_snr
 
 
-def potential_grb_times(master_lcs, trigger_time, results):
+def potential_grb_times(master_lcs, trigger_time, results, timebin=1):
     outlier_times = []
     for i in range(4):
         trigger_index = get_trigger_index(master_lcs[i], trigger_time)
-        detrended, raw, trend, *_ = quadratic_detrend_trigger(
+        detrended, *_ = quadratic_detrend_trigger(
             master_lcs[i], trigger_index, polyorder=2
         )
         _, outliers, grb_mask, _ = results[i]
         quad_outlier_times = detrended["TIME"][outliers[grb_mask]]
         quad_outlier_times = np.concatenate(
-            (quad_outlier_times, quad_outlier_times + 1, quad_outlier_times - 1)
+            (
+                quad_outlier_times,
+                quad_outlier_times + timebin,
+                quad_outlier_times - timebin,
+            )
         )
         outlier_times = np.concatenate((outlier_times, np.unique(quad_outlier_times)))
     u, c = np.unique(outlier_times, return_counts=True)
