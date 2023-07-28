@@ -692,6 +692,8 @@ def main(directory, trigger_time, grb_name, detection_sigma=1):
         snr = snr[snr > 0]
         snrs.append(np.mean(snr))
     optimal_timebin = timebins[np.argmax(snrs)]
+    print("\nOptimal timebin found!!!")
+    print("Generating plots for the optimal timebin of {}s\n".format(optimal_timebin))
     potential_grb_snrs, potential_grb_times, figs = run_timebins(
         directory, trigger_time, grb_name, optimal_timebin, detection_sigma, plot=True
     )
@@ -722,7 +724,7 @@ def main(directory, trigger_time, grb_name, detection_sigma=1):
     pdf.savefig(fig_snrvstime)
     plt.close()
     pdf.close()
-    print(f"BEST TIMEBIN: {optimal_timebin}s")
+    print(f"\n\nBEST TIMEBIN: {optimal_timebin}s")
     quadrants = np.nonzero(potential_grb_snrs)[0]
     for i in quadrants:
         print(
