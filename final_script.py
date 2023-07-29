@@ -61,8 +61,11 @@ def saav2(a):
     # Runs start and end where absdiff is 1.
     ranges = np.where(absdiff == 1)[0].reshape(-1, 2)
     no_of_zeros = ranges[:, 1] - ranges[:, 0]
-    max_zeros = np.where(no_of_zeros == np.max(no_of_zeros))[0][0]
-    return ranges[max_zeros]
+    if len(no_of_zeros) > 0:
+        max_zeros = np.where(no_of_zeros == np.max(no_of_zeros))[0][0]
+        return ranges[max_zeros]
+    else:
+        return [len(a)]
 
 
 def saav3(a):
@@ -219,12 +222,23 @@ def create_master_lc(directory, timebin=1):
     """
     Creates the master light curve (20-200 keV) for the given directory
     """
+    gti = glob.glob(f"{directory}/*bc.gti")[0]
+    evt = glob.glob(f"{directory}/*bc.evt")[0]
+    mkf = glob.glob(f"{directory}/*.mkf")[0]
     if not os.path.exists(f"{directory}/{timebin}s/master_lc"):
         print(
             "Creating master light curve at {}/{}s/master_lc".format(directory, timebin)
         )
         os.makedirs(f"{directory}/{timebin}s/master_lc")
-        os.system("python3 pipelinev3.py -d {} -time {}".format(directory, timebin))
+        if not os.path.exists(gti):
+            os.system("python3 pipelinev3.py -d {} -time {}".format(directory, timebin))
+        else:
+            bindata(evt, mkf, timebin, 20, 200)
+        print(
+            "\n\n Moving light curves to {}/{}s/master_lc \n\n".format(
+                directory, timebin
+            )
+        )
         os.system("mv {}/*.lc {}/{}s/master_lc".format(directory, directory, timebin))
     else:
         print(
@@ -261,6 +275,9 @@ def gen_energy_bins(directory, timebin=1):
                 os.makedirs(
                     f"{directory}/{timebin}s/{n_bins}_bins/{int(emin)}-{int(emax)}"
                 )
+            print(
+                f"\n\n Moving light curves to {directory}/{timebin}s/{n_bins}_bins/{int(emin)}-{int(emax)}/\n\n"
+            )
             os.system(
                 f"mv {directory}/*.lc {directory}/{timebin}s/{n_bins}_bins/{int(emin)}-{int(emax)}/"
             )
