@@ -488,7 +488,7 @@ def plot_a_bunch_of_stuff(
         fig_snrvsenergy,
         fig_marked_grb,
     ]
-
+    counter = 0
     for i in range(4):
         trigger_index = get_trigger_index(master_lcs[i], trigger_time)
         detrended, raw, trend, *_ = quadratic_detrend_trigger(
@@ -655,6 +655,7 @@ def plot_a_bunch_of_stuff(
             "Quadrant {} Potential GRBs - Detrended Counts".format(i)
         )
         if len(potential_grbs) > 0:
+            counter += 1
             matched_times_mask = np.isin(detrended["TIME"], potential_grbs)
             u_mask = np.isin(u, potential_grbs)
             snr_potential_grbs = []
@@ -720,11 +721,11 @@ def plot_a_bunch_of_stuff(
                 s=2 * grb[matched_times_mask],
                 label="Potential GRB",
             )
-        if i == 0:
-            ax_snr_outlier[i, 0].legend()
-            ax_snr_outlier[i, 1].legend()
-            ax_marked_grb[i, 0].legend()
-            ax_marked_grb[i, 1].legend()
+            if counter == 1:
+                ax_snr_outlier[i, 0].legend()
+                ax_snr_outlier[i, 1].legend()
+                ax_marked_grb[i, 0].legend()
+                ax_marked_grb[i, 1].legend()
             ax_snrvsenergy[i // 2, i % 2].legend(loc="best")
         ax_snrvsenergy[i // 2, i % 2].set_title("Quadrant {}".format(i))
         ax_snrvsenergy[i // 2, i % 2].set_xlabel("Energy (keV)")
