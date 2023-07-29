@@ -173,7 +173,7 @@ def quadratic_detrend_trigger(
                 counts = data["RATE"][trigger_index - background_window :]
                 times = data["TIME"][trigger_index - background_window :]
                 new_trigger_index = background_window
-        elif trigger_index - saa_end < background_window:
+        elif trigger_index - saa_end <= background_window:
             if trigger_index + background_window < len(data):
                 counts = data["RATE"][saa_end : trigger_index + background_window]
                 times = data["TIME"][saa_end : trigger_index + background_window]
@@ -191,7 +191,10 @@ def quadratic_detrend_trigger(
     counts = np.copy(counts)
     counts[np.abs(counts - mean) > 3 * std] = np.nan
     # filtered = counts
-    filtered = savgol_filter(counts, detrend_window, 2)
+    if detrend_window > 2:
+        filtered = savgol_filter(counts, detrend_window, 2)
+    else:
+        filtered = np.copy(counts)
     idx = np.isfinite(filtered)
     x = times[idx]
     y = filtered[idx]
@@ -781,6 +784,8 @@ def main(directory, trigger_time, grb_name, input_timebin=None, detection_sigma=
             12.0,
             13.0,
             14.0,
+            15.0,
+            16.0,
         ]
         snrs = []
         for timebin in timebins:
