@@ -590,7 +590,7 @@ def plot_a_bunch_of_stuff(
                     color="slateblue",
                     marker="o",
                     markersize=5,
-                    alpha=0.05,
+                    alpha=timebin / 20,
                     label="Outliers",
                     linestyle="--",
                 )
@@ -601,7 +601,7 @@ def plot_a_bunch_of_stuff(
                     color="slateblue",
                     marker="o",
                     markersize=5,
-                    alpha=0.05,
+                    alpha=timebin / 20,
                     linestyle="--",
                 )
         for j in range(len(snr[0][grb_mask])):
