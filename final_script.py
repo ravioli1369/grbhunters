@@ -30,7 +30,7 @@ warnings.simplefilter("ignore", np.RankWarning)
 params = {
     "text.usetex": True,
     "font.family": "serif",
-    "figure.dpi": 150,
+    "figure.dpi": 160,
     "xtick.minor.visible": True,
     "ytick.minor.visible": True,
     "xtick.top": True,
@@ -222,8 +222,8 @@ def create_master_lc(directory, timebin=1):
     """
     Creates the master light curve (20-200 keV) for the given directory
     """
-    gti = glob.glob(f"{directory}/*bc.gti")[0]
     evt = glob.glob(f"{directory}/*bc.evt")[0]
+    gti = evt.replace(".evt", ".gti")
     mkf = glob.glob(f"{directory}/*.mkf")[0]
     if not os.path.exists(f"{directory}/{timebin}s/master_lc"):
         print(
@@ -807,16 +807,21 @@ def main(directory, trigger_time, grb_name, input_timebin=None, detection_sigma=
         ]
         snrs = []
         for timebin in timebins:
-            snr = np.array(
-                run_timebins(
-                    directory, trigger_time, grb_name, timebin, detection_sigma
-                )[0]
-            )
-            snr = snr[snr > 0]
-            if len(snr) > 0:
-                snrs.append(np.mean(snr))
-            else:
+            try:
+                snr = np.array(
+                    run_timebins(
+                        directory, trigger_time, grb_name, timebin, detection_sigma
+                    )[0]
+                )
+                snr = snr[snr > 0]
+                if len(snr) > 0:
+                    snrs.append(np.mean(snr))
+                else:
+                    snrs.append(0)
+            except IndexError:
                 snrs.append(0)
+                print("Index Error for timebin: {}s".format(timebin))
+                continue
         if len(np.nonzero(snrs)[0]) > 0:
             optimal_timebin = timebins[np.argmax(snrs)]
             print("\nOptimal timebin found!!!")
