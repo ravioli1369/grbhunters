@@ -364,7 +364,7 @@ def find_outliers(directory, trigger_time, timebin=1, detection_sigma=3):
         master_snr_each_quad = snr_grb(master_lcs[i], outliers_each_quad, trigger_index)
         filtered_outliers_mask_each_quad = np.logical_and(
             np.logical_or(snr_outliers_each_quad[1] > 3, snr_outliers_each_quad[2] > 3),
-            master_snr_each_quad > 3,
+            master_snr_each_quad > 1,
         )
         filtered_outliers_each_quad = outliers_each_quad[
             filtered_outliers_mask_each_quad
