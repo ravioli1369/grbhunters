@@ -388,6 +388,9 @@ def find_outliers(directory, trigger_time, timebin=1, detection_sigma=3):
 def find_potential_grbs(
     master_lcs, lc_paths, trigger_time, results, timebin, grb_name, plot=False
 ):
+    """
+    Applies the SNR cut to the outliers in each quadrant to find the potential GRBs
+    """
     u = potential_grb_times(master_lcs, trigger_time, results, timebin)
     counter = 0
     potential_grb_snr = [0, 0, 0, 0]
@@ -434,6 +437,9 @@ def find_potential_grbs(
 
 
 def potential_grb_times(master_lcs, trigger_time, results, timebin=1):
+    """
+    Cross matches the time of outliers in each quadrant to find the potential GRBs
+    """
     outlier_times = []
     for i in range(4):
         trigger_index = get_trigger_index(master_lcs[i], trigger_time)
@@ -458,6 +464,9 @@ def potential_grb_times(master_lcs, trigger_time, results, timebin=1):
 def plot_a_bunch_of_stuff(
     master_lcs, lc_paths, results, u, grb_name, trigger_time, timebin
 ):
+    """
+    Function for creating most of the plots that will go into the pdf file
+    """
     fig_raw, ax_raw = plt.subplots(2, 2, figsize=(15, 10), sharex=True, sharey=True)
     fig_raw.set_tight_layout(True)
     fig_detrended, ax_detrended = plt.subplots(
@@ -752,6 +761,9 @@ def plot_a_bunch_of_stuff(
 def run_timebins(
     directory, trigger_time, grb_name, timebin, detection_sigma=1, plot=False
 ):
+    """
+    Finds and returns the potential GRBs for the given timebin
+    """
     results = find_outliers(directory, trigger_time, timebin, detection_sigma)
     master_lcs = results[4]
     lc_paths = np.sort(glob.glob(f"{results[5][0]}/*.lc"))
@@ -763,6 +775,9 @@ def run_timebins(
 
 
 def main(directory, trigger_time, grb_name, input_timebin=None, detection_sigma=1):
+    """
+    Main function to iterate through the timebins and create the final output files
+    """
     if input_timebin is not None:
         potential_grb_snrs, potential_grb_times, figs = run_timebins(
             directory,
@@ -899,6 +914,10 @@ if __name__ == "__main__":
     detection_sigma = parser.parse_args().s
     grb_name = parser.parse_args().n
     input_timebin = parser.parse_args().timebin
+
+    # check if directory exists
+    if not os.path.isdir(directory):
+        raise Exception("Directory does not exist")
 
     t = time.time()
     main(directory, trigger_time, grb_name, input_timebin, detection_sigma)
