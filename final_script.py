@@ -780,8 +780,12 @@ def main(directory, trigger_time, grb_name, input_timebin=None, detection_sigma=
             pdf.close()
             quadrants = np.nonzero(potential_grb_snrs)[0]
             for i in quadrants:
+                with open(f"output_for_{grb_name}.txt", "a") as f:
+                    f.write(
+                        f"Potential GRB found for binsize {input_timebin}s in Quadrant {i} at {potential_grb_times[i]}s with SNR {np.round(potential_grb_snrs[i], 2)}!!!!\n"
+                    )
                 print(
-                    f"Potential GRB found in Quadrant {i} at {potential_grb_times[i]}s with SNR {np.round(potential_grb_snrs[i], 2)}!!!!"
+                    f"Potential GRB found for binsize {input_timebin}s in Quadrant {i} at {potential_grb_times[i]}s with SNR {np.round(potential_grb_snrs[i], 2)}!!!!"
                 )
     else:
         timebins = [
@@ -865,12 +869,17 @@ def main(directory, trigger_time, grb_name, input_timebin=None, detection_sigma=
             pdf.savefig(fig_snrvstime)
             plt.close()
             pdf.close()
-            print(f"\n\nBEST TIMEBIN: {optimal_timebin}s")
-            quadrants = np.nonzero(potential_grb_snrs)[0]
-            for i in quadrants:
-                print(
-                    f"Potential GRB found in Quadrant {i} at {potential_grb_times[i]}s with SNR {np.round(potential_grb_snrs[i], 2)}!!!!"
-                )
+            with open(f"output_for_{grb_name}.txt", "a") as f:
+                f.write(f"BEST TIMEBIN: {optimal_timebin}s\n")
+                print(f"\n\nBEST TIMEBIN: {optimal_timebin}s")
+                quadrants = np.nonzero(potential_grb_snrs)[0]
+                for i in quadrants:
+                    f.write(
+                        f"Potential GRB found in Quadrant {i} at {potential_grb_times[i]}s with SNR {np.round(potential_grb_snrs[i], 2)}!!!!\n"
+                    )
+                    print(
+                        f"Potential GRB found in Quadrant {i} at {potential_grb_times[i]}s with SNR {np.round(potential_grb_snrs[i], 2)}!!!!"
+                    )
 
 
 if __name__ == "__main__":

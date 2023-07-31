@@ -1,0 +1,3 @@
+BEST TIMEBIN: 9.0s
+Potential GRB found in Quadrant 0 at 359102336.5s with SNR 4.12!!!!
+Potential GRB found in Quadrant 1 at 359102336.5s with SNR 6.53!!!!
