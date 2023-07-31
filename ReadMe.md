@@ -14,7 +14,7 @@ The code is written in Python 3.9.1 and uses the following packages:
 Note that you will require a working version of cztpipeline version 3 to run the code. The code was tested on czt_pipeline_20221209_v3.0. The pipeline can be downloaded from [here](http://astrosat-ssc.iucaa.in/cztiData).
 
 ### Running the code
-The relevant codes are two python scripts: `final_script.py` and `pipelinev3.py`. The former is the main script which calls the latter. To run the code, simply run the following command in the terminal:
+The relevant codes are the two python scripts: `final_script.py` and `pipelinev3.py`. The former is the main script which calls the latter. To run the code, simply run the following command in the terminal:
 ```
 python3 final_script.py -d <path to data> -t <trigger time> -n <name of GRB> --timebin <Optional: Binsize of time series>
 ```
