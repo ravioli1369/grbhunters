@@ -11,17 +11,16 @@
 \contentsline {subsection}{\numberline {1.3.1}How It Works}{9}{subsection.1.3.1}%
 \contentsline {subsection}{\numberline {1.3.2}Work Flow}{10}{subsection.1.3.2}%
 \contentsline {subsection}{\numberline {1.3.3}Pipeline Installation}{10}{subsection.1.3.3}%
-\contentsline {subsection}{\numberline {1.3.4}Automation of the Pipeline}{11}{subsection.1.3.4}%
-\contentsline {chapter}{\numberline {2}Playing With Data}{12}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Introduction}{12}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}FITS Files}{12}{subsection.2.1.1}%
-\contentsline {subsection}{\numberline {2.1.2}Accessing Files via Astropy}{12}{subsection.2.1.2}%
-\contentsline {subsection}{\numberline {2.1.3}Creating the Light Curve Files}{13}{subsection.2.1.3}%
-\contentsline {subsection}{\numberline {2.1.4}Creating the Spectrum Files}{14}{subsection.2.1.4}%
-\contentsline {subsection}{\numberline {2.1.5}Some Anomalies in the Data}{14}{subsection.2.1.5}%
-\contentsline {section}{\numberline {2.2}Analysis of GRB190928A}{15}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Finding the GRB}{15}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}Filtering and Detrending}{16}{subsection.2.2.2}%
+\contentsline {chapter}{\numberline {2}Playing With Data}{11}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Introduction}{11}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}FITS Files}{11}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Accessing Files via Astropy}{11}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Creating the Light Curve Files}{12}{subsection.2.1.3}%
+\contentsline {subsection}{\numberline {2.1.4}Creating the Spectrum Files}{13}{subsection.2.1.4}%
+\contentsline {subsection}{\numberline {2.1.5}Some Anomalies in the Data}{13}{subsection.2.1.5}%
+\contentsline {section}{\numberline {2.2}Analysis of GRB190928A}{14}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Finding the GRB}{14}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Filtering and Detrending}{15}{subsection.2.2.2}%
 \contentsline {section}{\numberline {2.3}Different Bin Sizes}{17}{section.2.3}%
 \contentsline {chapter}{\numberline {3}Signal To Noise Ratio}{18}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Introduction}{18}{section.3.1}%
@@ -36,4 +35,12 @@
 \contentsline {subsection}{\numberline {3.3.6}Skewnorm Distribution}{23}{subsection.3.3.6}%
 \contentsline {subsection}{\numberline {3.3.7}Quantifying the Fits}{24}{subsection.3.3.7}%
 \contentsline {section}{\numberline {3.4}Energy Dependence of the SNR}{25}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Energy Ranges}{25}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}The Optimal Energy Ranges}{26}{subsection.3.4.2}%
+\contentsline {section}{\numberline {3.5}Time Dependence of the SNR}{27}{section.3.5}%
+\contentsline {chapter}{\numberline {4}The Algorithm}{28}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Outliers}{28}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Timebins}{30}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Results and Overview}{30}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Blind Searches}{39}{section.4.4}%
 \contentsfinish 

@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2023.6.21)  28 JUL 2023 03:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2023.6.21)  6 AUG 2023 07:30
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/ravioli/astro/ksp/grb/GRB-Report/main.tex
-(/home/ravioli/astro/ksp/grb/GRB-Report/main.tex
+**/home/ravioli/astro/ksp/grbhunters/GRB-Report/main.tex
+(/home/ravioli/astro/ksp/grbhunters/GRB-Report/main.tex
 LaTeX2e <2020-02-02> patch level 2
 L3 programming layer <2020-02-14> (/usr/share/texlive/texmf-dist/tex/latex/base/book.cls
 Document Class: book 2019/12/20 v1.4l Standard LaTeX document class
@@ -66,11 +66,10 @@ File: lipsum.ltd.tex 2019/01/02 v2.2 The Lorem ipsum dummy text
 Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
 ) (/usr/share/texlive/texmf-dist/tex/latex/was/gensymb.sty
 Package: gensymb 2003/07/02 v1.0 (WaS)
-) (/usr/share/texlive/texmf-dist/tex/latex/mathtools/mathtools.sty
-Package: mathtools 2020/01/17 v1.23 mathematical typesetting tools
- (/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
-Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks14
+) (/usr/share/texlive/texmf-dist/tex/latex/pdfpages/pdfpages.sty
+Package: pdfpages 2020/01/28 v0.5q Insert pages of external PDF documents (AM)
+ (/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 ) (/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
 \calc@Acount=\count199
@@ -83,88 +82,6 @@ LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
 \calc@Ccount=\count267
 \calc@Cskip=\skip51
-) (/usr/share/texlive/texmf-dist/tex/latex/mathtools/mhsetup.sty
-Package: mhsetup 2017/03/31 v1.3 programming setup (MH)
-) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2020/01/20 v2.17e AMS math features
-\@mathmargin=\skip52
-
-For additional information on amsmath, use the `?' option.
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
-Package: amstext 2000/06/29 v2.01 AMS text
- (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
-File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks15
-\ex@=\dimen137
-)) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
-Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen138
-) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
-Package: amsopn 2016/03/08 v2.02 operator names
-)
-\inf@bad=\count268
-LaTeX Info: Redefining \frac on input line 227.
-\uproot@=\count269
-\leftroot@=\count270
-LaTeX Info: Redefining \overline on input line 389.
-\classnum@=\count271
-\DOTSCASE@=\count272
-LaTeX Info: Redefining \ldots on input line 486.
-LaTeX Info: Redefining \dots on input line 489.
-LaTeX Info: Redefining \cdots on input line 610.
-\Mathstrutbox@=\box46
-\strutbox@=\box47
-\big@size=\dimen139
-LaTeX Font Info:    Redeclaring font encoding OML on input line 733.
-LaTeX Font Info:    Redeclaring font encoding OMS on input line 734.
-\macc@depth=\count273
-\c@MaxMatrixCols=\count274
-\dotsspace@=\muskip16
-\c@parentequation=\count275
-\dspbrk@lvl=\count276
-\tag@help=\toks16
-\row@=\count277
-\column@=\count278
-\maxfields@=\count279
-\andhelp@=\toks17
-\eqnshift@=\dimen140
-\alignsep@=\dimen141
-\tagshift@=\dimen142
-\tagwidth@=\dimen143
-\totwidth@=\dimen144
-\lineht@=\dimen145
-\@envbody=\toks18
-\multlinegap=\skip53
-\multlinetaggap=\skip54
-\mathdisplay@stack=\toks19
-LaTeX Info: Redefining \[ on input line 2859.
-LaTeX Info: Redefining \] on input line 2860.
-)
-LaTeX Info: Thecontrolsequence`\('isalreadyrobust on input line 129.
-LaTeX Info: Thecontrolsequence`\)'isalreadyrobust on input line 129.
-LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 129.
-LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
-\g_MT_multlinerow_int=\count280
-\l_MT_multwidth_dim=\dimen146
-\origjot=\skip55
-\l_MT_shortvdotswithinadjustabove_dim=\dimen147
-\l_MT_shortvdotswithinadjustbelow_dim=\dimen148
-\l_MT_above_intertext_sep=\dimen149
-\l_MT_below_intertext_sep=\dimen150
-\l_MT_above_shortintertext_sep=\dimen151
-\l_MT_below_shortintertext_sep=\dimen152
-) (/usr/share/texlive/texmf-dist/tex/latex/titling/titling.sty
-Package: titling 2009/09/04 v2.1d maketitle typesetting
-\thanksmarkwidth=\skip56
-\thanksmargin=\skip57
-\droptitle=\skip58
-) (/usr/share/texlive/texmf-dist/tex/latex/preprint/authblk.sty
-Package: authblk 2001/02/27 1.3 (PWD)
-\affilsep=\skip59
-\@affilsep=\skip60
-\c@Maxaffil=\count281
-\c@authors=\count282
-\c@affil=\count283
 ) (/usr/share/texlive/texmf-dist/tex/latex/eso-pic/eso-pic.sty
 Package: eso-pic 2018/04/12 v2.0h eso-pic (RN)
  (/usr/share/texlive/texmf-dist/tex/generic/atbegshi/atbegshi.sty
@@ -175,7 +92,10 @@ Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
 Package: ltxcmds 2019/12/15 v1.24 LaTeX kernel commands for general use (HO)
 ) (/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty
 Package: iftex 2019/11/07 v1.0c TeX engine tests
-)) (/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+)) (/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+) (/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
  (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
@@ -193,7 +113,116 @@ Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
 Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
-)) (/usr/share/texlive/texmf-dist/tex/latex/tocbibind/tocbibind.sty
+)) (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
+ (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2019/11/30 v1.4a Standard LaTeX Graphics (DPC,SPQR)
+ (/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+) (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 105.
+)
+\Gin@req@height=\dimen137
+\Gin@req@width=\dimen138
+)
+\AM@pagewidth=\dimen139
+\AM@pageheight=\dimen140
+ (/usr/share/texlive/texmf-dist/tex/latex/pdfpages/pppdftex.def
+File: pppdftex.def 2020/01/28 v0.5q Pdfpages driver for pdfTeX (AM)
+)
+\AM@pagebox=\box46
+\AM@global@opts=\toks15
+\AM@pagecnt=\count268
+\AM@toc@title=\toks16
+\c@AM@survey=\count269
+\AM@templatesizebox=\box47
+) (/usr/share/texlive/texmf-dist/tex/latex/mathtools/mathtools.sty
+Package: mathtools 2020/01/17 v1.23 mathematical typesetting tools
+ (/usr/share/texlive/texmf-dist/tex/latex/mathtools/mhsetup.sty
+Package: mhsetup 2017/03/31 v1.3 programming setup (MH)
+) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2020/01/20 v2.17e AMS math features
+\@mathmargin=\skip52
+
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+ (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks17
+\ex@=\dimen141
+)) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen142
+) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count270
+LaTeX Info: Redefining \frac on input line 227.
+\uproot@=\count271
+\leftroot@=\count272
+LaTeX Info: Redefining \overline on input line 389.
+\classnum@=\count273
+\DOTSCASE@=\count274
+LaTeX Info: Redefining \ldots on input line 486.
+LaTeX Info: Redefining \dots on input line 489.
+LaTeX Info: Redefining \cdots on input line 610.
+\Mathstrutbox@=\box48
+\strutbox@=\box49
+\big@size=\dimen143
+LaTeX Font Info:    Redeclaring font encoding OML on input line 733.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 734.
+\macc@depth=\count275
+\c@MaxMatrixCols=\count276
+\dotsspace@=\muskip16
+\c@parentequation=\count277
+\dspbrk@lvl=\count278
+\tag@help=\toks18
+\row@=\count279
+\column@=\count280
+\maxfields@=\count281
+\andhelp@=\toks19
+\eqnshift@=\dimen144
+\alignsep@=\dimen145
+\tagshift@=\dimen146
+\tagwidth@=\dimen147
+\totwidth@=\dimen148
+\lineht@=\dimen149
+\@envbody=\toks20
+\multlinegap=\skip53
+\multlinetaggap=\skip54
+\mathdisplay@stack=\toks21
+LaTeX Info: Redefining \[ on input line 2859.
+LaTeX Info: Redefining \] on input line 2860.
+)
+LaTeX Info: Thecontrolsequence`\('isalreadyrobust on input line 129.
+LaTeX Info: Thecontrolsequence`\)'isalreadyrobust on input line 129.
+LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 129.
+LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
+\g_MT_multlinerow_int=\count282
+\l_MT_multwidth_dim=\dimen150
+\origjot=\skip55
+\l_MT_shortvdotswithinadjustabove_dim=\dimen151
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen152
+\l_MT_above_intertext_sep=\dimen153
+\l_MT_below_intertext_sep=\dimen154
+\l_MT_above_shortintertext_sep=\dimen155
+\l_MT_below_shortintertext_sep=\dimen156
+) (/usr/share/texlive/texmf-dist/tex/latex/titling/titling.sty
+Package: titling 2009/09/04 v2.1d maketitle typesetting
+\thanksmarkwidth=\skip56
+\thanksmargin=\skip57
+\droptitle=\skip58
+) (/usr/share/texlive/texmf-dist/tex/latex/preprint/authblk.sty
+Package: authblk 2001/02/27 1.3 (PWD)
+\affilsep=\skip59
+\@affilsep=\skip60
+\c@Maxaffil=\count283
+\c@authors=\count284
+\c@affil=\count285
+) (/usr/share/texlive/texmf-dist/tex/latex/tocbibind/tocbibind.sty
 Package: tocbibind 2010/10/13 v1.5k extra ToC listings
 Package tocbibind Info: The document has chapter divisions on input line 50.
 
@@ -205,8 +234,8 @@ Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip61
 \bibsep=\skip62
 LaTeX Info: Redefining \cite on input line 694.
-\c@NAT@ctr=\count284
-) (/home/ravioli/astro/ksp/grb/GRB-Report/aas_macros.sty) (/usr/share/texlive/texmf-dist/tex/latex/minted/minted.sty
+\c@NAT@ctr=\count286
+) (/home/ravioli/astro/ksp/grbhunters/GRB-Report/aas_macros.sty) (/usr/share/texlive/texmf-dist/tex/latex/minted/minted.sty
 Package: minted 2017/07/19 v2.5 Yet another Pygments shim for LaTeX
  (/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty
 Package: kvoptions 2019/11/29 v3.13 Key value format for package options (HO)
@@ -214,61 +243,59 @@ Package: kvoptions 2019/11/29 v3.13 Key value format for package options (HO)
 Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
 )) (/usr/share/texlive/texmf-dist/tex/latex/fvextra/fvextra.sty
 Package: fvextra 2019/02/04 v1.4 fvextra - extensions and patches for fancyvrb
- (/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
-Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
-) (/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+ (/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2019/09/21 v2.5h e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count285
+\etb@tempcnta=\count287
 ) (/usr/share/texlive/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
 Package: fancyvrb 2020/01/13 v3.5 verbatim text (tvz,hv)
-\FV@CodeLineNo=\count286
+\FV@CodeLineNo=\count288
 \FV@InFile=\read2
-\FV@TabBox=\box48
-\c@FancyVerbLine=\count287
-\FV@StepNumber=\count288
+\FV@TabBox=\box50
+\c@FancyVerbLine=\count289
+\FV@StepNumber=\count290
 \FV@OutFile=\write3
 ) (/usr/share/texlive/texmf-dist/tex/latex/upquote/upquote.sty
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verbatim
 ) (/usr/share/texlive/texmf-dist/tex/latex/lineno/lineno.sty
 Package: lineno 2005/11/02 line numbers on paragraphs v4.41
-\linenopenalty=\count289
-\output=\toks20
-\linenoprevgraf=\count290
-\linenumbersep=\dimen153
-\linenumberwidth=\dimen154
-\c@linenumber=\count291
-\c@pagewiselinenumber=\count292
-\c@LN@truepage=\count293
-\c@internallinenumber=\count294
-\c@internallinenumbers=\count295
-\quotelinenumbersep=\dimen155
-\bframerule=\dimen156
-\bframesep=\dimen157
-\bframebox=\box49
+\linenopenalty=\count291
+\output=\toks22
+\linenoprevgraf=\count292
+\linenumbersep=\dimen157
+\linenumberwidth=\dimen158
+\c@linenumber=\count293
+\c@pagewiselinenumber=\count294
+\c@LN@truepage=\count295
+\c@internallinenumber=\count296
+\c@internallinenumbers=\count297
+\quotelinenumbersep=\dimen159
+\bframerule=\dimen160
+\bframesep=\dimen161
+\bframebox=\box51
 LaTeX Info: Redefining \\ on input line 3056.
 )
-\c@FV@TrueTabGroupLevel=\count296
-\c@FV@TrueTabCounter=\count297
-\FV@TabBox@Group=\box50
+\c@FV@TrueTabGroupLevel=\count298
+\c@FV@TrueTabCounter=\count299
+\FV@TabBox@Group=\box52
 \FV@TmpLength=\skip63
-\c@FV@HighlightLinesStart=\count298
-\c@FV@HighlightLinesStop=\count299
-\FV@LoopCount=\count300
-\FV@NCharsBox=\box51
-\FV@BreakIndent=\dimen158
-\FV@BreakIndentNChars=\count301
-\FV@BreakSymbolSepLeft=\dimen159
-\FV@BreakSymbolSepLeftNChars=\count302
-\FV@BreakSymbolSepRight=\dimen160
-\FV@BreakSymbolSepRightNChars=\count303
-\FV@BreakSymbolIndentLeft=\dimen161
-\FV@BreakSymbolIndentLeftNChars=\count304
-\FV@BreakSymbolIndentRight=\dimen162
-\FV@BreakSymbolIndentRightNChars=\count305
-\c@FancyVerbLineBreakLast=\count306
-\FV@LineBox=\box52
-\FV@LineIndentBox=\box53
-\FV@LineWidth=\dimen163
+\c@FV@HighlightLinesStart=\count300
+\c@FV@HighlightLinesStop=\count301
+\FV@LoopCount=\count302
+\FV@NCharsBox=\box53
+\FV@BreakIndent=\dimen162
+\FV@BreakIndentNChars=\count303
+\FV@BreakSymbolSepLeft=\dimen163
+\FV@BreakSymbolSepLeftNChars=\count304
+\FV@BreakSymbolSepRight=\dimen164
+\FV@BreakSymbolSepRightNChars=\count305
+\FV@BreakSymbolIndentLeft=\dimen165
+\FV@BreakSymbolIndentLeftNChars=\count306
+\FV@BreakSymbolIndentRight=\dimen166
+\FV@BreakSymbolIndentRightNChars=\count307
+\c@FancyVerbLineBreakLast=\count308
+\FV@LineBox=\box54
+\FV@LineIndentBox=\box55
+\FV@LineWidth=\dimen167
 ) (/usr/share/texlive/texmf-dist/tex/latex/tools/shellesc.sty
 Package: shellesc 2019/11/08 v1.0c unified shell escape interface for LaTeX
 Package shellesc Info: Unrestricted shell escape enabled on input line 75.
@@ -288,75 +315,67 @@ Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
 )
 runsystem(uname -s > "main.w18")...executed.
 
- (/home/ravioli/astro/ksp/grb/GRB-Report/main.w18)
+ (/home/ravioli/astro/ksp/grbhunters/GRB-Report/main.w18)
 runsystem(rm -- "main.w18")...executed.
 
 ) (/usr/share/texlive/texmf-dist/tex/generic/xstring/xstring.sty (/usr/share/texlive/texmf-dist/tex/generic/xstring/xstring.tex
-\integerpart=\count307
-\decimalpart=\count308
+\integerpart=\count309
+\decimalpart=\count310
 )
 Package: xstring 2019/02/06 v1.83 String manipulations (CT)
 ) (/usr/share/texlive/texmf-dist/tex/latex/framed/framed.sty
 Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 \OuterFrameSep=\skip64
-\fb@frw=\dimen164
-\fb@frh=\dimen165
-\FrameRule=\dimen166
-\FrameSep=\dimen167
+\fb@frw=\dimen168
+\fb@frh=\dimen169
+\FrameRule=\dimen170
+\FrameSep=\dimen171
 ) (/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count309
-\float@exts=\toks21
-\float@box=\box54
-\@float@everytoks=\toks22
-\@floatcapt=\box55
+\c@float@type=\count311
+\float@exts=\toks23
+\float@box=\box56
+\@float@everytoks=\toks24
+\@floatcapt=\box57
 )
 \minted@appexistsfile=\read3
-\minted@bgbox=\box56
+\minted@bgbox=\box58
 \minted@code=\write4
-\c@minted@FancyVerbLineTemp=\count310
-\c@minted@pygmentizecounter=\count311
-\@float@every@listing=\toks23
-\c@listing=\count312
+\c@minted@FancyVerbLineTemp=\count312
+\c@minted@pygmentizecounter=\count313
+\@float@every@listing=\toks25
+\c@listing=\count314
 )
 runsystem(mkdir -p cache/_minted-main)...executed.
 
  (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count313
-\lst@gtempboxa=\box57
-\lst@token=\toks24
-\lst@length=\count314
-\lst@currlwidth=\dimen168
-\lst@column=\count315
-\lst@pos=\count316
-\lst@lostspace=\dimen169
-\lst@width=\dimen170
-\lst@newlines=\count317
-\lst@lineno=\count318
-\lst@maxwidth=\dimen171
+\lst@mode=\count315
+\lst@gtempboxa=\box59
+\lst@token=\toks26
+\lst@length=\count316
+\lst@currlwidth=\dimen172
+\lst@column=\count317
+\lst@pos=\count318
+\lst@lostspace=\dimen173
+\lst@width=\dimen174
+\lst@newlines=\count319
+\lst@lineno=\count320
+\lst@maxwidth=\dimen175
  (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2019/09/10 1.8c (Carsten Heinz)
-\c@lstnumber=\count319
-\lst@skipnumbers=\count320
-\lst@framebox=\box58
+\c@lstnumber=\count321
+\lst@skipnumbers=\count322
+\lst@framebox=\box60
 ) (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
 File: listings.cfg 2019/09/10 1.8c listings configuration
 ))
 Package: listings 2019/09/10 1.8c (Carsten Heinz)
- (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
-Package: graphics 2019/11/30 v1.4a Standard LaTeX Graphics (DPC,SPQR)
- (/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
-Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
-) (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
-File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
-)
-Package graphics Info: Driver file: pdftex.def on input line 105.
-) (/usr/share/texlive/texmf-dist/tex/latex/wrapfig/wrapfig.sty
-\wrapoverhang=\dimen172
-\WF@size=\dimen173
-\c@WF@wrappedlines=\count321
-\WF@box=\box59
-\WF@everypar=\toks25
+ (/usr/share/texlive/texmf-dist/tex/latex/wrapfig/wrapfig.sty
+\wrapoverhang=\dimen176
+\WF@size=\dimen177
+\c@WF@wrappedlines=\count323
+\WF@box=\box61
+\WF@everypar=\toks27
 Package: wrapfig 2003/01/31  v 3.6
 ) (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
@@ -376,8 +395,8 @@ Package: nicefrac 1998/08/04 v0.9b Nice fractions
 \L@UnitsRaiseScriptstyle=\skip67
 )) (/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2018/08/11 v1.3c Input encoding file
-\inpenc@prehook=\toks26
-\inpenc@posthook=\toks27
+\inpenc@prehook=\toks28
+\inpenc@posthook=\toks29
 ) (/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
 Package: subcaption 2020/01/22 v1.3d Sub-captions (AR)
  (/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
@@ -385,70 +404,66 @@ Package: caption 2020/01/03 v3.4h Customizing captions (AR)
  (/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2020/01/03 v1.8h caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 61.
-\captionmargin=\dimen174
-\captionmargin@=\dimen175
-\captionwidth=\dimen176
-\caption@tempdima=\dimen177
-\caption@indent=\dimen178
-\caption@parindent=\dimen179
-\caption@hangindent=\dimen180
+\captionmargin=\dimen178
+\captionmargin@=\dimen179
+\captionwidth=\dimen180
+\caption@tempdima=\dimen181
+\caption@indent=\dimen182
+\caption@parindent=\dimen183
+\caption@hangindent=\dimen184
 Package caption Info: Standard document class detected.
 )
-\c@caption@flags=\count322
-\c@continuedfloat=\count323
+\c@caption@flags=\count324
+\c@continuedfloat=\count325
 Package caption Info: float package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: wrapfig package is loaded.
 )
-\c@subfigure=\count324
-\c@subtable=\count325
+\c@subfigure=\count326
+\c@subtable=\count327
 ) (/usr/share/texlive/texmf-dist/tex/latex/adjustbox/adjustbox.sty
 Package: adjustbox 2019/01/04 v1.2 Adjusting TeX boxes (trim, clip, ...)
  (/usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
 Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
  (/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex (/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkvutils.tex
-\XKV@toks=\toks28
-\XKV@tempa@toks=\toks29
+\XKV@toks=\toks30
+\XKV@tempa@toks=\toks31
 )
-\XKV@depth=\count326
+\XKV@depth=\count328
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 )) (/usr/share/texlive/texmf-dist/tex/latex/adjustbox/adjcalc.sty
 Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back-ends (calc, etex, pgfmath)
 ) (/usr/share/texlive/texmf-dist/tex/latex/adjustbox/trimclip.sty
 Package: trimclip 2018/04/08 v1.1 Trim and clip general TeX material
- (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
-Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
-\Gin@req@height=\dimen181
-\Gin@req@width=\dimen182
-) (/usr/share/texlive/texmf-dist/tex/latex/collectbox/collectbox.sty
+ (/usr/share/texlive/texmf-dist/tex/latex/collectbox/collectbox.sty
 Package: collectbox 2012/05/17 v0.4b Collect macro arguments as boxes
-\collectedbox=\box60
+\collectedbox=\box62
 )
-\tc@llx=\dimen183
-\tc@lly=\dimen184
-\tc@urx=\dimen185
-\tc@ury=\dimen186
+\tc@llx=\dimen185
+\tc@lly=\dimen186
+\tc@urx=\dimen187
+\tc@ury=\dimen188
 Package trimclip Info: Using driver 'tc-pdftex.def'.
  (/usr/share/texlive/texmf-dist/tex/latex/adjustbox/tc-pdftex.def
 File: tc-pdftex.def 2019/01/04 v2.2 Clipping driver for pdftex
 ))
-\adjbox@Width=\dimen187
-\adjbox@Height=\dimen188
-\adjbox@Depth=\dimen189
-\adjbox@Totalheight=\dimen190
-\adjbox@pwidth=\dimen191
-\adjbox@pheight=\dimen192
-\adjbox@pdepth=\dimen193
-\adjbox@ptotalheight=\dimen194
+\adjbox@Width=\dimen189
+\adjbox@Height=\dimen190
+\adjbox@Depth=\dimen191
+\adjbox@Totalheight=\dimen192
+\adjbox@pwidth=\dimen193
+\adjbox@pheight=\dimen194
+\adjbox@pdepth=\dimen195
+\adjbox@ptotalheight=\dimen196
  (/usr/share/texlive/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
 Package: ifoddpage 2016/04/23 v1.1 Conditionals for odd/even page detection
-\c@checkoddpage=\count327
+\c@checkoddpage=\count329
 ) (/usr/share/texlive/texmf-dist/tex/latex/varwidth/varwidth.sty
 Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
-\@vwid@box=\box61
-\sift@deathcycles=\count328
-\@vwid@loff=\dimen195
-\@vwid@roff=\dimen196
+\@vwid@box=\box63
+\sift@deathcycles=\count330
+\@vwid@loff=\dimen197
+\@vwid@roff=\dimen198
 )) (/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
@@ -465,9 +480,9 @@ Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
 ) (/usr/share/texlive/texmf-dist/tex/latex/auxhook/auxhook.sty
 Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
 )
-\@linkdim=\dimen197
-\Hy@linkcounter=\count329
-\Hy@pagecounter=\count330
+\@linkdim=\dimen199
+\Hy@linkcounter=\count331
+\Hy@pagecounter=\count332
  (/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2020/01/14 v7.00d Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
@@ -475,8 +490,8 @@ Now handling font encoding PD1 ...
 ) (/usr/share/texlive/texmf-dist/tex/generic/intcalc/intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-\Hy@SavedSpaceFactor=\count331
-\pdfmajorversion=\count332
+\Hy@SavedSpaceFactor=\count333
+\pdfmajorversion=\count334
 Package hyperref Info: Hyper figures OFF on input line 4547.
 Package hyperref Info: Link nesting OFF on input line 4552.
 Package hyperref Info: Hyper index ON on input line 4555.
@@ -484,17 +499,17 @@ Package hyperref Info: Plain pages OFF on input line 4562.
 Package hyperref Info: Backreferencing OFF on input line 4567.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4800.
-\c@Hy@tempcnt=\count333
+\c@Hy@tempcnt=\count335
 LaTeX Info: Redefining \url on input line 5159.
-\XeTeXLinkMargin=\dimen198
+\XeTeXLinkMargin=\dimen256
  (/usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
  (/usr/share/texlive/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
 ))
-\Fld@menulength=\count334
-\Field@Width=\dimen199
-\Fld@charsize=\dimen256
+\Fld@menulength=\count336
+\Field@Width=\dimen257
+\Fld@charsize=\dimen258
 Package hyperref Info: Hyper figures OFF on input line 6430.
 Package hyperref Info: Link nesting OFF on input line 6435.
 Package hyperref Info: Hyper index ON on input line 6438.
@@ -504,9 +519,9 @@ Package hyperref Info: Link coloring with OCG OFF on input line 6455.
 Package hyperref Info: PDF/A mode OFF on input line 6460.
 LaTeX Info: Redefining \ref on input line 6500.
 LaTeX Info: Redefining \pageref on input line 6504.
-\Hy@abspage=\count335
-\c@Item=\count336
-\c@Hfootnote=\count337
+\Hy@abspage=\count337
+\c@Item=\count338
+\c@Hfootnote=\count339
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
  (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
@@ -514,8 +529,8 @@ File: hpdftex.def 2020/01/14 v7.00d Hyperref driver for pdfTeX
  (/usr/share/texlive/texmf-dist/tex/latex/atveryend/atveryend.sty
 Package: atveryend 2019-12-11 v1.11 Hooks at the very end of document (HO)
 )
-\Fld@listcount=\count338
-\c@bookmark@seq@number=\count339
+\Fld@listcount=\count340
+\c@bookmark@seq@number=\count341
  (/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 Package: rerunfilecheck 2019/12/05 v1.9 Rerun checks for auxiliary files (HO)
  (/usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
@@ -524,12 +539,12 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 286.
 )
 \Hy@SectionHShift=\skip68
-) (/home/ravioli/astro/ksp/grb/GRB-Report/structure.tex (/usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty (/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
-\pgfutil@everybye=\toks30
-\pgfutil@tempdima=\dimen257
-\pgfutil@tempdimb=\dimen258
+) (/home/ravioli/astro/ksp/grbhunters/GRB-Report/structure.tex (/usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty (/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
+\pgfutil@everybye=\toks32
+\pgfutil@tempdima=\dimen259
+\pgfutil@tempdimb=\dimen260
  (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common-lists.tex)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
-\pgfutil@abb=\box62
+\pgfutil@abb=\box64
  (/usr/share/texlive/texmf-dist/tex/latex/ms/everyshi.sty
 Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
 )) (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgf/pgf.revision.tex)
@@ -539,31 +554,31 @@ Package: pgf 2020/01/08 v3.1.5b (3.1.5b)
  (/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty (/usr/share/texlive/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
 Package: pgfsys 2020/01/08 v3.1.5b (3.1.5b)
  (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
-\pgfkeys@pathtoks=\toks31
-\pgfkeys@temptoks=\toks32
+\pgfkeys@pathtoks=\toks33
+\pgfkeys@temptoks=\toks34
  (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.code.tex
-\pgfkeys@tmptoks=\toks33
+\pgfkeys@tmptoks=\toks35
 ))
-\pgf@x=\dimen259
-\pgf@y=\dimen260
-\pgf@xa=\dimen261
-\pgf@ya=\dimen262
-\pgf@xb=\dimen263
-\pgf@yb=\dimen264
-\pgf@xc=\dimen265
-\pgf@yc=\dimen266
-\pgf@xd=\dimen267
-\pgf@yd=\dimen268
+\pgf@x=\dimen261
+\pgf@y=\dimen262
+\pgf@xa=\dimen263
+\pgf@ya=\dimen264
+\pgf@xb=\dimen265
+\pgf@yb=\dimen266
+\pgf@xc=\dimen267
+\pgf@yc=\dimen268
+\pgf@xd=\dimen269
+\pgf@yd=\dimen270
 \w@pgf@writea=\write5
 \r@pgf@reada=\read4
-\c@pgf@counta=\count340
-\c@pgf@countb=\count341
-\c@pgf@countc=\count342
-\c@pgf@countd=\count343
-\t@pgf@toka=\toks34
-\t@pgf@tokb=\toks35
-\t@pgf@tokc=\toks36
-\pgf@sys@id@count=\count344
+\c@pgf@counta=\count342
+\c@pgf@countb=\count343
+\c@pgf@countc=\count344
+\c@pgf@countd=\count345
+\t@pgf@toka=\toks36
+\t@pgf@tokb=\toks37
+\t@pgf@tokc=\toks38
+\pgf@sys@id@count=\count346
  (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
 File: pgf.cfg 2020/01/08 v3.1.5b (3.1.5b)
 )
@@ -574,59 +589,59 @@ File: pgfsys-pdftex.def 2020/01/08 v3.1.5b (3.1.5b)
 File: pgfsys-common-pdf.def 2020/01/08 v3.1.5b (3.1.5b)
 ))) (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex
 File: pgfsyssoftpath.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgfsyssoftpath@smallbuffer@items=\count345
-\pgfsyssoftpath@bigbuffer@items=\count346
+\pgfsyssoftpath@smallbuffer@items=\count347
+\pgfsyssoftpath@bigbuffer@items=\count348
 ) (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex
 File: pgfsysprotocol.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 )) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
 Package: pgfcore 2020/01/08 v3.1.5b (3.1.5b)
  (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
-\pgfmath@dimen=\dimen269
-\pgfmath@count=\count347
-\pgfmath@box=\box63
-\pgfmath@toks=\toks37
-\pgfmath@stack@operand=\toks38
-\pgfmath@stack@operation=\toks39
+\pgfmath@dimen=\dimen271
+\pgfmath@count=\count349
+\pgfmath@box=\box65
+\pgfmath@toks=\toks39
+\pgfmath@stack@operand=\toks40
+\pgfmath@stack@operation=\toks41
 ) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonometric.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerarithmetics.code.tex))) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
-\c@pgfmathroundto@lastzeros=\count348
+\c@pgfmathroundto@lastzeros=\count350
 )) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfint.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
 File: pgfcorepoints.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@picminx=\dimen270
-\pgf@picmaxx=\dimen271
-\pgf@picminy=\dimen272
-\pgf@picmaxy=\dimen273
-\pgf@pathminx=\dimen274
-\pgf@pathmaxx=\dimen275
-\pgf@pathminy=\dimen276
-\pgf@pathmaxy=\dimen277
-\pgf@xx=\dimen278
-\pgf@xy=\dimen279
-\pgf@yx=\dimen280
-\pgf@yy=\dimen281
-\pgf@zx=\dimen282
-\pgf@zy=\dimen283
+\pgf@picminx=\dimen272
+\pgf@picmaxx=\dimen273
+\pgf@picminy=\dimen274
+\pgf@picmaxy=\dimen275
+\pgf@pathminx=\dimen276
+\pgf@pathmaxx=\dimen277
+\pgf@pathminy=\dimen278
+\pgf@pathmaxy=\dimen279
+\pgf@xx=\dimen280
+\pgf@xy=\dimen281
+\pgf@yx=\dimen282
+\pgf@yy=\dimen283
+\pgf@zx=\dimen284
+\pgf@zy=\dimen285
 ) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.code.tex
 File: pgfcorepathconstruct.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@path@lastx=\dimen284
-\pgf@path@lasty=\dimen285
+\pgf@path@lastx=\dimen286
+\pgf@path@lasty=\dimen287
 ) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code.tex
 File: pgfcorepathusage.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@shorten@end@additional=\dimen286
-\pgf@shorten@start@additional=\dimen287
+\pgf@shorten@end@additional=\dimen288
+\pgf@shorten@start@additional=\dimen289
 ) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex
 File: pgfcorescopes.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgfpic=\box64
-\pgf@hbox=\box65
-\pgf@layerbox@main=\box66
-\pgf@picture@serial@count=\count349
+\pgfpic=\box66
+\pgf@hbox=\box67
+\pgf@layerbox@main=\box68
+\pgf@picture@serial@count=\count351
 ) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex
 File: pgfcoregraphicstate.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgflinewidth=\dimen288
+\pgflinewidth=\dimen290
 ) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformations.code.tex
 File: pgfcoretransformations.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@pt@x=\dimen289
-\pgf@pt@y=\dimen290
-\pgf@pt@temp=\dimen291
+\pgf@pt@x=\dimen291
+\pgf@pt@y=\dimen292
+\pgf@pt@temp=\dimen293
 ) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
 File: pgfcorequick.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 ) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.tex
@@ -635,17 +650,17 @@ File: pgfcoreobjects.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 File: pgfcorepathprocessing.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 ) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.tex
 File: pgfcorearrows.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgfarrowsep=\dimen292
+\pgfarrowsep=\dimen294
 ) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
 File: pgfcoreshade.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@max=\dimen293
-\pgf@sys@shading@range@num=\count350
-\pgf@shadingcount=\count351
+\pgf@max=\dimen295
+\pgf@sys@shading@range@num=\count352
+\pgf@shadingcount=\count353
 ) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
 File: pgfcoreimage.code.tex 2020/01/08 v3.1.5b (3.1.5b)
  (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.tex
 File: pgfcoreexternal.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgfexternal@startupbox=\box67
+\pgfexternal@startupbox=\box69
 )) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.tex
 File: pgfcorelayers.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 ) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.code.tex
@@ -656,52 +671,52 @@ File: pgfcorepatterns.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 File: pgfcorerdf.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 ))) (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
 File: pgfmoduleshapes.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgfnodeparttextbox=\box68
+\pgfnodeparttextbox=\box70
 ) (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
 File: pgfmoduleplot.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 ) (/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65.sty
 Package: pgfcomp-version-0-65 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@nodesepstart=\dimen294
-\pgf@nodesepend=\dimen295
+\pgf@nodesepstart=\dimen296
+\pgf@nodesepend=\dimen297
 ) (/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18.sty
 Package: pgfcomp-version-1-18 2020/01/08 v3.1.5b (3.1.5b)
 )) (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgffor.sty (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex)) (/usr/share/texlive/texmf-dist/tex/latex/pgf/math/pgfmath.sty (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
 Package: pgffor 2020/01/08 v3.1.5b (3.1.5b)
  (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
-\pgffor@iter=\dimen296
-\pgffor@skip=\dimen297
-\pgffor@stack=\toks40
-\pgffor@toks=\toks41
+\pgffor@iter=\dimen298
+\pgffor@skip=\dimen299
+\pgffor@stack=\toks42
+\pgffor@toks=\toks43
 )) (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
 Package: tikz 2020/01/08 v3.1.5b (3.1.5b)
  (/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.code.tex
 File: pgflibraryplothandlers.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@plot@mark@count=\count352
-\pgfplotmarksize=\dimen298
+\pgf@plot@mark@count=\count354
+\pgfplotmarksize=\dimen300
 )
-\tikz@lastx=\dimen299
-\tikz@lasty=\dimen300
-\tikz@lastxsaved=\dimen301
-\tikz@lastysaved=\dimen302
-\tikz@lastmovetox=\dimen303
-\tikz@lastmovetoy=\dimen304
-\tikzleveldistance=\dimen305
-\tikzsiblingdistance=\dimen306
-\tikz@figbox=\box69
-\tikz@figbox@bg=\box70
-\tikz@tempbox=\box71
-\tikz@tempbox@bg=\box72
-\tikztreelevel=\count353
-\tikznumberofchildren=\count354
-\tikznumberofcurrentchild=\count355
-\tikz@fig@count=\count356
+\tikz@lastx=\dimen301
+\tikz@lasty=\dimen302
+\tikz@lastxsaved=\dimen303
+\tikz@lastysaved=\dimen304
+\tikz@lastmovetox=\dimen305
+\tikz@lastmovetoy=\dimen306
+\tikzleveldistance=\dimen307
+\tikzsiblingdistance=\dimen308
+\tikz@figbox=\box71
+\tikz@figbox@bg=\box72
+\tikz@tempbox=\box73
+\tikz@tempbox@bg=\box74
+\tikztreelevel=\count355
+\tikznumberofchildren=\count356
+\tikznumberofcurrentchild=\count357
+\tikz@fig@count=\count358
  (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
 File: pgfmodulematrix.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgfmatrixcurrentrow=\count357
-\pgfmatrixcurrentcolumn=\count358
-\pgf@matrix@numberofcolumns=\count359
+\pgfmatrixcurrentrow=\count359
+\pgfmatrixcurrentcolumn=\count360
+\pgf@matrix@numberofcolumns=\count361
 )
-\tikz@expandcount=\count360
+\tikz@expandcount=\count362
  (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopaths.code.tex
 File: tikzlibrarytopaths.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 ))) (/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
@@ -712,11 +727,11 @@ File: switch.def 2020/02/14 3.40 Babel switching mechanism
 Language: english 2017/06/06 v3.3r English support from the babel system
  (/usr/share/texlive/texmf-dist/tex/generic/babel/babel.def
 File: babel.def 2020/02/14 3.40 Babel common definitions
-\babel@savecnt=\count361
-\U@D=\dimen307
+\babel@savecnt=\count363
+\U@D=\dimen309
  (/usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def)
 \bbl@readstream=\read5
-\bbl@dirlevel=\count362
+\bbl@dirlevel=\count364
 )
 Package babel Info: \l@canadian = using hyphenrules for english
 (babel)             (\language0) on input line 102.
@@ -727,49 +742,48 @@ Package babel Info: \l@newzealand = using hyphenrules for ukenglish
 )) (/usr/share/texlive/texmf-dist/tex/latex/enumitem/enumitem.sty
 Package: enumitem 2019/06/20 v3.9 Customized lists
 \labelindent=\skip69
-\enit@outerparindent=\dimen308
-\enit@toks=\toks42
-\enit@inbox=\box73
-\enit@count@id=\count363
-\enitdp@description=\count364
+\enit@outerparindent=\dimen310
+\enit@toks=\toks44
+\enit@inbox=\box75
+\enit@count@id=\count365
+\enitdp@description=\count366
 ) (/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
-\heavyrulewidth=\dimen309
-\lightrulewidth=\dimen310
-\cmidrulewidth=\dimen311
-\belowrulesep=\dimen312
-\belowbottomsep=\dimen313
-\aboverulesep=\dimen314
-\abovetopsep=\dimen315
-\cmidrulesep=\dimen316
-\cmidrulekern=\dimen317
-\defaultaddspace=\dimen318
-\@cmidla=\count365
-\@cmidlb=\count366
-\@aboverulesep=\dimen319
-\@belowrulesep=\dimen320
-\@thisruleclass=\count367
-\@lastruleclass=\count368
-\@thisrulewidth=\dimen321
+\heavyrulewidth=\dimen311
+\lightrulewidth=\dimen312
+\cmidrulewidth=\dimen313
+\belowrulesep=\dimen314
+\belowbottomsep=\dimen315
+\aboverulesep=\dimen316
+\abovetopsep=\dimen317
+\cmidrulesep=\dimen318
+\cmidrulekern=\dimen319
+\defaultaddspace=\dimen320
+\@cmidla=\count367
+\@cmidlb=\count368
+\@aboverulesep=\dimen321
+\@belowrulesep=\dimen322
+\@thisruleclass=\count369
+\@lastruleclass=\count370
+\@thisrulewidth=\dimen323
 ) (/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
  (/usr/share/texlive/texmf-dist/tex/generic/iftex/ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 )
-\Gm@cnth=\count369
-\Gm@cntv=\count370
-\c@Gm@tempcnt=\count371
-\Gm@bindingoffset=\dimen322
-\Gm@wd@mp=\dimen323
-\Gm@odd@mp=\dimen324
-\Gm@even@mp=\dimen325
-\Gm@layoutwidth=\dimen326
-\Gm@layoutheight=\dimen327
-\Gm@layouthoffset=\dimen328
-\Gm@layoutvoffset=\dimen329
-\Gm@dimlist=\toks43
-)
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/avant.sty
+\Gm@cnth=\count371
+\Gm@cntv=\count372
+\c@Gm@tempcnt=\count373
+\Gm@bindingoffset=\dimen324
+\Gm@wd@mp=\dimen325
+\Gm@odd@mp=\dimen326
+\Gm@even@mp=\dimen327
+\Gm@layoutwidth=\dimen328
+\Gm@layoutheight=\dimen329
+\Gm@layouthoffset=\dimen330
+\Gm@layoutvoffset=\dimen331
+\Gm@dimlist=\toks45
+) (/usr/share/texlive/texmf-dist/tex/latex/psnfss/avant.sty
 Package: avant 2005/04/12 PSNFSS-v9.2a (SPQR) 
 ) (/usr/share/texlive/texmf-dist/tex/latex/psnfss/mathptmx.sty
 Package: mathptmx 2005/04/12 PSNFSS-v9.2a Times w/ Math, improved (SPQR, WaS) 
@@ -808,12 +822,12 @@ LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 LaTeX Info: Redefining \hbar on input line 50.
 ) (/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype.sty
 Package: microtype 2019/11/18 v2.7d Micro-typographical refinements (RS)
-\MT@toks=\toks44
-\MT@count=\count372
+\MT@toks=\toks46
+\MT@count=\count374
 LaTeX Info: Redefining \textls on input line 790.
-\MT@outer@kern=\dimen330
+\MT@outer@kern=\dimen332
 LaTeX Info: Redefining \textmicrotypecontext on input line 1354.
-\MT@listname@count=\count373
+\MT@listname@count=\count375
  (/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype-pdftex.def
 File: microtype-pdftex.def 2019/11/18 v2.7d Definitions specific to pdftex (RS)
 LaTeX Info: Redefining \lsstyle on input line 914.
@@ -823,7 +837,8 @@ LaTeX Info: Redefining \lslig on input line 914.
 Package microtype Info: Loading configuration file microtype.cfg.
  (/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype.cfg
 File: microtype.cfg 2019/11/18 v2.7d microtype main configuration file (RS)
-)) (/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
+))
+(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2020/02/11 v2.0o Standard LaTeX package
 LaTeX Font Info:    Trying to load font information for T1+ptm on input line 112.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd
@@ -838,7 +853,7 @@ Package: makeidx 2014/09/29 v1.0m Standard LaTeX package
 Writing index file main.idx
 (/usr/share/texlive/texmf-dist/tex/latex/titlesec/titletoc.sty
 Package: titletoc 2019/10/16 v2.13 TOC entries
-\ttl@leftsep=\dimen331
+\ttl@leftsep=\dimen333
 ) (/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 Package: fancyhdr 2019/01/31 v3.10 Extensive control of page headers and footers
 \f@nch@headwidth=\skip71
@@ -852,23 +867,23 @@ Package: fancyhdr 2019/01/31 v3.10 Extensive control of page headers and footers
 \f@nch@O@orf=\skip79
 ) (/usr/share/texlive/texmf-dist/tex/latex/amscls/amsthm.sty
 Package: amsthm 2017/10/31 v2.20.4
-\thm@style=\toks45
-\thm@bodyfont=\toks46
-\thm@headfont=\toks47
-\thm@notefont=\toks48
-\thm@headpunct=\toks49
+\thm@style=\toks47
+\thm@bodyfont=\toks48
+\thm@headfont=\toks49
+\thm@notefont=\toks50
+\thm@headpunct=\toks51
 \thm@preskip=\skip80
 \thm@postskip=\skip81
 \thm@headsep=\skip82
-\dth@everypar=\toks50
+\dth@everypar=\toks52
 )
-\c@notation=\count374
-\c@dummy=\count375
-\c@problem=\count376
-\c@exerciseT=\count377
-\c@exampleT=\count378
-\c@vocabulary=\count379
-\c@definitionT=\count380
+\c@notation=\count376
+\c@dummy=\count377
+\c@problem=\count378
+\c@exerciseT=\count379
+\c@exampleT=\count380
+\c@vocabulary=\count381
+\c@definitionT=\count382
  (/usr/share/texlive/texmf-dist/tex/latex/mdframed/mdframed.sty
 Package: mdframed 2013/07/01 1.9b: mdframed
  (/usr/share/texlive/texmf-dist/tex/latex/zref/zref-abspage.sty
@@ -879,13 +894,13 @@ Package zref Info: New property list: main on input line 763.
 Package zref Info: New property: default on input line 764.
 Package zref Info: New property: page on input line 765.
 )
-\c@abspage=\count381
+\c@abspage=\count383
 Package zref Info: New property: abspage on input line 66.
 ) (/usr/share/texlive/texmf-dist/tex/latex/needspace/needspace.sty
 Package: needspace 2010/09/12 v1.3d reserve vertical space
 )
 \mdf@templength=\skip83
-\c@mdf@globalstyle@cnt=\count382
+\c@mdf@globalstyle@cnt=\count384
 \mdf@skipabove@length=\skip84
 \mdf@skipbelow@length=\skip85
 \mdf@leftmargin@length=\skip86
@@ -928,11 +943,11 @@ Package: needspace 2010/09/12 v1.3d reserve vertical space
  (/usr/share/texlive/texmf-dist/tex/latex/mdframed/md-frame-0.mdf
 File: md-frame-0.mdf 2013/07/01\ 1.9b: md-frame-0
 )
-\mdf@frametitlebox=\box74
-\mdf@footnotebox=\box75
-\mdf@splitbox@one=\box76
-\mdf@splitbox@two=\box77
-\mdf@splitbox@save=\box78
+\mdf@frametitlebox=\box76
+\mdf@footnotebox=\box77
+\mdf@splitbox@one=\box78
+\mdf@splitbox@two=\box79
+\mdf@splitbox@save=\box80
 \mdfsplitboxwidth=\skip123
 \mdfsplitboxtotalwidth=\skip124
 \mdfsplitboxheight=\skip125
@@ -960,16 +975,16 @@ File: md-frame-0.mdf 2013/07/01\ 1.9b: md-frame-0
 \mdf@horizontalspaceofbox=\skip147
 \mdfsubtitleheight=\skip148
 \mdfsubsubtitleheight=\skip149
-\c@mdfcountframes=\count383
+\c@mdfcountframes=\count385
 
 ****** mdframed patching \endmdf@trivlist
 
 ****** -- success******
 
-\mdf@envdepth=\count384
-\c@mdf@env@i=\count385
-\c@mdf@env@ii=\count386
-\c@mdf@zref@counter=\count387
+\mdf@envdepth=\count386
+\c@mdf@env@i=\count387
+\c@mdf@env@ii=\count388
+\c@mdf@zref@counter=\count389
 Package zref Info: New property: mdf@pagevalue on input line 895.
 )
 \esp=\skip150
@@ -986,70 +1001,76 @@ Package hyperref Info: Option `bookmarksopen' set `false' on input line 508.
 Package: bookmark 2019/12/03 v1.28 PDF bookmarks (HO)
  (/usr/share/texlive/texmf-dist/tex/latex/bookmark/bkm-pdftex.def
 File: bkm-pdftex.def 2019/12/03 v1.28 bookmark driver for pdfTeX (HO)
-\BKM@id=\count388
+\BKM@id=\count390
 )))
 runsystem(which pygmentize && touch main.aex)...executed.
 
 runsystem(rm main.aex)...executed.
 
- (/home/ravioli/astro/ksp/grb/GRB-Report/main.aux)
+ (/home/ravioli/astro/ksp/grbhunters/GRB-Report/main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 129.
-LaTeX Font Info:    ... okay on input line 129.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 129.
-LaTeX Font Info:    ... okay on input line 129.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 129.
-LaTeX Font Info:    ... okay on input line 129.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 129.
-LaTeX Font Info:    ... okay on input line 129.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 129.
-LaTeX Font Info:    ... okay on input line 129.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 129.
-LaTeX Font Info:    ... okay on input line 129.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 129.
-LaTeX Font Info:    ... okay on input line 129.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 129.
-LaTeX Font Info:    ... okay on input line 129.
-LaTeX Font Info:    Trying to load font information for T1+pag on input line 129.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Trying to load font information for T1+pag on input line 130.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pag.fd
 File: t1pag.fd 2001/06/04 font definitions for T1/pag.
 )
 \symgns@font=\mathgroup8
 LaTeX Font Info:    Overwriting symbol font `gns@font' in version `bold'
-(Font)                  TS1/pag/m/n --> TS1/pag/b/n on input line 129.
-Package gensymb Info: Math companion symbols declared on input line 129.
-LaTeX Info: Redefining \degree on input line 129.
-LaTeX Info: Redefining \celsius on input line 129.
-Package gensymb Info: Using text companion symbols for \degree, \celsius and \perthousand on input line 129.
-LaTeX Info: Redefining \ohm on input line 129.
-Package gensymb Info: Using \textohm for \ohm on input line 129.
-Package gensymb Info: Using \textmu for \micro on input line 129.
-\AtBeginShipoutBox=\box79
+(Font)                  TS1/pag/m/n --> TS1/pag/b/n on input line 130.
+Package gensymb Info: Math companion symbols declared on input line 130.
+LaTeX Info: Redefining \degree on input line 130.
+LaTeX Info: Redefining \celsius on input line 130.
+Package gensymb Info: Using text companion symbols for \degree, \celsius and \perthousand on input line 130.
+LaTeX Info: Redefining \ohm on input line 130.
+Package gensymb Info: Using \textohm for \ohm on input line 130.
+Package gensymb Info: Using \textmu for \micro on input line 130.
+\AtBeginShipoutBox=\box81
  (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count389
-\scratchdimen=\dimen332
-\scratchbox=\box80
-\nofMPsegments=\count390
-\nofMParguments=\count391
-\everyMPshowfont=\toks51
-\MPscratchCnt=\count392
-\MPscratchDim=\dimen333
-\MPnumerator=\count393
-\makeMPintoPDFobject=\count394
-\everyMPtoPDFconversion=\toks52
+\scratchcounter=\count391
+\scratchdimen=\dimen334
+\scratchbox=\box82
+\nofMPsegments=\count392
+\nofMParguments=\count393
+\everyMPshowfont=\toks53
+\MPscratchCnt=\count394
+\MPscratchDim=\dimen335
+\MPnumerator=\count395
+\makeMPintoPDFobject=\count396
+\everyMPtoPDFconversion=\toks54
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
  (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
-))
-\c@lstlisting=\count395
+)) (/usr/share/texlive/texmf-dist/tex/latex/pdflscape/pdflscape.sty
+Package: pdflscape 2019/12/05 v0.12 Display of landscape pages in PDF (HO)
+ (/usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
+Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
+)
+Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
+)
+\c@lstlisting=\count397
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring ON on input line 129.
+Package hyperref Info: Link coloring ON on input line 130.
  (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
  (/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
@@ -1057,11 +1078,11 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count396
+\c@section@level=\count398
 )
-LaTeX Info: Redefining \ref on input line 129.
-LaTeX Info: Redefining \pageref on input line 129.
-LaTeX Info: Redefining \nameref on input line 129.
+LaTeX Info: Redefining \ref on input line 130.
+LaTeX Info: Redefining \pageref on input line 130.
+LaTeX Info: Redefining \nameref on input line 130.
  ABD: EveryShipout initializing macros
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1097,14 +1118,14 @@ LaTeX Info: Redefining \nameref on input line 129.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Info: Redefining \microtypecontext on input line 129.
+LaTeX Info: Redefining \microtypecontext on input line 130.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `basictext'.
-LaTeX Info: Redefining \showhyphens on input line 129.
+LaTeX Info: Redefining \showhyphens on input line 130.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -1113,11 +1134,16 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `T1/pag/b/n' in size <35> not available
-(Font)              Font shape `T1/pag/db/n' tried instead on input line 152.
+(Font)              Font shape `T1/pag/db/n' tried instead on input line 153.
+<Pictures/cover.png, id=7, 4791.9025pt x 6775.3125pt>
+File: Pictures/cover.png Graphic file (type png)
+<use Pictures/cover.png>
+Package pdftex.def Info: Pictures/cover.png  used on input line 159.
+(pdftex.def)             Requested size: 597.45087pt x 845.05112pt.
 [1
 
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/cover.png>] [2
 
 ]
 LaTeX Font Info:    Trying to load font information for OT1+ztmcm on input line 174.
@@ -1177,19 +1203,22 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has b
 l.174 \end
           {titlepage} [1
 
-]pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has been already used, duplicate ignored
+]
+LaTeX Font Info:    Font shape `T1/pag/m/it' in size <10.95> not available
+(Font)              Font shape `T1/pag/m/sl' tried instead on input line 192.
+pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.198 \tableofcontents
+l.211 \tableofcontents
                        % Print the table of contents itself [2]
-<Pictures/index.jpg, id=25, 3270.2175pt x 1635.10875pt>
+<Pictures/index.jpg, id=27, 3270.2175pt x 1635.10875pt>
 File: Pictures/index.jpg Graphic file (type jpg)
 <use Pictures/index.jpg>
-Package pdftex.def Info: Pictures/index.jpg  used on input line 198.
+Package pdftex.def Info: Pictures/index.jpg  used on input line 211.
 (pdftex.def)             Requested size: 597.50787pt x 298.74792pt.
 LaTeX Font Info:    Font shape `T1/pag/b/n' in size <20.74> not available
-(Font)              Font shape `T1/pag/db/n' tried instead on input line 198.
- (/home/ravioli/astro/ksp/grb/GRB-Report/main.toc
+(Font)              Font shape `T1/pag/db/n' tried instead on input line 211.
+ (/home/ravioli/astro/ksp/grbhunters/GRB-Report/main.toc
 LaTeX Font Info:    Font shape `T1/pag/b/n' in size <12> not available
 (Font)              Font shape `T1/pag/db/n' tried instead on input line 2.
 LaTeX Font Info:    Font shape `T1/pag/b/n' in size <14.4> not available
@@ -1198,85 +1227,85 @@ LaTeX Font Info:    Font shape `T1/pag/b/n' in size <10.95> not available
 (Font)              Font shape `T1/pag/db/n' tried instead on input line 2.
  [3
 
- </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/index.jpg>])
+ </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/index.jpg>])
 \tf@toc=\write7
 \openout7 = `main.toc'.
 
  [4]
 Chapter 1.
-<Pictures/astrosat.jpg, id=146, 1682.285pt x 841.1425pt>
+<Pictures/astrosat.jpg, id=169, 1682.285pt x 841.1425pt>
 File: Pictures/astrosat.jpg Graphic file (type jpg)
 <use Pictures/astrosat.jpg>
-Package pdftex.def Info: Pictures/astrosat.jpg  used on input line 208.
+Package pdftex.def Info: Pictures/astrosat.jpg  used on input line 221.
 (pdftex.def)             Requested size: 597.50787pt x 298.75528pt.
-<Pictures/grb_shell_final_0.jpg, id=149, 988.69376pt x 556.0775pt>
+<Pictures/grb_shell_final_0.jpg, id=172, 988.69376pt x 556.0775pt>
 File: Pictures/grb_shell_final_0.jpg Graphic file (type jpg)
 <use Pictures/grb_shell_final_0.jpg>
-Package pdftex.def Info: Pictures/grb_shell_final_0.jpg  used on input line 215.
+Package pdftex.def Info: Pictures/grb_shell_final_0.jpg  used on input line 228.
 (pdftex.def)             Requested size: 298.75264pt x 168.0294pt.
 [5
 
- </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/astrosat.jpg> </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/grb_shell_final_0.jpg>]
-<Pictures/neutronstars.jpg, id=158, 1059.96pt x 787.94376pt>
+ </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/astrosat.jpg> </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/grb_shell_final_0.jpg>]
+<Pictures/neutronstars.jpg, id=181, 1059.96pt x 787.94376pt>
 File: Pictures/neutronstars.jpg Graphic file (type jpg)
 <use Pictures/neutronstars.jpg>
-Package pdftex.def Info: Pictures/neutronstars.jpg  used on input line 225.
+Package pdftex.def Info: Pictures/neutronstars.jpg  used on input line 238.
 (pdftex.def)             Requested size: 170.71393pt x 126.90317pt.
-<Pictures/astrosat_wireframe.png, id=164, 227.8914pt x 147.9126pt>
+<Pictures/astrosat_wireframe.png, id=187, 227.8914pt x 147.9126pt>
 File: Pictures/astrosat_wireframe.png Graphic file (type png)
 <use Pictures/astrosat_wireframe.png>
-Package pdftex.def Info: Pictures/astrosat_wireframe.png  used on input line 245.
+Package pdftex.def Info: Pictures/astrosat_wireframe.png  used on input line 258.
 (pdftex.def)             Requested size: 182.31335pt x 118.33023pt.
 
-Overfull \hbox (11.59943pt too wide) in paragraph at lines 245--246
+Overfull \hbox (11.59943pt too wide) in paragraph at lines 258--259
  [][] 
  []
 
-[6 </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/neutronstars.jpg> </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/astrosat_wireframe.png>]
-<Pictures/czti.jpg, id=177, 170.66168pt x 201.71747pt>
+[6 </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/neutronstars.jpg> </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/astrosat_wireframe.png>]
+<Pictures/czti.jpg, id=200, 170.66168pt x 201.71747pt>
 File: Pictures/czti.jpg Graphic file (type jpg)
 <use Pictures/czti.jpg>
-Package pdftex.def Info: Pictures/czti.jpg  used on input line 260.
+Package pdftex.def Info: Pictures/czti.jpg  used on input line 273.
 (pdftex.def)             Requested size: 170.66125pt x 201.71696pt.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 264.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 277.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 264.
-<Pictures/cztiassembly.png, id=180, 687.56876pt x 619.31375pt>
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 277.
+<Pictures/cztiassembly.png, id=203, 687.56876pt x 619.31375pt>
 File: Pictures/cztiassembly.png Graphic file (type png)
 <use Pictures/cztiassembly.png>
-Package pdftex.def Info: Pictures/cztiassembly.png  used on input line 271.
+Package pdftex.def Info: Pictures/cztiassembly.png  used on input line 284.
 (pdftex.def)             Requested size: 171.89177pt x 154.82805pt.
 
-Overfull \hbox (1.17784pt too wide) in paragraph at lines 271--272
+Overfull \hbox (1.17784pt too wide) in paragraph at lines 284--285
  [][] 
  []
 
 [7
 
- </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/czti.jpg> </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/cztiassembly.png (PNG copy)>]
-<Pictures/cam_working.png, id=190, 331.2375pt x 331.2375pt>
+ </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/czti.jpg> </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/cztiassembly.png (PNG copy)>]
+<Pictures/cam_working.png, id=213, 331.2375pt x 331.2375pt>
 File: Pictures/cam_working.png Graphic file (type png)
 <use Pictures/cam_working.png>
-Package pdftex.def Info: Pictures/cam_working.png  used on input line 303.
+Package pdftex.def Info: Pictures/cam_working.png  used on input line 316.
 (pdftex.def)             Requested size: 175.55502pt x 175.55502pt.
-<Pictures/CAM-czti.png, id=193, 494.44725pt x 492.6405pt>
+<Pictures/CAM-czti.png, id=216, 494.44725pt x 492.6405pt>
 File: Pictures/CAM-czti.png Graphic file (type png)
 <use Pictures/CAM-czti.png>
-Package pdftex.def Info: Pictures/CAM-czti.png  used on input line 312.
+Package pdftex.def Info: Pictures/CAM-czti.png  used on input line 325.
 (pdftex.def)             Requested size: 341.16898pt x 339.92232pt.
  [8
 
- </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/cam_working.png> </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/CAM-czti.png>]
-<Pictures/cztpipeline.png, id=203, 526.96875pt x 649.2255pt>
+ </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/cam_working.png> </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/CAM-czti.png>]
+<Pictures/cztpipeline.png, id=227, 526.96875pt x 649.2255pt>
 File: Pictures/cztpipeline.png Graphic file (type png)
 <use Pictures/cztpipeline.png>
-Package pdftex.def Info: Pictures/cztpipeline.png  used on input line 348.
+Package pdftex.def Info: Pictures/cztpipeline.png  used on input line 361.
 (pdftex.def)             Requested size: 289.8337pt x 357.07512pt.
  [9
 
- </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/cztpipeline.png>]
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 372.
+ </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/cztpipeline.png>]
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 385.
  (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
@@ -1288,19 +1317,19 @@ Package microtype Info: Loading generic protrusion settings for font family
 File: lstlang1.sty 2019/09/10 1.8c listings language file
 ) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2019/09/10 1.8c listings language file
-) [10] [11]
+) [10]
 Chapter 2.
-<Pictures/BOAT.png, id=253, 1907.125pt x 953.5625pt>
+<Pictures/BOAT.png, id=271, 1907.125pt x 953.5625pt>
 File: Pictures/BOAT.png Graphic file (type png)
 <use Pictures/BOAT.png>
-Package pdftex.def Info: Pictures/BOAT.png  used on input line 428.
+Package pdftex.def Info: Pictures/BOAT.png  used on input line 439.
 (pdftex.def)             Requested size: 597.50787pt x 298.75871pt.
-[12
+[11
 
- </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/BOAT.png (PNG copy)>] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+ </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/BOAT.png (PNG copy)>] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2019/09/10 1.8c listings language file
 )
-LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 459.
+LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 470.
  (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmtt.fd
 File: ts1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
@@ -1308,152 +1337,320 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmtt' (encoding: TS1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-<Pictures/sample_lc.png, id=258, 514.5624pt x 404.89267pt>
+<Pictures/sample_lc.png, id=277, 514.5624pt x 404.89267pt>
 File: Pictures/sample_lc.png Graphic file (type png)
 <use Pictures/sample_lc.png>
-Package pdftex.def Info: Pictures/sample_lc.png  used on input line 490.
+Package pdftex.def Info: Pictures/sample_lc.png  used on input line 501.
 (pdftex.def)             Requested size: 334.4616pt x 263.17711pt.
- [13 </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/sample_lc.png>]
-<Pictures/spectrum.png, id=273, 517.59773pt x 409.91544pt>
+ [12 </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/sample_lc.png>]
+<Pictures/spectrum.png, id=292, 517.59773pt x 409.91544pt>
 File: Pictures/spectrum.png Graphic file (type png)
 <use Pictures/spectrum.png>
-Package pdftex.def Info: Pictures/spectrum.png  used on input line 500.
+Package pdftex.def Info: Pictures/spectrum.png  used on input line 511.
 (pdftex.def)             Requested size: 284.67963pt x 225.45418pt.
-<Pictures/anomaly.png, id=274, 907.13304pt x 631.20618pt>
+<Pictures/anomaly.png, id=293, 907.13304pt x 631.20618pt>
 File: Pictures/anomaly.png Graphic file (type png)
 <use Pictures/anomaly.png>
-Package pdftex.def Info: Pictures/anomaly.png  used on input line 509.
+Package pdftex.def Info: Pictures/anomaly.png  used on input line 520.
 (pdftex.def)             Requested size: 272.14201pt x 189.36331pt.
- [14 </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/spectrum.png> </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/anomaly.png>]
-<Pictures/allquads.png, id=285, 1076.823pt x 711.8595pt>
+ [13 </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/spectrum.png> </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/anomaly.png>]
+<Pictures/allquads.png, id=304, 1076.823pt x 711.8595pt>
 File: Pictures/allquads.png Graphic file (type png)
 <use Pictures/allquads.png>
-Package pdftex.def Info: Pictures/allquads.png  used on input line 531.
+Package pdftex.def Info: Pictures/allquads.png  used on input line 542.
 (pdftex.def)             Requested size: 376.89369pt x 249.15456pt.
-LaTeX Font Info:    Font shape `T1/pag/m/it' in size <10.95> not available
-(Font)              Font shape `T1/pag/m/sl' tried instead on input line 544.
- [15 </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/allquads.png>]
-<Pictures/detrended.png, id=294, 1148.94846pt x 1291.32036pt>
+ [14 </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/allquads.png>]
+<Pictures/trend.png, id=312, 800.0289pt x 633.44655pt>
+File: Pictures/trend.png Graphic file (type png)
+<use Pictures/trend.png>
+Package pdftex.def Info: Pictures/trend.png  used on input line 566.
+(pdftex.def)             Requested size: 426.79135pt x 337.92882pt.
+<Pictures/detrended.png, id=313, 800.0289pt x 633.44655pt>
 File: Pictures/detrended.png Graphic file (type png)
 <use Pictures/detrended.png>
-Package pdftex.def Info: Pictures/detrended.png  used on input line 565.
-(pdftex.def)             Requested size: 287.2364pt x 322.8293pt.
-
-Underfull \hbox (badness 3312) in paragraph at lines 572--573
-\T1/pag/m/n/10.95 (+20) been re-moved, the
- []
-
-
-Underfull \hbox (badness 5345) in paragraph at lines 572--573
-\T1/pag/m/n/10.95 (+20) brought down from
- []
-
-
-Overfull \hbox (6.24991pt too wide) in paragraph at lines 572--573
-\T1/pag/m/n/10.95 (-20) the orig-i-nal back-ground
- []
-
-
-Underfull \hbox (badness 1184) in paragraph at lines 574--575
-[]\T1/pag/m/n/10.95 (+20) We can also see
- []
-
-[16 </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/detrended.png>]
-<Pictures/allquads01s.png, id=310, 1076.823pt x 711.8595pt>
+Package pdftex.def Info: Pictures/detrended.png  used on input line 574.
+(pdftex.def)             Requested size: 362.77525pt x 287.2424pt.
+ [15 </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/trend.png>]
+<Pictures/trend2.png, id=320, 934.08975pt x 650.43pt>
+File: Pictures/trend2.png Graphic file (type png)
+<use Pictures/trend2.png>
+Package pdftex.def Info: Pictures/trend2.png  used on input line 582.
+(pdftex.def)             Requested size: 362.77525pt x 252.61465pt.
+ [16 </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/detrended.png> </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/trend2.png>]
+<Pictures/allquads01s.png, id=329, 1076.823pt x 711.8595pt>
 File: Pictures/allquads01s.png Graphic file (type png)
 <use Pictures/allquads01s.png>
-Package pdftex.def Info: Pictures/allquads01s.png  used on input line 584.
+Package pdftex.def Info: Pictures/allquads01s.png  used on input line 594.
 (pdftex.def)             Requested size: 341.43437pt x 225.71417pt.
-<Pictures/allquads10s.png, id=311, 1076.823pt x 711.8595pt>
+<Pictures/allquads10s.png, id=330, 1076.823pt x 711.8595pt>
 File: Pictures/allquads10s.png Graphic file (type png)
 <use Pictures/allquads10s.png>
-Package pdftex.def Info: Pictures/allquads10s.png  used on input line 593.
+Package pdftex.def Info: Pictures/allquads10s.png  used on input line 603.
 (pdftex.def)             Requested size: 341.43437pt x 225.71417pt.
- [17
-
- </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/allquads01s.png> </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/allquads10s.png>]
+ [17 </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/allquads01s.png> </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/allquads10s.png>]
 Chapter 3.
-<Pictures/lgm.png, id=322, 253.6677pt x 126.9543pt>
+<Pictures/lgm.png, id=341, 253.6677pt x 126.9543pt>
 File: Pictures/lgm.png Graphic file (type png)
 <use Pictures/lgm.png>
-Package pdftex.def Info: Pictures/lgm.png  used on input line 604.
+Package pdftex.def Info: Pictures/lgm.png  used on input line 614.
 (pdftex.def)             Requested size: 597.50787pt x 299.08649pt.
 [18
 
- </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/lgm.png (PNG copy)>]
+ </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/lgm.png (PNG copy)>]
 LaTeX Font Info:    Font shape `T1/pag/b/it' in size <10.95> not available
-(Font)              Font shape `T1/pag/db/it' tried instead on input line 652.
+(Font)              Font shape `T1/pag/db/it' tried instead on input line 662.
 LaTeX Font Info:    Font shape `T1/pag/db/it' in size <10.95> not available
-(Font)              Font shape `T1/pag/db/sl' tried instead on input line 652.
+(Font)              Font shape `T1/pag/db/sl' tried instead on input line 662.
  [19]
-<Pictures/gaussian_fit.png, id=341, 715.32846pt x 570.933pt>
+<Pictures/gaussian_fit.png, id=360, 715.32846pt x 570.933pt>
 File: Pictures/gaussian_fit.png Graphic file (type png)
 <use Pictures/gaussian_fit.png>
-Package pdftex.def Info: Pictures/gaussian_fit.png  used on input line 677.
+Package pdftex.def Info: Pictures/gaussian_fit.png  used on input line 687.
 (pdftex.def)             Requested size: 341.43437pt x 272.51146pt.
- [20 </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/gaussian_fit.png>]
-<Pictures/poisson_fit.png, id=350, 715.32846pt x 570.933pt>
+ [20 </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/gaussian_fit.png>]
+<Pictures/poisson_fit.png, id=370, 715.32846pt x 570.933pt>
 File: Pictures/poisson_fit.png Graphic file (type png)
 <use Pictures/poisson_fit.png>
-Package pdftex.def Info: Pictures/poisson_fit.png  used on input line 704.
+Package pdftex.def Info: Pictures/poisson_fit.png  used on input line 714.
 (pdftex.def)             Requested size: 341.43437pt x 272.51146pt.
- [21 </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/poisson_fit.png>]
-<Pictures/gamma_fit.png, id=359, 715.32846pt x 570.933pt>
+ [21 </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/poisson_fit.png>]
+<Pictures/gamma_fit.png, id=379, 715.32846pt x 570.933pt>
 File: Pictures/gamma_fit.png Graphic file (type png)
 <use Pictures/gamma_fit.png>
-Package pdftex.def Info: Pictures/gamma_fit.png  used on input line 738.
+Package pdftex.def Info: Pictures/gamma_fit.png  used on input line 748.
 (pdftex.def)             Requested size: 341.43437pt x 272.51146pt.
- [22 </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/gamma_fit.png>]
-<Pictures/skewnorm_fit.png, id=369, 894.34125pt x 894.34125pt>
+ [22 </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/gamma_fit.png>]
+<Pictures/skewnorm_fit.png, id=389, 894.34125pt x 894.34125pt>
 File: Pictures/skewnorm_fit.png Graphic file (type png)
 <use Pictures/skewnorm_fit.png>
-Package pdftex.def Info: Pictures/skewnorm_fit.png  used on input line 764.
+Package pdftex.def Info: Pictures/skewnorm_fit.png  used on input line 774.
 (pdftex.def)             Requested size: 256.07741pt x 256.07715pt.
- [23 </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/skewnorm_fit.png (PNG copy)>]
+ [23 </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/skewnorm_fit.png (PNG copy)>]
 LaTeX Font Info:    Font shape `T1/pag/b/sl' in size <10.95> not available
-(Font)              Font shape `T1/pag/db/sl' tried instead on input line 804.
+(Font)              Font shape `T1/pag/db/sl' tried instead on input line 814.
  [24]
-<Pictures/spectogram.png, id=386, 446.8695pt x 483.60675pt>
+<Pictures/spectogram.png, id=406, 446.8695pt x 483.60675pt>
 File: Pictures/spectogram.png Graphic file (type png)
 <use Pictures/spectogram.png>
-Package pdftex.def Info: Pictures/spectogram.png  used on input line 813.
+Package pdftex.def Info: Pictures/spectogram.png  used on input line 823.
 (pdftex.def)             Requested size: 341.43437pt x 369.52258pt.
- [25 </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/spectogram.png>]
-<Pictures/signalvsenergy.png, id=393, 628.0263pt x 522.15076pt>
+ [25 </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/spectogram.png>]
+<Pictures/signalvsenergy.png, id=413, 628.0263pt x 522.15076pt>
 File: Pictures/signalvsenergy.png Graphic file (type png)
 <use Pictures/signalvsenergy.png>
-Package pdftex.def Info: Pictures/signalvsenergy.png  used on input line 827.
+Package pdftex.def Info: Pictures/signalvsenergy.png  used on input line 839.
 (pdftex.def)             Requested size: 128.0387pt x 106.45201pt.
-<Pictures/noisevsenergy.png, id=394, 617.9085pt x 522.15076pt>
+<Pictures/noisevsenergy.png, id=414, 617.9085pt x 522.15076pt>
 File: Pictures/noisevsenergy.png Graphic file (type png)
 <use Pictures/noisevsenergy.png>
-Package pdftex.def Info: Pictures/noisevsenergy.png  used on input line 832.
+Package pdftex.def Info: Pictures/noisevsenergy.png  used on input line 844.
 (pdftex.def)             Requested size: 128.0387pt x 108.18889pt.
-<Pictures/snrvsenergy.png, id=395, 622.9674pt x 522.15076pt>
+<Pictures/snrvsenergy.png, id=415, 622.9674pt x 522.15076pt>
 File: Pictures/snrvsenergy.png Graphic file (type png)
 <use Pictures/snrvsenergy.png>
-Package pdftex.def Info: Pictures/snrvsenergy.png  used on input line 837.
+Package pdftex.def Info: Pictures/snrvsenergy.png  used on input line 849.
 (pdftex.def)             Requested size: 128.0387pt x 107.31248pt.
- [26 </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/signalvsenergy.png> </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/noisevsenergy.png> </home/ravioli/astro/ksp/grb/GRB-Report/Pictures/snrvsenergy.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 879.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 879.
- (/home/ravioli/astro/ksp/grb/GRB-Report/main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 879.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 879.
+ [26 </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/signalvsenergy.png> </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/noisevsenergy.png> </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/snrvsenergy.png>]
+<Pictures/timevssnr.png, id=424, 819.66225pt x 552.8655pt>
+File: Pictures/timevssnr.png Graphic file (type png)
+<use Pictures/timevssnr.png>
+Package pdftex.def Info: Pictures/timevssnr.png  used on input line 871.
+(pdftex.def)             Requested size: 298.75264pt x 201.50317pt.
+<Pictures/snrvstime.png, id=425, 832.91174pt x 573.342pt>
+File: Pictures/snrvstime.png Graphic file (type png)
+<use Pictures/snrvstime.png>
+Package pdftex.def Info: Pictures/snrvstime.png  used on input line 882.
+(pdftex.def)             Requested size: 298.75264pt x 205.64183pt.
+ [27 </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/timevssnr.png> </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/snrvstime.png>]
+Chapter 4.
+<Pictures/algocover.png, id=434, 1109.3445pt x 554.67226pt>
+File: Pictures/algocover.png Graphic file (type png)
+<use Pictures/algocover.png>
+Package pdftex.def Info: Pictures/algocover.png  used on input line 891.
+(pdftex.def)             Requested size: 597.50787pt x 298.75684pt.
+<Pictures/type1.png, id=435, 840.13875pt x 530.58224pt>
+File: Pictures/type1.png Graphic file (type png)
+<use Pictures/type1.png>
+Package pdftex.def Info: Pictures/type1.png  used on input line 900.
+(pdftex.def)             Requested size: 298.75264pt x 188.66971pt.
+[28
+
+ </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/algocover.png (PNG copy)> </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/type1.png>]
+<Pictures/type2.png, id=442, 997.92825pt x 311.36325pt>
+File: Pictures/type2.png Graphic file (type png)
+<use Pictures/type2.png>
+Package pdftex.def Info: Pictures/type2.png  used on input line 912.
+(pdftex.def)             Requested size: 298.75264pt x 93.2149pt.
+<Pictures/type2_2.png, id=443, 934.08975pt x 582.978pt>
+File: Pictures/type2_2.png Graphic file (type png)
+<use Pictures/type2_2.png>
+Package pdftex.def Info: Pictures/type2_2.png  used on input line 920.
+(pdftex.def)             Requested size: 298.75264pt x 186.45892pt.
+ [29 </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/type2.png> </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/type2_2.png>]
+<Pictures/snroutliersenergy.png, id=454, 928.6695pt x 569.7285pt>
+File: Pictures/snroutliersenergy.png Graphic file (type png)
+<use Pictures/snroutliersenergy.png>
+Package pdftex.def Info: Pictures/snroutliersenergy.png  used on input line 931.
+(pdftex.def)             Requested size: 384.1096pt x 235.64183pt.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 945.
+ [30 </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/snroutliersenergy.png>]
+<Pictures/algo.png, id=465, 1156.32pt x 570.933pt>
+File: Pictures/algo.png Graphic file (type png)
+<use Pictures/algo.png>
+Package pdftex.def Info: Pictures/algo.png  used on input line 952.
+(pdftex.def)             Requested size: 426.79135pt x 210.7279pt.
+<Pictures/results.png, id=466, 1156.32pt x 365.56575pt>
+File: Pictures/results.png Graphic file (type png)
+<use Pictures/results.png>
+Package pdftex.def Info: Pictures/results.png  used on input line 960.
+(pdftex.def)             Requested size: 426.79135pt x 134.9281pt.
+<Pictures/txt.png, id=467, 604.05675pt x 87.32625pt>
+File: Pictures/txt.png Graphic file (type png)
+<use Pictures/txt.png>
+Package pdftex.def Info: Pictures/txt.png  used on input line 968.
+(pdftex.def)             Requested size: 426.79135pt x 61.70093pt.
+<Pictures/output_for_GRB160909A.pdf, id=468, 1084.05pt x 722.7pt>
+File: Pictures/output_for_GRB160909A.pdf Graphic file (type pdf)
+<use Pictures/output_for_GRB160909A.pdf>
+Package pdftex.def Info: Pictures/output_for_GRB160909A.pdf  used on input line 972.
+(pdftex.def)             Requested size: 1084.04736pt x 722.69823pt.
+File: Pictures/output_for_GRB160909A.pdf Graphic file (type pdf)
+<use Pictures/output_for_GRB160909A.pdf>
+Package pdftex.def Info: Pictures/output_for_GRB160909A.pdf  used on input line 972.
+(pdftex.def)             Requested size: 1084.04736pt x 722.69823pt.
+<Pictures/output_for_GRB160909A.pdf, id=471, page=1, 1084.05pt x 722.7pt>
+File: Pictures/output_for_GRB160909A.pdf Graphic file (type pdf)
+<use Pictures/output_for_GRB160909A.pdf, page 1>
+Package pdftex.def Info: Pictures/output_for_GRB160909A.pdf , page1 used on input line 972.
+(pdftex.def)             Requested size: 1084.04736pt x 722.69823pt.
+File: Pictures/output_for_GRB160909A.pdf Graphic file (type pdf)
+<use Pictures/output_for_GRB160909A.pdf, page 1>
+Package pdftex.def Info: Pictures/output_for_GRB160909A.pdf , page1 used on input line 972.
+(pdftex.def)             Requested size: 597.51956pt x 398.34637pt.
+ [31 </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/algo.png> </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/results.png> </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/txt.png>]
+File: Pictures/output_for_GRB160909A.pdf Graphic file (type pdf)
+<use Pictures/output_for_GRB160909A.pdf, page 1>
+Package pdftex.def Info: Pictures/output_for_GRB160909A.pdf , page1 used on input line 972.
+(pdftex.def)             Requested size: 597.51956pt x 398.34637pt.
+File: Pictures/output_for_GRB160909A.pdf Graphic file (type pdf)
+<use Pictures/output_for_GRB160909A.pdf, page 1>
+Package pdftex.def Info: Pictures/output_for_GRB160909A.pdf , page1 used on input line 972.
+(pdftex.def)             Requested size: 597.51956pt x 398.34637pt.
+File: Pictures/output_for_GRB160909A.pdf Graphic file (type pdf)
+<use Pictures/output_for_GRB160909A.pdf, page 1>
+Package pdftex.def Info: Pictures/output_for_GRB160909A.pdf , page1 used on input line 972.
+(pdftex.def)             Requested size: 597.51956pt x 398.34637pt.
+ [32 </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/output_for_GRB160909A.pdf>]
+<Pictures/output_for_GRB160909A.pdf, id=623, page=2, 1084.05pt x 722.7pt>
+File: Pictures/output_for_GRB160909A.pdf Graphic file (type pdf)
+<use Pictures/output_for_GRB160909A.pdf, page 2>
+Package pdftex.def Info: Pictures/output_for_GRB160909A.pdf , page2 used on input line 972.
+(pdftex.def)             Requested size: 597.51956pt x 398.34637pt.
+File: Pictures/output_for_GRB160909A.pdf Graphic file (type pdf)
+<use Pictures/output_for_GRB160909A.pdf, page 2>
+Package pdftex.def Info: Pictures/output_for_GRB160909A.pdf , page2 used on input line 972.
+(pdftex.def)             Requested size: 597.51956pt x 398.34637pt.
+File: Pictures/output_for_GRB160909A.pdf Graphic file (type pdf)
+<use Pictures/output_for_GRB160909A.pdf, page 2>
+Package pdftex.def Info: Pictures/output_for_GRB160909A.pdf , page2 used on input line 972.
+(pdftex.def)             Requested size: 597.51956pt x 398.34637pt.
+ [33 </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/output_for_GRB160909A.pdf>]
+<Pictures/output_for_GRB160909A.pdf, id=628, page=3, 1084.05pt x 722.7pt>
+File: Pictures/output_for_GRB160909A.pdf Graphic file (type pdf)
+<use Pictures/output_for_GRB160909A.pdf, page 3>
+Package pdftex.def Info: Pictures/output_for_GRB160909A.pdf , page3 used on input line 972.
+(pdftex.def)             Requested size: 597.51956pt x 398.34637pt.
+File: Pictures/output_for_GRB160909A.pdf Graphic file (type pdf)
+<use Pictures/output_for_GRB160909A.pdf, page 3>
+Package pdftex.def Info: Pictures/output_for_GRB160909A.pdf , page3 used on input line 972.
+(pdftex.def)             Requested size: 597.51956pt x 398.34637pt.
+File: Pictures/output_for_GRB160909A.pdf Graphic file (type pdf)
+<use Pictures/output_for_GRB160909A.pdf, page 3>
+Package pdftex.def Info: Pictures/output_for_GRB160909A.pdf , page3 used on input line 972.
+(pdftex.def)             Requested size: 597.51956pt x 398.34637pt.
+ [34 </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/output_for_GRB160909A.pdf>]
+<Pictures/output_for_GRB160909A.pdf, id=633, page=4, 1084.05pt x 722.7pt>
+File: Pictures/output_for_GRB160909A.pdf Graphic file (type pdf)
+<use Pictures/output_for_GRB160909A.pdf, page 4>
+Package pdftex.def Info: Pictures/output_for_GRB160909A.pdf , page4 used on input line 972.
+(pdftex.def)             Requested size: 597.51956pt x 398.34637pt.
+File: Pictures/output_for_GRB160909A.pdf Graphic file (type pdf)
+<use Pictures/output_for_GRB160909A.pdf, page 4>
+Package pdftex.def Info: Pictures/output_for_GRB160909A.pdf , page4 used on input line 972.
+(pdftex.def)             Requested size: 597.51956pt x 398.34637pt.
+File: Pictures/output_for_GRB160909A.pdf Graphic file (type pdf)
+<use Pictures/output_for_GRB160909A.pdf, page 4>
+Package pdftex.def Info: Pictures/output_for_GRB160909A.pdf , page4 used on input line 972.
+(pdftex.def)             Requested size: 597.51956pt x 398.34637pt.
+ [35 </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/output_for_GRB160909A.pdf>]
+<Pictures/output_for_GRB160909A.pdf, id=639, page=5, 1084.05pt x 722.7pt>
+File: Pictures/output_for_GRB160909A.pdf Graphic file (type pdf)
+<use Pictures/output_for_GRB160909A.pdf, page 5>
+Package pdftex.def Info: Pictures/output_for_GRB160909A.pdf , page5 used on input line 972.
+(pdftex.def)             Requested size: 597.51956pt x 398.34637pt.
+File: Pictures/output_for_GRB160909A.pdf Graphic file (type pdf)
+<use Pictures/output_for_GRB160909A.pdf, page 5>
+Package pdftex.def Info: Pictures/output_for_GRB160909A.pdf , page5 used on input line 972.
+(pdftex.def)             Requested size: 597.51956pt x 398.34637pt.
+File: Pictures/output_for_GRB160909A.pdf Graphic file (type pdf)
+<use Pictures/output_for_GRB160909A.pdf, page 5>
+Package pdftex.def Info: Pictures/output_for_GRB160909A.pdf , page5 used on input line 972.
+(pdftex.def)             Requested size: 597.51956pt x 398.34637pt.
+ [36 </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/output_for_GRB160909A.pdf>]
+<Pictures/output_for_GRB160909A.pdf, id=644, page=6, 1084.05pt x 722.7pt>
+File: Pictures/output_for_GRB160909A.pdf Graphic file (type pdf)
+<use Pictures/output_for_GRB160909A.pdf, page 6>
+Package pdftex.def Info: Pictures/output_for_GRB160909A.pdf , page6 used on input line 972.
+(pdftex.def)             Requested size: 597.51956pt x 398.34637pt.
+File: Pictures/output_for_GRB160909A.pdf Graphic file (type pdf)
+<use Pictures/output_for_GRB160909A.pdf, page 6>
+Package pdftex.def Info: Pictures/output_for_GRB160909A.pdf , page6 used on input line 972.
+(pdftex.def)             Requested size: 597.51956pt x 398.34637pt.
+File: Pictures/output_for_GRB160909A.pdf Graphic file (type pdf)
+<use Pictures/output_for_GRB160909A.pdf, page 6>
+Package pdftex.def Info: Pictures/output_for_GRB160909A.pdf , page6 used on input line 972.
+(pdftex.def)             Requested size: 597.51956pt x 398.34637pt.
+ [37 </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/output_for_GRB160909A.pdf>]
+<Pictures/output_for_GRB160909A.pdf, id=649, page=7, 1084.05pt x 722.7pt>
+File: Pictures/output_for_GRB160909A.pdf Graphic file (type pdf)
+<use Pictures/output_for_GRB160909A.pdf, page 7>
+Package pdftex.def Info: Pictures/output_for_GRB160909A.pdf , page7 used on input line 972.
+(pdftex.def)             Requested size: 597.51956pt x 398.34637pt.
+File: Pictures/output_for_GRB160909A.pdf Graphic file (type pdf)
+<use Pictures/output_for_GRB160909A.pdf, page 7>
+Package pdftex.def Info: Pictures/output_for_GRB160909A.pdf , page7 used on input line 972.
+(pdftex.def)             Requested size: 597.51956pt x 398.34637pt.
+File: Pictures/output_for_GRB160909A.pdf Graphic file (type pdf)
+<use Pictures/output_for_GRB160909A.pdf, page 7>
+Package pdftex.def Info: Pictures/output_for_GRB160909A.pdf , page7 used on input line 972.
+(pdftex.def)             Requested size: 597.51956pt x 398.34637pt.
+ [38 </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/output_for_GRB160909A.pdf>]
+<Pictures/blindsearch.png, id=654, 1119.18124pt x 682.55pt>
+File: Pictures/blindsearch.png Graphic file (type png)
+<use Pictures/blindsearch.png>
+Package pdftex.def Info: Pictures/blindsearch.png  used on input line 979.
+(pdftex.def)             Requested size: 426.79135pt x 260.28821pt.
+ [39 </home/ravioli/astro/ksp/grbhunters/GRB-Report/Pictures/blindsearch.png>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1008.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1008.
+ (/home/ravioli/astro/ksp/grbhunters/GRB-Report/main.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1008.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 1008.
  ) 
 Here is how much of TeX's memory you used:
- 31138 strings out of 481239
- 562669 string characters out of 5920377
- 1254339 words of memory out of 5000000
- 45347 multiletter control sequences out of 15000+600000
- 655044 words of font info for 287 fonts, out of 8000000 for 9000
+ 31846 strings out of 481239
+ 575747 string characters out of 5920377
+ 1265556 words of memory out of 5000000
+ 46002 multiletter control sequences out of 15000+600000
+ 661898 words of font info for 295 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 63i,12n,98p,879b,1524s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1095.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/avantgar/uagd8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/avantgar/uagdo8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/avantgar/uagk8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/avantgar/uagko8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on /home/ravioli/astro/ksp/grb/GRB-Report/main.pdf (28 pages, 10797483 bytes).
+ 63i,18n,98p,886b,1524s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1095.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/avantgar/uagd8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/avantgar/uagdo8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/avantgar/uagk8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/avantgar/uagko8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on /home/ravioli/astro/ksp/grbhunters/GRB-Report/main.pdf (41 pages, 28631408 bytes).
 PDF statistics:
- 597 PDF objects out of 1000 (max. 8388607)
- 459 compressed objects within 5 object streams
- 139 named destinations out of 1000 (max. 500000)
- 55228 words of extra memory for PDF output out of 61914 (max. 10000000)
+ 882 PDF objects out of 1000 (max. 8388607)
+ 578 compressed objects within 6 object streams
+ 165 named destinations out of 1000 (max. 500000)
+ 57964 words of extra memory for PDF output out of 61914 (max. 10000000)
 

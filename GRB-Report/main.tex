@@ -39,6 +39,7 @@
 \usepackage{lipsum}
 \usepackage{textcomp}
 \usepackage{gensymb}
+\usepackage{pdfpages}
 \usepackage{mathtools}
 % \usepackage{subfigure}
 \usepackage{titling}
@@ -144,7 +145,7 @@
 	\begingroup
 	\thispagestyle{empty}
         \begin{center}
-	% \AddToShipoutPicture*{\includegraphics[height=\paperheight, width=\paperwidth]{Pictures/cover.png}}
+	\AddToShipoutPicture*{\includegraphics[height=\paperheight, width=\paperwidth]{Pictures/cover.png}}
         \end{center}
 	\vspace*{25em}
 	{\centering
@@ -167,7 +168,6 @@
 		\vfill
 		\noindent Copyright \copyright\ 2023 Krittika IITB\\ %Copyright notice
 		\noindent \textsc{Published by Krittika: The Astronomy Club of IIT Bombay}\\ % Publisher	
-		\noindent \href{https://github.com/krittikaiitb}{\textsc{github.com/krittikaiitb}} \\ % URL
 	First Release, July 2023 % Printing/edition date
 }
 	\maketitle
@@ -181,6 +181,19 @@
 \pagestyle{empty}
 \begin{center}
 {\huge \textmd{Abstract}}\\
+\par
+\vspace{20pt}
+Gamma-ray bursts (GRBs) are fascinating astronomical phenomena that have captured the attention of scientists and researchers around the world. These powerful bursts of gamma-ray radiation, lasting from a fraction of a second to a few minutes, provide valuable insights into the universe's workings.
+\newline
+
+To understand GRBs and their origins, astronomers employ various methods of analysis. In this paper, we will focus on how to analyze data from the Cadmium Zinc Telluride Imager (CZTI) onboard ISRO's famous AstroSat, currently in orbit.
+\newline
+
+We process the CZTI data using \textit{cztpipeline}, which automatically runs a series of processing modules to yield clean, user-friendly data files. A section in this paper explains the working of the CZTI Pipeline and gives a bird's eye view into building a GUI data processing platform.
+\newline
+
+Ultimately, we will implement various signal processing concepts on the CZTI data, to mathematically determine the location and significance of the GRB.
+
 \end{center}
 \vspace{5em}
 
@@ -417,8 +430,6 @@ Finally execute the following commands
     $ chmod +x cztpipeline
 \end{lstlisting}
 
-\subsection{Automation of the Pipeline}
-% In a joint effort with \href{}{Shreyas N.B.} we have automated the pipeline using python. The code uses the subprocess module to run the pipeline commands in the terminal, along with the \lstinline[language=python]{tkinter} module to create a GUI for the user to interact with. The code can be found \href{}{here}
 
 
 %----------------------------------------------------------------------------------------
@@ -541,39 +552,38 @@ The above plot shows the light curves for all four quadrants along with the peak
 % REFER THE FIGURE HERE 
 % \ref{fig:anomaly}
 %
-From Figure \ref{fig:anomaly}, we can see that the "backgorund" data (the signal apart from the GRB) has a mean value somewhere around $100$, along with a lot of variation around that mean value. This variation is known as \textit{noise} and is caused by the inherent physics of the working of the CZTI detectors. There is also an upward slope right before the SAA region which causes a "trend" in the data. We need to "detrend" the data to make any GRB in that region stand out. 
+From Figure \ref{fig:anomaly}, we can see that the "backgorund" data (the signal apart from the GRB) has a mean value somewhere around $100$, along with a lot of variation around that mean value. This variation is known as \textit{noise} and is caused by the inherent physics of the working of the CZTI detectors. There is also various "trends" present in the data due to the satellite observing various targets and the SAA region. These trends need to be "detrended"
 
-We can do this by using the \lstinline[language=Python]{savgol_filter} function from \lstinline{scipy.stats} to filter the data. The \lstinline[language=Python]{savgol_filter} function applies a \href{https://en.wikipedia.org/wiki/Savitzky%E2%80%93Golay_filter}{Savitzky-Golay filter} to the data. 
+We do this by taking a region of 1000 seconds around the GRB trigger time (500 seconds before and after the trigger time) and fitting a quadratic polynomial to the data. We then subtract this polynomial from the data to get the detrended data. To make the fitting easier, we can use the \lstinline[language=Python]{savgol_filter} function from the \lstinline[language=Python]{scipy.signal} module. 
 
-The \lstinline[language=Python]{savgol_filter} function takes in the data, the window length and the polynomial order as input. The filter fits a polynomial of a given order to the datapoints in the window, then we subtract this polynomial from the data. This is done for all the datapoints in the window and further for all windows in the data.
+The \lstinline[language=Python]{savgol_filter} function takes in the data, the window length and the polynomial order as input. The filter fits a polynomial of a given order to the datapoints in the window, then we fit a quadratic to the savgol fit and subtract the quadratic from the data to get the detrended data.
 
-The above process is done for the data points \textit{outside} of the GRB region, so as to not detrend the GRB itself. We also have to subtract the mean of the original background ($\approx 100$) from the GRB to get the final GRB data. This step can easily be done before the detrending.
+The above process is done for the data points \textit{outside} of a 3 sigma clip, so as to not detrend the GRB or include any outliers in the trend. 
 
-In python, filtering and detrending can be done as follows:
 
-\begin{lstlisting}[language=Python]
-    from scipy.signal import savgol_filter
-    import numpy as np
-    # Subtracting the mean of the original background
-    data[grb] -= np.mean(data[noise])
-    # Filtering and Detrending
-    data[noise] -= savgol_filter(data[noise], 101, 3)
-\end{lstlisting}
-
-\begin{wrapfigure}{l}{0.7\textwidth}
+\begin{figure}[H]
     \centering
-    \includegraphics[scale=0.25]{Pictures/detrended.png}
+    \includegraphics[width=\textwidth]{Pictures/trend.png}
+    \caption{Trend in the Light Curve}
+\end{figure}
+
+We notice a slight "bowing" in the orange quadratic that was fit to the savgol fit. This is our trend in the data. We can now subtract this trend from the data to get the detrended data.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{Pictures/detrended.png}
     \caption{Detrended Light Curve}
-\end{wrapfigure}
+\end{figure}
 
+We can see that the detrended data has its mean counts close to 0 and is flatter than the raw light curve.
 
-For the purposes of our analysis, we will be using a window length of $101$s and a polynomial order of $3$. The results of the filtering and detrending are shown below:
-
-To the left we can see that the slope next to the SAA region has been removed, the background has been reduced to nearly $0$, and the GRB has been brought down from the original background of $\approx 100$ to $\approx 0$.
-
-We can also see that the "dip" that occurs during the SAA region is now a flat line with values equal to $0$.
-
-\clearpage
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{Pictures/trend2.png}
+    \caption{Trend in the lightcurve}
+\end{figure}
+Here we can see the trend more clearly in the data for GRB 160909A.
+\newpage
 
 \section{Different Bin Sizes}
 
@@ -814,7 +824,9 @@ Every detection (count) made by the CZT detectors has an associated energy spect
     \caption{Spectogram of the region around GRB 190928A}
 \end{figure}
 
-We can see that the GRB is present in most of the energy range (20-200 keV) whereas the noise is predominantly present in the lower energy range (20-60 keV). These "noise" events with sufficiently high counts in the lower 20-50 keV range are known as cosmic rays. 
+\subsection{Energy Ranges}
+
+We can see that the GRB is present in most of the energy range (20-200 keV) whereas the noise is predominantly present in the lower energy range (20-60 keV). These "noise" events with sufficiently high counts in the lower 20-60 keV range are known as cosmic rays. 
 
 In order to distiguish between cosmic and real sources of counts, we can calculate the SNR of "outliers" in the lowest energy range and compare it with the SNR of the same outliers in higher energy ranges. If the SNR of the outliers in the higher energy ranges drops below a certain threshold, we can safely assume that the outliers in the lower energy range are cosmic rays and not real sources of counts. A real source of counts would have a SNR higher than our threshold in at least one of the higher energy ranges.
 \newpage
@@ -843,15 +855,132 @@ So, how do we determine the right amount of energy ranges to use? We can plot th
 
 We can see that the Signal as well as Noise decrease with increase in energy, which is to be expected as the spectrum of a GRB or any source for that matter cannot be infinitely increasing with energy. However, the SNR increases with energy, which is a direct result of the cosmic rays being present predominantly in the lower energy range. Overall the noise drops faster than the signal with increase in energy, which is a good thing as it means that the SNR will increase with energy.
 
+\subsection{The Optimal Energy Ranges}
+
 Now comes the part of choosing the right amount of energy ranges. We can see that the SNR \textsl{in general} increases with increase in energy, reaches a maxima and then starts decreasing. This shows the spectrum of the GRB. Something like 2 - 4 energy bins are ideal for SNR calculations and outlier rejection as taking many energy bins leads to limited data in each bin, and taking too few energy bins leads to a lot of cosmic rays in the lower energy bins.
 
 For the purposes of this project, we will be using 3 energy bins (20-60, 60-100 and 100-200 keV) as 20-60 keV will contain majority of the cosmic rays and random noise spikes, 60-100 keV will contain the GRB as well as some cosmic rays and 100-200 keV will predominantly contain the GRB.
+
+\newpage
+
+\section{Time Dependence of the SNR}
+We have seen earlier how choosing different time bins can affect the light curve including the peak signal value and the noise. We can also see how the SNR changes by taking different time bins. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Pictures/timevssnr.png}
+    \caption{SNR vs Different time bins for GRB 170330A}
+\end{figure}
+
+
+From the above plot we can see that the SNR varies with time bins. In particular the SNR is highest for the binsize of 11 seconds. This is likely because the binsize of 11 seconds is the closest to the duration of the GRB (10 seconds), implying that the entire GRB is contained in a single bin. This is a best case result and is not likely to happen for most GRBs.
+
+For example, we see a highly fluctuating SNR for the GRB 210709A and the peak SNR was found for the binsize of 9 seconds whereas the GRB duration was 14 seconds.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Pictures/snrvstime.png}
+    \caption{SNR vs Different time bins for GRB 210709A}
+    \label{fig:timebins}
+\end{figure}
+
 %----------------------------------------------------------------------------------------
 %	CHAPTER 4
 %----------------------------------------------------------------------------------------
+\chapterimage{algocover.png}
+\chapter{The Algorithm}
+Without the quantification and analysis of \textsl{each and every count} present in the light curve, we cannot attempt to provide a definitive result about the SNR or even the presence of a GRB. We proceed with this analysis by carrying out a series of steps to identify sources then classify them as real or cosmic purely by using their SNRs.
 
+\section{Outliers}
 
+Noise, as we know is predominantly present in the 20-60 keV energy range. So, we take our initial set of outliers as all counts which have an SNR greater than 1 in this energy range. For clarity we will refer to these outliers as \textbf{Type 1} outliers.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Pictures/type1.png}
+    \caption{Type 1 Outliers}
+\end{figure}
+
+\newpage
+
+As we can clearly see, there are a lot of Type 1 outliers, and this is on purpose. We want to be able to identify as many sources as possible, in order to not miss out any faint GRBs. 
+
+The next step is to classify these Type 1 outliers as real or cosmic based on their SNRs in the higher energy ranges. We can do this by calculating the SNR of each Type 1 outlier in the higher energy ranges and comparing it with a threshold SNR (typically chosen to be 3). 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Pictures/type2.png}
+    \caption{SNR variation of Type 1 outliers in different energy ranges}
+\end{figure}
+
+If the SNR of the Type 1 outlier in either of the higher energy ranges is higher than the threshold SNR, we classify it as a possible real source, else we classify it as a cosmic ray or noise. We also reject sources whose SNR is less than 1 in the 20-200 keV range, even if they pass the above criteria. We will refer to these outliers as \textbf{Type 2} outliers.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Pictures/type2_2.png}
+    \caption{Type 2 and 3 Outliers}
+    \label{fig:type2}
+\end{figure}
+
+In Figure \ref{fig:type2} the Type 2 outliers are marked in purple. We can see that they are a subset of Type 1 outliers. Now, we have to find potential GRBs out of these Type 2 outliers. To do so, we must compare \textsl{between} quadrants. If a Type 2 outlier is present at the \textsl{same} time stamp in \textbf{at least 2} quadrants, then that Type 2 outlier is classified as a \textbf{Type 3} outlier, or, in other words, a potential GRB. In the above figure, the green dots are the Type 3 outliers, they've been found in both Quadrant 0 and Quadrant 1, whereas the spikes without the green dots are Type 2 outliers that have been found in only one quadrant.
+
+\newpage
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{Pictures/snroutliersenergy.png}
+    \caption{Finding Poential GRBs in a haystack of outliers}
+\end{figure}
+
+From the above figures, we can see how well the algorithm is able to distinguish between all the outliers and possible GRB sources. Purple representing the Type 1 outliers, red representing the Type 2 outliers and green representing the Type 3 outliers. The Type 3 outliers are the only ones that are potential GRBs.
+
+\section{Timebins}
+
+The next step is to find the timebin for which the SNR of these Type 3 outliers is the highest. We can do this by iterating over different timebins. The criteria used to comapare each timebin is the average SNR of the Type 3 outliers across all quadrants in that timebin. The timebin with the highest average SNR is chosen as the timebin for which the results are to be reported. Figure \ref{fig:timebins} shows the SNR variation of the Type 3 outliers in different timebins.
+
+\section{Results and Overview}
+
+We run the above steps, starting from detrending, all the way to maximimizing the SNR over different timebins, for each GRB. The results are then stored in a .txt file as well a .pdf file. The .txt file contains the SNRs of the analysis for each GRB, whereas the .pdf file contains the raw and detrended light curves, SNR maximisation plots, outlier detection plots and the potential GRB marked in each light curve.
+
+The python code for the algorithm along with results for other GRBs can be found at this project's GitHub \footnote[1]{Link to the repository: \href{https://github.com/ravioli1369/grbhunters}{https://github.com/ravioli1369/grbhunters}} repository. 
+
+\newpage
+A schematic of each step followed by the algorithm is shown below:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Pictures/algo.png}
+    \caption{Schematic of the Algorithm}
+\end{figure}
+
+The algorithm was run on 10 GRBs, of which 9 were detected successfully and 1 was not detected. The results are shown below:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Pictures/results.png}
+    \caption{Results of the Algorithm}
+\end{figure}
+
+A detailed report created by the script for GRB 1609009A is shown below, starting with the .txt file output followed by each page of the .pdf file output:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Pictures/txt.png}
+    \caption{Text file output for GRB160909A}
+\end{figure}
+
+\includepdf[pages=-]{Pictures/output_for_GRB160909A.pdf}
+
+\section{Blind Searches}
+As a bonus, the algorithm can identify potential GRBs in a blind search by iterating through the timestamps of the light curve. The results of the blind search are shown below:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Pictures/blindsearch.png}
+    \caption{Results of the Blind Search}
+\end{figure}
+
+We can see that the GRB was found at the correct timestamp and all outliers in other timestamps throughout the light curve were rejected.
 
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY
