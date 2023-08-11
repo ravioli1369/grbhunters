@@ -4,3 +4,8 @@ __pycache__/pipelinev3.cpython-39.pyc
 __pycache__/processing_functions.cpython-36.pyc
 __pycache__/processing_functions.cpython-39.pyc
 .vscode/settings.json
+*.zip
+*.evt
+*.gti 
+*.lc 
+*.fits
