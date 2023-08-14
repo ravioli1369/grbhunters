@@ -1,4 +1,4 @@
-# Statistical Siginificance of Gamma Ray Bursts
+# Statistical Significance of Gamma Ray Bursts
 
 ## Getting Started
 This repository contains the code used to perform the statistical analysis of the data from the Cadmium-Zinc-Telluride (CZT) detector on Astrosat to determine the significance of the Gamma Ray Bursts (GRBs) detected by the detector. The pipeline performs the tasks of finding the GRB as well as determining its Signal to Noise Ratio (SNR). 
